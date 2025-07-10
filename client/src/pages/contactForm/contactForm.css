@@ -1,0 +1,132 @@
+.form-title {
+  color: var(--secondary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1em 0;
+  padding: 0 1rem;
+  text-align: center;
+  font-family: "Now", sans-serif;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-left: 3rem;
+  align-items: flex-start;
+  padding: 0 1rem;
+  max-width: 320px;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  margin-bottom: 0.4rem;
+  margin-top: 1.2rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  border: 1px solid var(--primary);
+  border-radius: 25px;
+  width: 15rem;
+  height: 2rem;
+  padding-left: 15px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.email-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.email-icon {
+  position: absolute;
+  left: 12px;
+  color: #888;
+  font-size: 16px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.email-input-wrapper input[type="email"] {
+  padding-left: 38px;
+  width: 100%;
+}
+
+.contact-form textarea {
+  min-height: 100px;
+  resize: vertical;
+  padding-top: 10px;
+  padding-left: 15px;
+}
+
+.container_btn {
+  display: flex;
+  justify-content: end;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.submit-button {
+  background-color: var(--secondary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: var(--secondary);
+}
+
+@media (min-width: 1200px) {
+  .contact-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, auto);
+    grid-column-gap: 15rem;
+    margin: 0 20%;
+  }
+
+  .form-group:nth-child(1),
+  .form-group:nth-child(3) {
+    grid-column-start: 1;
+  }
+
+  .form-group:nth-child(2),
+  .form-group:nth-child(4) {
+    grid-column-start: 2;
+  }
+
+  .container_btn {
+    grid-row-start: 5;
+    grid-column-start: 2;
+    justify-content: flex-end;
+  }
+
+  .submit-button {
+    background-color: var(--secondary);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: background-color 0.3s ease;
+  }
+}
