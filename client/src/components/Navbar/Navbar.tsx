@@ -104,6 +104,9 @@ const Navbar = () => {
                 <NavLink to="/">Accueil</NavLink>
               </li>
               <li>Les recettes</li>
+              <li>
+                <NavLink to="/profil">Mon profil</NavLink>
+              </li>
               <li>A propos</li>
               <li>
                 <button
@@ -142,6 +145,11 @@ const Navbar = () => {
               <Link className="link-desktop" to="/">
                 Les recettes
               </Link>
+              {isConnected && (
+                <Link className="link-desktop" to="/profil">
+                  Mon profil
+                </Link>
+              )}
               <Link className="link-desktop" to="/">
                 A propos
               </Link>
