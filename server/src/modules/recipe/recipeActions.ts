@@ -1,5 +1,6 @@
 import type { RequestHandler } from "express";
 import type { AdminUpdateRecipe } from "../../lib/definitions";
+import StepRepository from "../step/stepRepository";
 import RecipeRepository from "./recipeRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -15,6 +16,17 @@ const browse: RequestHandler = async (req, res, next) => {
         +req.query.last,
       );
       res.status(200).json(latestRecipes);
+    }
+    if (req.query.search) {
+      const searchParam = req.query.search;
+      let search: string | [] = "";
+      if (typeof searchParam === "string") {
+        search = searchParam;
+      } else if (Array.isArray(searchParam)) {
+        search = searchParam as [];
+      }
+      const searchResult = await RecipeRepository.readAllByIngredients(search);
+      res.status(200).json(searchResult);
     } else {
       const recipes = await RecipeRepository.readAll();
       res.json(recipes);
@@ -28,12 +40,14 @@ const read: RequestHandler = async (req, res, next) => {
   try {
     const recipeId = Number(req.params.id);
     const recipe = await RecipeRepository.read(recipeId);
+    const stepsByRecipe = await StepRepository.readByRecipe(recipeId);
 
     if (recipe == null) {
       res.sendStatus(404);
     } else {
-      res.json(recipe);
+      res.json([recipe, stepsByRecipe]);
     }
+    next();
   } catch (err) {
     next(err);
   }

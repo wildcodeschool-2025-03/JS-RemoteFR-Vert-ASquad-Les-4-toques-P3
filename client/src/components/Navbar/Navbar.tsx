@@ -121,7 +121,7 @@ const Navbar = () => {
           <h1> Eating NAM NAM</h1>
 
           <div className="sign-banniere">
-            <NavLink to={"/"}>
+            <NavLink to={"/recettes"}>
               <motion.button
                 type="button"
                 className="search-btn"

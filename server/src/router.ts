@@ -20,7 +20,11 @@ router.post("/api/items", itemActions.add);
 import recipeActions from "./modules/recipe/recipeActions";
 
 router.get("/api/recipes", recipeActions.browse);
-router.get("/api/recipes/:id", recipeActions.read);
+router.get(
+  "/api/recipes/:id",
+  recipeActions.read,
+  stepActions.readStepsByRecipe,
+);
 router.put("/api/admin/recipes/:id", recipeActions.editAdmin);
 router.delete("/api/recipes/:id", recipeActions.destroy);
 
@@ -71,6 +75,7 @@ router.post("/api/logout", cookieCheck, deleteCookie);
 
 // Define admin-related routes
 import adminActions from "./modules/admin/adminActions";
+import stepActions from "./modules/step/stepActions";
 
 router.get("/api/admin", adminActions.browse);
 

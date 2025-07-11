@@ -63,10 +63,16 @@ function PrevArrow({ onClick }: ArrowProps) {
 }
 
 export default function Carousel({
+  search,
   categoryId,
   showMainImage = true,
   last,
-}: { categoryId?: number; showMainImage?: boolean; last?: number }) {
+}: {
+  categoryId?: number;
+  showMainImage?: boolean;
+  last?: number;
+  search?: string;
+}) {
   const [recipes, setRecipes] = useState<RecipesType[]>([]);
 
   useEffect(() => {
@@ -75,14 +81,16 @@ export default function Carousel({
         ? `?category=${categoryId}`
         : last
           ? `?last=${last}`
-          : "";
+          : search
+            ? `?search=${search}`
+            : "";
       axios
         .get(`${import.meta.env.VITE_API_URL}/api/recipes${option}`)
         .then((response) => setRecipes(response.data))
         .catch((err) => console.error("Erreur :", err));
     };
     getRecipes();
-  }, [categoryId, last]);
+  }, [categoryId, last, search]);
 
   const [displayedImgIndex, setdisplayedImgIndex] = useState<number>(1);
 

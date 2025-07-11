@@ -9,7 +9,7 @@ export default function Recipes() {
           <input
             className={styles.search_input}
             type="text"
-            placeholder="Rechercher une recette"
+            placeholder="Rechercher une recette, un ingrédient ou label"
           />
           <button className={styles.search_btn} type="button">
             <img
@@ -19,27 +19,6 @@ export default function Recipes() {
             />
           </button>
         </div>
-        <button className={styles.vegan} type="button">
-          <img
-            className={styles.label_icon}
-            src="/images/vegan_circle_green.jpg"
-            alt="bouton rechercher"
-          />
-        </button>
-        <button className={styles.gluten_free} type="button">
-          <img
-            className={styles.label_icon}
-            src="/images/gluten free.png"
-            alt="bouton rechercher"
-          />
-        </button>
-        <button className={styles.vegetarian} type="button">
-          <img
-            className={styles.label_icon}
-            src="/images/logo veggie.JPG"
-            alt="bouton rechercher"
-          />
-        </button>
       </form>
       <section>
         <h2 className={styles.category}>Entrées</h2>
