@@ -72,7 +72,7 @@ export default function Login() {
             />
           </div>
           {errors.email && (
-            <p className="login-error-msg">{errors.email.message}</p>
+            <p className="error-msg">{errors.email.message}</p>
           )}
         </div>
 
@@ -104,7 +104,7 @@ export default function Login() {
             />
           </div>
           {errors.password && (
-            <p className="login-error-msg">{errors.password.message}</p>
+            <p className="error-msg">{errors.password.message}</p>
           )}
         </div>
 

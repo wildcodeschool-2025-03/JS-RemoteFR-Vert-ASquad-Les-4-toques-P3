@@ -67,12 +67,6 @@
   border-color: var(--secondary);
 }
 
-.login-error-msg {
-  color: red;
-  font-size: 0.85rem;
-  margin-top: 0.25rem;
-}
-
 .login-btn-container {
   display: flex;
   justify-content: flex-end;
