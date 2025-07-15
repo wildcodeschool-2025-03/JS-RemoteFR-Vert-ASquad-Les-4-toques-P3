@@ -87,7 +87,9 @@ export default function ProfilUpdate() {
             id="firstname"
             autoComplete="given-name"
           />
-          {errors.firstname && <p className="error-msg">{errors.firstname.message}</p>}
+          {errors.firstname && (
+            <p className="error-msg">{errors.firstname.message}</p>
+          )}
         </div>
 
         <div>
@@ -101,7 +103,9 @@ export default function ProfilUpdate() {
             id="lastname"
             autoComplete="family-name"
           />
-          {errors.lastname && <p className="error-msg">{errors.lastname.message}</p>}
+          {errors.lastname && (
+            <p className="error-msg">{errors.lastname.message}</p>
+          )}
         </div>
 
         <div>
@@ -114,7 +118,9 @@ export default function ProfilUpdate() {
             type="text"
             id="pseudo"
           />
-          {errors.pseudo && <p className="error-msg">{errors.pseudo.message}</p>}
+          {errors.pseudo && (
+            <p className="error-msg">{errors.pseudo.message}</p>
+          )}
         </div>
 
         <div>
