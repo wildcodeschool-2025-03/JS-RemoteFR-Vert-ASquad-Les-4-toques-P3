@@ -81,10 +81,7 @@ export default function recipeCreation() {
     fetchData("category", setCategory);
   }, []);
 
-  const fetchData = async (
-    route: string,
-    set: (data: []) => void,
-  ): Promise<void> => {
+  const fetchData = async (route: string, set: (data: []) => void) => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/${route}`,

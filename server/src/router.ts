@@ -22,7 +22,8 @@ import recipeActions from "./modules/recipe/recipeActions";
 router.get("/api/recipes", recipeActions.browse);
 router.get("/api/recipes/:id", recipeActions.read);
 router.get("/api/latestrecipes", recipeActions.readByLatest);
-
+router.get("/api/label", labelActions.browse);
+router.get("/api/category", categoryActions.browse);
 /* ************************************************************************* */
 
 // Define ingredient-related routes
@@ -60,6 +61,8 @@ router.delete("/api/users/:id", userActions.destroy);
 import { deleteCookie } from "./middlewares/cookieAuth/deleteCookie.middleware";
 /** cokie validation route */
 import { verifyCookie } from "./middlewares/cookieAuth/verifyCookie.middleware";
+import categoryActions from "./modules/category/categoryActions";
+import labelActions from "./modules/label/labelActions";
 
 const cookieCheck = cookieParser();
 router.get("/api/me", cookieCheck, verifyCookie);
