@@ -45,11 +45,7 @@ export default function Login() {
   return (
     <div className="login-container">
       <h2 className="login-title">Connexion</h2>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="login-form"
-        noValidate
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="login-form" noValidate>
         <div className="login-form-group">
           <label htmlFor="email" className="login-label">
             Email
