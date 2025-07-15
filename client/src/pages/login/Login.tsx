@@ -71,9 +71,7 @@ export default function Login() {
               className="login-input-icon"
             />
           </div>
-          {errors.email && (
-            <p className="error-msg">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="error-msg">{errors.email.message}</p>}
         </div>
 
         <div className="login-form-group">
