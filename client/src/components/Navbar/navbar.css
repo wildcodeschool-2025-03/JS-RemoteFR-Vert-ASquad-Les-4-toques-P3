@@ -2,6 +2,7 @@
   background-image: url("/images/new-mobile.png");
   background-size: cover;
   background-position: center;
+  width: 100%;
 }
 
 .navbar-section {
@@ -25,7 +26,7 @@
 
 .navbar-text {
   font-size: 1rem;
-  color: #d56c06;
+  color: var(--primary);
   text-align: center;
   padding: 1.5rem;
 }
@@ -43,7 +44,7 @@
 }
 
 .sign-btn {
-  background-color: #97bf0d;
+  background-color: var(--secondary);
   color: white;
   font-size: 0.8rem;
   font-weight: bold;
@@ -76,13 +77,25 @@
 }
 
 .burger-menu {
-  color: #97bf0d;
+  color: var(--secondary);
   position: absolute;
   top: 70px;
   right: 10px;
   background: white;
   border-radius: 20px;
   padding: 5px;
+}
+.burger-logout {
+  background: none;
+  border: none;
+  color: var(--secondary);
+  font-size: 1rem;
+  font-family: Aleo, sans-serif;
+}
+
+.burger-menu a {
+  text-decoration: none;
+  color: var(--secondary);
 }
 
 .burger-menu ul {
@@ -96,6 +109,27 @@
 
 .desktop-menu {
   display: none;
+}
+
+.navbar-all-compact {
+  background-image: url("/images/new-mobile.png");
+  background-size: center;
+  min-height: 110px;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+.navbar-all-compact .navbar-text {
+  display: none;
+}
+
+.navbar-all-compact .menu {
+  background-color: white;
+  border: 2px solid var(--secondary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
 }
 
 @media screen and (min-width: 1200px) {
@@ -135,8 +169,18 @@
 
   .link-desktop {
     text-decoration: none;
-    color: #d56c06;
+    color: var(--primary);
     font-weight: bold;
     margin: 0 4em;
+  }
+
+  .navbar-all-compact {
+    background-image: url("/images/accueil_desktop.jpg");
+    background-size: cover;
+    background-position-y: 10rem;
+    width: 100%;
+  }
+  .navbar-all-compact .navbar-text {
+    display: none;
   }
 }

@@ -19,6 +19,7 @@ export const login: RequestHandler = async (req, res, next) => {
       const { password, ...userWithoutHashedPassword } = user;
 
       const myPayload: JwtPayload = {
+        id: user.id,
         firstname: user.firstname,
         lastname: user.lastname,
       };

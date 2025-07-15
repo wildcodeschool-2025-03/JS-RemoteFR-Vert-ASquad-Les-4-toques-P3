@@ -1,6 +1,7 @@
 footer {
-  background-color: #ece8da;
+  background-color: var(--tertiary);
   padding: 20px;
+  margin-top: 30px;
 }
 
 .footer-container {
@@ -23,17 +24,9 @@ footer {
 }
 
 @media screen and (min-width: 1200px) {
-  .footer-container {
-    padding: 0em 7em;
-  }
-
   .logos {
     display: flex;
-    gap: 2rem;
-  }
-
-  .logos img {
-    width: 2vw;
-    height: 4vh;
+    gap: 1rem;
+    padding-left: 5rem;
   }
 }

@@ -29,7 +29,8 @@ CREATE TABLE ingredient (
     glucides VARCHAR(10),
     lipides VARCHAR(10),
     sucre VARCHAR(10),
-    sel VARCHAR(10)
+    sel VARCHAR(10),
+    is_validated BOOLEAN DEFAULT false
 );
 
 
@@ -67,6 +68,7 @@ CREATE TABLE user (
   password VARCHAR(255) NOT NULL,
   age INT NOT NULL,
   role_id INT,
+  is_validated BOOLEAN DEFAULT false,
   FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
@@ -109,4 +111,5 @@ CREATE TABLE week_meal (
   FOREIGN KEY (recipe_id) REFERENCES recipe(id),
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
 

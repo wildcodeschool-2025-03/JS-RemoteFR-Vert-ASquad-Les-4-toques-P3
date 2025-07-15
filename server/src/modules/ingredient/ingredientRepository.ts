@@ -1,4 +1,5 @@
 import databaseClient from "../../../database/client";
+import type { AdminUpdateIngredient } from "../../lib/definitions";
 
 import type { Result, Rows } from "../../../database/client";
 
@@ -11,6 +12,7 @@ type recipeType = {
   lipides: string;
   sucre: string;
   sel: string;
+  is_validated: boolean;
 };
 
 class IngredientRepository {
@@ -25,6 +27,28 @@ class IngredientRepository {
       [id],
     );
     return rows[0] as recipeType;
+  }
+
+  async updateAdmin(ingredient: AdminUpdateIngredient) {
+    const [result] = await databaseClient.query<Result>(
+      "UPDATE ingredient SET nom = ?, calories = ?, is_validated = ? WHERE id = ?",
+      [
+        ingredient.nom,
+        ingredient.calories,
+        ingredient.is_validated,
+        ingredient.id,
+      ],
+    );
+    return result.affectedRows;
+  }
+
+  async delete(id: number) {
+    const [result] = await databaseClient.query<Result>(
+      "DELETE FROM ingredient WHERE id = ?",
+      [id],
+    );
+
+    return result.affectedRows;
   }
 }
 

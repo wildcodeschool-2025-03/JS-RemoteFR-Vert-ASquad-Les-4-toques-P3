@@ -1,0 +1,59 @@
+.search_contener {
+  display: flex;
+  margin: 2rem 0 2rem 15%;
+  @media (max-width: 1200px) {
+    margin: 2rem 0 2rem 5%;
+  }
+}
+
+.search_input {
+  border: none;
+  margin-left: 1rem;
+}
+.search_btn {
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  margin-left: .5rem;
+}
+
+.search_icon {
+  height: .9rem;
+}
+
+.search_bar {
+  border: 1px solid var(--primary);
+  border-radius: 25px;
+  width: 12rem;
+  height: 2rem;
+  display: flex;
+}
+
+.vegan,
+.gluten_free,
+.vegetarian {
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  height: 2rem;
+  width: 2rem;
+  margin-left: .8rem;
+}
+.label_icon {
+  height: 2rem;
+}
+
+.category {
+  color: #97bf0d;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1em 0 1em 15%;
+  padding: 0;
+  text-align: left;
+  font-family: "Now", sans-serif;
+  @media (max-width: 1200px) {
+    margin: 2rem 0 2rem 5%;
+  }
+}
+
+.desktop_displayed_img_container {
+  display: none;
+}

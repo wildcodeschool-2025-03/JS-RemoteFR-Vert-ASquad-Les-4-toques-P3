@@ -7,9 +7,6 @@
 }
 
 .formulaire {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   padding: 0 1rem;
   gap: 1.2rem;
   max-width: 320px;
@@ -81,30 +78,38 @@
 }
 
 @media (min-width: 1200px) {
-  .formulaire {
-    flex-direction: row;
-    flex-wrap: wrap;
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-  .formulaire input {
-    margin-right: rem;
-    margin-bottom: 3rem;
+
+  .container_btn {
+    display: flex;
+    justify-content: end;
   }
-}
 
-.container_btn {
-  display: flex;
-  justify-content: end;
-}
+  .btn {
+    background-color: var(--secondary);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 5rem;
+    margin-bottom: 2rem;
+  }
 
-.btn {
-  background-color: var(--secondary);
-  color: white;
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 10px 40px;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  margin-right: 5rem;
-  margin-bottom: 2rem;
+  .input-icon {
+    position: absolute;
+    top: 20%;
+    left: 15px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
 }

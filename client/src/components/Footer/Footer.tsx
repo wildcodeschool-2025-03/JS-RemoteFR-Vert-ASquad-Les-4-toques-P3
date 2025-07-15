@@ -12,9 +12,9 @@ const Footer = () => {
           <p>A propos du site</p>
         </div>
         <div className="logos">
-          <img src="/images/instagram.PNG" alt="logo instagram" />
-          <img src="/images/twitter.png" alt="logo twitter" />
-          <img src="/images/facebook.PNG" alt="logo facebook" />
+          <img src="/images/instagram.svg" alt="logo instagram" />
+          <img src="/images/facebook.svg" alt="logo facebook" />
+          <img src="/images/twitter.svg" alt="logo twitter" />
         </div>
         <div className="footer-section">
           <p>Politique de confidentialité</p>

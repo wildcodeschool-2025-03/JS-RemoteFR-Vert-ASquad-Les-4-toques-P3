@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 import "./navbar.css";
 import { motion } from "motion/react";
 import { useState } from "react";
@@ -7,10 +7,13 @@ import { useAuth } from "../../Auth/authContext";
 const Navbar = () => {
   const { isConnected, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const navbarChange =
+    location.pathname === "/" ? "navbar-all" : "navbar-all-compact";
 
   if (!isConnected) {
     return (
-      <div className="navbar-all">
+      <div className={navbarChange}>
         <header className="navbar-section">
           <NavLink to="/">
             <img src="images/logo.png" alt="logo Eating NamNam" />
@@ -21,7 +24,7 @@ const Navbar = () => {
         </header>
 
         {open && (
-          <nav className="burger-menu">
+          <nav className="burger-menu" onMouseLeave={() => setOpen(false)}>
             <ul>
               <li>
                 <NavLink to="/">Accueil</NavLink>
@@ -66,7 +69,7 @@ const Navbar = () => {
               <Link className="link-desktop" to="/">
                 Accueil
               </Link>
-              <Link className="link-desktop" to="/">
+              <Link className="link-desktop" to="/recettes">
                 Les recettes
               </Link>
               <Link className="link-desktop" to="/">
@@ -84,7 +87,7 @@ const Navbar = () => {
 
   if (isConnected) {
     return (
-      <div className="navbar-all">
+      <div className={navbarChange}>
         <header className="navbar-section">
           <NavLink to="/">
             <img src="images/logo.png" alt="logo Eating NamNam" />
@@ -95,15 +98,22 @@ const Navbar = () => {
         </header>
 
         {open && (
-          <nav className="burger-menu">
+          <nav className="burger-menu" onMouseLeave={() => setOpen(false)}>
             <ul>
               <li>
                 <NavLink to="/">Accueil</NavLink>
               </li>
               <li>Les recettes</li>
+              <li>
+                <NavLink to="/profil">Mon profil</NavLink>
+              </li>
               <li>A propos</li>
               <li>
-                <button type="button" onClick={() => logout()}>
+                <button
+                  className="burger-logout"
+                  type="button"
+                  onClick={logout}
+                >
                   Déconnexion
                 </button>
               </li>
@@ -135,6 +145,11 @@ const Navbar = () => {
               <Link className="link-desktop" to="/">
                 Les recettes
               </Link>
+              {isConnected && (
+                <Link className="link-desktop" to="/profil">
+                  Mon profil
+                </Link>
+              )}
               <Link className="link-desktop" to="/">
                 A propos
               </Link>

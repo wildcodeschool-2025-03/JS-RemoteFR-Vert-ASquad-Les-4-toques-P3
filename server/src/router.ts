@@ -21,9 +21,9 @@ import recipeActions from "./modules/recipe/recipeActions";
 
 router.get("/api/recipes", recipeActions.browse);
 router.get("/api/recipes/:id", recipeActions.read);
-router.get("/api/latestrecipes", recipeActions.readByLatest);
-router.get("/api/label", labelActions.browse);
-router.get("/api/category", categoryActions.browse);
+router.put("/api/admin/recipes/:id", recipeActions.editAdmin);
+router.delete("/api/recipes/:id", recipeActions.destroy);
+
 /* ************************************************************************* */
 
 // Define ingredient-related routes
@@ -31,6 +31,8 @@ import ingredientActions from "./modules/ingredient/ingredientActions";
 
 router.get("/api/ingredients", ingredientActions.browse);
 router.get("/api/ingredients/:id", ingredientActions.read);
+router.put("/api/admin/ingredients/:id", ingredientActions.editAdmin);
+router.delete("/api/ingredients/:id", ingredientActions.destroy);
 
 /* ************************************************************************* */
 
@@ -41,6 +43,7 @@ import {
 } from "./middlewares/checkEmail.middleware";
 import userActions from "./modules/user/userActions";
 import validateUser from "./validation/userValidation";
+import validateUserUpdate from "./validation/userValidationUser";
 
 router.post("/api/login", checkEmailAndStoreUserData, login);
 
@@ -53,19 +56,25 @@ router.post(
 );
 router.get("/api/users", userActions.browse);
 router.get("/api/users/:id", userActions.read);
-router.put("/api/users/:id", validateUser, hashPassword, userActions.edit);
+router.put("/api/users/:id", validateUserUpdate, userActions.edit);
+router.put("/api/admin/users/:id", userActions.editAdmin);
 router.delete("/api/users/:id", userActions.destroy);
 
 /* ************************************************************************* */
 
-import { deleteCookie } from "./middlewares/cookieAuth/deleteCookie.middleware";
 /** cokie validation route */
 import { verifyCookie } from "./middlewares/cookieAuth/verifyCookie.middleware";
-import categoryActions from "./modules/category/categoryActions";
-import labelActions from "./modules/label/labelActions";
+import { deleteCookie } from "./middlewares/cookieAuth/deleteCookie.middleware";
 
 const cookieCheck = cookieParser();
 router.get("/api/me", cookieCheck, verifyCookie);
 router.post("/api/logout", cookieCheck, deleteCookie);
+
+// Define admin-related routes
+import adminActions from "./modules/admin/adminActions";
+
+router.get("/api/admin", adminActions.browse);
+
+/* ************************************************************************* */
 
 export default router;

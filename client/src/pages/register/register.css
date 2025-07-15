@@ -13,13 +13,51 @@
   flex-direction: column;
   margin-top: 1rem;
   margin-left: 3rem;
+  align-items: flex-start;
+  padding: 0 1rem;
+  max-width: 320px;
+  width: 100%;
+}
+
+.formulaire label {
+  margin-bottom: 0.4rem;
+  margin-top: 1.2rem;
+  font-weight: 500;
+}
+.input-group,
+.input-group1,
+.input-group2 {
+  display: flex;
+  flex-direction: column;
 }
 
 .formulaire input {
   border: 1px solid var(--primary);
   border-radius: 25px;
-  width: 13rem;
+  width: 15rem;
   height: 2rem;
+}
+
+.firstname-input,
+.lastname-input,
+.pseudo-input,
+.age-input {
+  padding-left: 15px;
+}
+
+.email-input {
+  background-image: url("/images/mail.svg");
+  background-repeat: no-repeat;
+  background-position: .7rem;
+  background-size: 10%;
+  padding-left: 38px;
+}
+.password-input {
+  background-image: url("/images/padlock.svg");
+  background-repeat: no-repeat;
+  background-position: .7rem;
+  background-size: 8%;
+  padding-left: 38px;
 }
 
 .para {
@@ -27,31 +65,63 @@
   text-align: center;
 }
 
-@media (min-width: 1200px) {
-  .formulaire {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .formulaire input {
-    margin-right: rem;
-    margin-bottom: 3rem;
-  }
-}
-
 .container_btn {
   display: flex;
   justify-content: end;
+  margin-top: 1.5rem;
+  width: 100%;
 }
 
 .btn {
   background-color: var(--secondary);
   color: white;
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 10px 40px;
   border: none;
-  border-radius: 50px;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
-  margin-right: 5rem;
-  margin-bottom: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 1200px) {
+  .formulaire {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-column-gap: 15rem;
+    grid-row-gap: 0px;
+    margin: 0 20%;
+  }
+
+  .input-group1 {
+    grid-column-start: 1;
+  }
+  .input-group2 {
+    grid-column-start: 2;
+  }
+
+  .btn {
+    background-color: var(--secondary);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 5rem;
+    margin-bottom: 2rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .container_btn {
+    grid-row-start: 5;
+    grid-column-start: 2;
+  }
 }
