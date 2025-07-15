@@ -52,12 +52,6 @@ input:focus {
   border-color: var(--secondary);
 }
 
-p {
-  color: red;
-  font-size: 0.85rem;
-  margin-top: 0.3rem;
-}
-
 .para {
   margin: 1.5rem 0;
   text-align: center;
