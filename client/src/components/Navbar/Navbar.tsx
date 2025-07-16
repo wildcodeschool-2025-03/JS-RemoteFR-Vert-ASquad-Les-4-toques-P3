@@ -105,8 +105,12 @@ const Navbar = () => {
               <li>
                 <NavLink to="/">Accueil</NavLink>
               </li>
+
               <li>
                 <NavLink to="/recettes">Les recettes</NavLink>
+              <li>Les recettes</li>
+              <li>
+                <NavLink to="/profil">Mon profil</NavLink>
               </li>
               <li>A propos</li>
               <li>
@@ -146,6 +150,11 @@ const Navbar = () => {
               <Link className="link-desktop" to="/recettes">
                 Les recettes
               </Link>
+              {isConnected && (
+                <Link className="link-desktop" to="/profil">
+                  Mon profil
+                </Link>
+              )}
               <Link className="link-desktop" to="/">
                 A propos
               </Link>

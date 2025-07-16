@@ -54,16 +54,13 @@ class userRepository {
 
   async update(user: UserType) {
     const [result] = await databaseClient.query<Result>(
-      "UPDATE user SET firstname = ?, lastname = ?, pseudo = ?, email = ?, password = ?, age = ?, role_id = ?, is_validated = ? WHERE id = ?",
+      "UPDATE user SET firstname = ?, lastname = ?, pseudo = ?, email = ?, age = ? WHERE id = ?",
       [
         user.firstname,
         user.lastname,
         user.pseudo,
         user.email,
-        user.password,
         user.age,
-        user.role_id,
-        user.is_validated,
         user.id,
       ],
     );
