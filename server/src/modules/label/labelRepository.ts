@@ -1,6 +1,6 @@
 import databaseClient from "../../../database/client";
 
-import type { Rows } from "../../../database/client";
+import type { Result, Rows } from "../../../database/client";
 
 type labelType = {
   id: number;
@@ -22,6 +22,21 @@ class LabelRepository {
       [id],
     );
     return rows[0] as labelType;
+  }
+
+  async create(labels: string[], recipeId: number) {
+    const insertedLabels = labels.map((l) => {
+      return databaseClient.query<Result>(
+        "INSERT INTO recipe_label (label, recipe_id) VALUES (?, ?)",
+        [l, recipeId],
+      );
+    });
+
+    const results = await Promise.all(insertedLabels);
+
+    const insertIds = results.map(([r]) => r.insertId);
+
+    return insertIds;
   }
 }
 

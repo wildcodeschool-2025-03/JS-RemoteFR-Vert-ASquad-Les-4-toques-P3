@@ -18,9 +18,9 @@ const validateRecipe: RequestHandler = (req, res, next) => {
     cost = Number.parseInt(cost, 10);
     persons = Number.parseInt(persons, 10);
   } catch (error) {
-    res
-      .status(400)
-      .json({ error: "Invalid number format for cost or persons" });
+    res.status(400).json({
+      error: "Invalid number format for cost or persons",
+    });
   }
 
   labels = JSON.parse(req.body.labels);

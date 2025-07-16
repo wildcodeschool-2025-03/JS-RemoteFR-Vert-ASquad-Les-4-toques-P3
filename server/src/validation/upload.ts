@@ -18,4 +18,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+export const normalizeImagePath = (
+  filePath: string | undefined,
+): string | undefined => {
+  if (!filePath) return undefined;
+
+  return filePath.replace(/\\/g, "/").replace(/^public\//, "/");
+};
+
 export default upload;

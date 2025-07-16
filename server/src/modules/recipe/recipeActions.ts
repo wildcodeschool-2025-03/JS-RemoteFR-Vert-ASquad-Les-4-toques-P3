@@ -1,5 +1,7 @@
 import type { NextFunction, Request, RequestHandler, Response } from "express";
 import type { AdminUpdateRecipe, NewRecipeType } from "../../lib/definitions";
+import { normalizeImagePath } from "../../validation/upload";
+import labelRepository from "../label/labelRepository";
 import RecipeRepository from "./recipeRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -76,7 +78,7 @@ const add: RequestHandler = async (req, res, next) => {
     const { labels, ingredients, steps, image, ...rest } =
       req.body as NewRecipeType;
 
-    const imagePath = req.file?.path;
+    const imagePath = normalizeImagePath(req.file?.path);
     const userId = req.user?.id as number;
 
     if (!imagePath) {
@@ -90,7 +92,9 @@ const add: RequestHandler = async (req, res, next) => {
       userId,
     );
 
-    res.status(201).json({ insertId });
+    const addLabel = await labelRepository.create(labels, insertId);
+
+    res.status(201).json({ recipeId: insertId, "Labels ids:": addLabel });
   } catch (err) {
     next(err);
   }

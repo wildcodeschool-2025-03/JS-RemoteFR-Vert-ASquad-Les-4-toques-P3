@@ -7,6 +7,7 @@ import type { SubmitHandler } from "react-hook-form";
 import ImgUpload from "../../components/ImgUpload/ImgUpload";
 
 import "./recipeCreation.css";
+import { useNavigate } from "react-router";
 
 type RecipeForm = {
   title: string;
@@ -61,6 +62,7 @@ const UNITOPTIONS = [
 export default function recipeCreation() {
   const [label, setLabel] = useState<Labeltype[]>([]);
   const [category, setCategory] = useState<Categorytype[]>([]);
+  const navigate = useNavigate();
 
   const {
     control,
@@ -116,7 +118,8 @@ export default function recipeCreation() {
           },
         })
         .then((response) => {
-          console.log("Recipe created successfully:", response.data);
+          console.log("Recipe created successfully:", response.data.insertId);
+          navigate("/");
         });
     } catch (err) {
       console.error(err);
