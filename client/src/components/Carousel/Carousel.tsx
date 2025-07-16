@@ -71,7 +71,7 @@ export default function Carousel({
   categoryId?: number;
   showMainImage?: boolean;
   last?: number;
-  search?: string;
+  search?: string | undefined;
 }) {
   const [recipes, setRecipes] = useState<RecipesType[]>([]);
 
@@ -81,27 +81,35 @@ export default function Carousel({
         ? `?category=${categoryId}`
         : last
           ? `?last=${last}`
-          : search
-            ? `?search=${search}`
-            : "";
+          : "";
       axios
         .get(`${import.meta.env.VITE_API_URL}/api/recipes${option}`)
         .then((response) => setRecipes(response.data))
         .catch((err) => console.error("Erreur :", err));
     };
     getRecipes();
-  }, [categoryId, last, search]);
+  }, [categoryId, last]);
+  console.log(recipes);
+
+  const filteredRecipes = recipes.filter((recipe) => {
+    const searchLower = search ? search.toLowerCase() : "";
+    const matchName = recipe.name.toLowerCase().startsWith(searchLower);
+    return matchName;
+  });
 
   const [displayedImgIndex, setdisplayedImgIndex] = useState<number>(1);
+  const slidesToShow = Math.max(1, Math.min(3, filteredRecipes.length));
+  const showOneOrMany =
+    filteredRecipes.length === 1 ? filteredRecipes.length > slidesToShow : true;
 
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: showOneOrMany,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow,
     slidesToScroll: 1,
     afterChange: (current: number) => {
-      const centeredIndex = current + Math.floor(3 / 2);
+      const centeredIndex = current + Math.floor(slidesToShow / 2);
       setdisplayedImgIndex(centeredIndex);
       console.log(current);
     },
@@ -132,6 +140,10 @@ export default function Carousel({
 
   if (recipes.length === 0) {
     return <h1>Chargement</h1>;
+  }
+
+  if (filteredRecipes.length === 0) {
+    return <h1>Aucune recette trouvée</h1>;
   }
 
   return (
@@ -165,7 +177,7 @@ export default function Carousel({
         )}
         <div className="slider-container">
           <Slider {...settings}>
-            {recipes.map((r) => (
+            {filteredRecipes.map((r) => (
               <div key={r.id}>
                 <img src={r.picture} alt={r.name} />
               </div>
