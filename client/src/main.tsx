@@ -10,10 +10,10 @@ import App from "./App";
 import Admin from "./pages/Admin";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/login/Login";
+import Recipedetail from "./pages/recipe_detail/Recipedetail";
 import Recipes from "./pages/recipes_list/recipes_list";
 import Register from "./pages/register/Register";
 import UserHomepage from "./pages/userHomepage/userHomepage";
-import Recipedetail from "./pages/recipe_detail/Recipedetail";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder

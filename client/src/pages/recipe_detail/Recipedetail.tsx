@@ -1,6 +1,6 @@
+import IngredientList from "../../components/RecipeDetail/IngredientList";
 import RecipeInfo from "../../components/RecipeDetail/RecipeInfo";
 import StepList from "../../components/RecipeDetail/StepList";
-import IngredientList from "../../components/RecipeDetail/IngredientList";
 import "./recipedetail.css";
 
 const RecetteDetailPage = () => (
