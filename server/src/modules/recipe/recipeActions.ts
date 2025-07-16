@@ -79,7 +79,7 @@ const add: RequestHandler = async (req, res, next) => {
       req.body as NewRecipeType;
 
     const imagePath = normalizeImagePath(req.file?.path);
-    const userId = req.user?.id as number;
+    const userId = req.auth?.id as number;
 
     if (!imagePath) {
       res.status(400).json({ error: "Image file is required" });
