@@ -1,7 +1,8 @@
+import type { FieldPacket, ResultSetHeader } from "mysql2";
 import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
-import type { AdminUpdateRecipe } from "../../lib/definitions";
+import type { AdminUpdateRecipe, NewRecipeType } from "../../lib/definitions";
 
 type recipeType = {
   id: number;
@@ -17,6 +18,16 @@ type recipeType = {
 };
 
 class RecipeRepository {
+  async create(recipe: NewRecipeType, imagePath: string, userId: number) {
+    const { title, persons, difficulty, cost } = recipe;
+    const [result]: [ResultSetHeader, FieldPacket[]] =
+      await databaseClient.query<Result>(
+        "INSERT INTO recipe (name, cost, difficulty, nb_people, picture, user_id) VALUES (?, ?, ?, ?, ?, ?)",
+        [title, cost, difficulty, persons, imagePath, userId],
+      );
+    return result.insertId;
+  }
+
   async readAll() {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT id, name, cost, difficulty, nb_people, qte_ingredients, picture, additional_text, is_validated, user_id FROM recipe",

@@ -1,5 +1,5 @@
-import type { RequestHandler } from "express";
-import type { AdminUpdateRecipe } from "../../lib/definitions";
+import type { NextFunction, Request, RequestHandler, Response } from "express";
+import type { AdminUpdateRecipe, NewRecipeType } from "../../lib/definitions";
 import RecipeRepository from "./recipeRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -71,9 +71,35 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
+const add: RequestHandler = async (req, res, next) => {
+  try {
+    const { labels, ingredients, steps, image, ...rest } =
+      req.body as NewRecipeType;
+
+    const imagePath = req.file?.path;
+    const userId = req.user?.id as number;
+
+    if (!imagePath) {
+      res.status(400).json({ error: "Image file is required" });
+      return;
+    }
+
+    const insertId: number = await RecipeRepository.create(
+      rest as NewRecipeType,
+      imagePath,
+      userId,
+    );
+
+    res.status(201).json({ insertId });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   browse,
   read,
   editAdmin,
+  add,
   destroy,
 };

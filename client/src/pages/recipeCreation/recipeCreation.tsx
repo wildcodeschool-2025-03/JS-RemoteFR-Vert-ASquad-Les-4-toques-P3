@@ -13,7 +13,7 @@ type RecipeForm = {
   persons: string;
   image: File[];
   categorie: string;
-  label: string[];
+  labels: string[];
   difficulty: string;
   cost: string;
   ingredients: {
@@ -22,7 +22,7 @@ type RecipeForm = {
     unit: string;
   }[];
   steps: {
-    content: string;
+    description: string;
   }[];
 };
 
@@ -71,7 +71,7 @@ export default function recipeCreation() {
   } = useForm<RecipeForm & { image: File[] }>({
     defaultValues: {
       ingredients: [{ name: "", unit: "unité" }],
-      steps: [{ content: "" }],
+      steps: [{ description: "" }],
       image: [],
     },
   });
@@ -99,22 +99,25 @@ export default function recipeCreation() {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("persons", data.persons);
-    formData.append("categorie", data.categorie);
+    formData.append("category", data.categorie);
     formData.append("difficulty", data.difficulty);
     formData.append("cost", data.cost);
-    formData.append("label", JSON.stringify(data.label));
+    formData.append("labels", JSON.stringify(data.labels));
     formData.append("ingredients", JSON.stringify(data.ingredients));
     formData.append("steps", JSON.stringify(data.steps));
     formData.append("image", data.image[0]);
 
     try {
-      axios.post(
-        `${import.meta.env.VITE_API_URL}/api/recipe-creation`,
-        formData,
-        {
+      axios
+        .post(`${import.meta.env.VITE_API_URL}/api/recipe`, formData, {
           withCredentials: true,
-        },
-      );
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.log("Recipe created successfully:", response.data);
+        });
     } catch (err) {
       console.error(err);
     }
@@ -139,7 +142,7 @@ export default function recipeCreation() {
   });
 
   useEffect(() => {
-    register("image", { required: "Image requise" });
+    register("image", { required: "Veuillez ajouter une image" });
   }, [register]);
 
   return (
@@ -197,7 +200,7 @@ export default function recipeCreation() {
                   <input
                     type="checkbox"
                     id={`label-${l.id}`}
-                    {...register("label")}
+                    {...register("labels")}
                     value={l.label}
                     className="checkbox-hidden"
                   />
@@ -207,7 +210,7 @@ export default function recipeCreation() {
                 </div>
               ))}
             </div>
-            {errors?.label && <span>{errors.label.message}</span>}
+            {errors?.labels && <span>{errors.labels.message}</span>}
           </article>
           <article className="category_article">
             <h4>Catégorie</h4>
@@ -376,10 +379,12 @@ export default function recipeCreation() {
                   <h4>Etape {index + 1}</h4>
                   <textarea
                     placeholder="Décrivez une étape de votre recette"
-                    {...register(`steps.${index}.content` as const, {
+                    {...register(`steps.${index}.description` as const, {
                       required: true,
                     })}
-                    className={errors?.steps?.[index]?.content ? "error" : ""}
+                    className={
+                      errors?.steps?.[index]?.description ? "error" : ""
+                    }
                   />
 
                   <motion.button
@@ -400,7 +405,7 @@ export default function recipeCreation() {
           <motion.button
             className="adding-btn"
             type="button"
-            onClick={() => appendStep({ content: "" })}
+            onClick={() => appendStep({ description: "" })}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
