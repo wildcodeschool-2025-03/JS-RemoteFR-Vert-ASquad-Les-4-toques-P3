@@ -27,3 +27,34 @@ export type AdminUserType = {
   role_id: number;
   is_validated: boolean;
 };
+
+export type recipeType = {
+  id: number;
+  name: string;
+  cost: number;
+  difficulty: number;
+  nb_people: number;
+  qte_ingredients: number;
+  picture: string;
+  additional_text: string;
+  is_validated: boolean;
+  user_id: number;
+};
+
+export type stepType = {
+  id: number;
+  title: string;
+  description: string;
+};
+
+export type ingredientType = {
+  id: number;
+  nom: string;
+  calories: string;
+  proteines: string;
+  glucides: string;
+  lipides: string;
+  sucre: string;
+  sel: string;
+  is_validated: boolean;
+};

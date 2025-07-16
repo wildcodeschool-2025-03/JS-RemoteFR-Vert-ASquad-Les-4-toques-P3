@@ -38,19 +38,19 @@ CREATE TABLE recipe_ingredient (
   recipe_id INT,
   ingredient_id INT,
   PRIMARY KEY (recipe_id, ingredient_id),
-  FOREIGN KEY (recipe_id) REFERENCES recipe(id),
-  FOREIGN KEY (ingredient_id) REFERENCES ingredient(id)
+  FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON DELETE CASCADE,
+  FOREIGN KEY (ingredient_id) REFERENCES ingredient(id) ON DELETE NO ACTION
 );
 
 
 CREATE TABLE step (
   id INT AUTO_INCREMENT PRIMARY KEY,
   step_number INT UNSIGNED NOT NULL,
-  title VARCHAR(45),
+  title VARCHAR(255),
   description TEXT,
   image VARCHAR(255),
   recipe_id INT,
-  FOREIGN KEY (recipe_id) REFERENCES recipe(id)
+  FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON DELETE CASCADE
 );
 
 
@@ -93,7 +93,7 @@ CREATE TABLE recipe_label(
   label_id INT,
   recipe_id INT,
   PRIMARY KEY (label_id, recipe_id),
-  FOREIGN KEY (recipe_id) REFERENCES recipe(id)
+  FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON DELETE CASCADE
 );
 
 CREATE TABLE favori (

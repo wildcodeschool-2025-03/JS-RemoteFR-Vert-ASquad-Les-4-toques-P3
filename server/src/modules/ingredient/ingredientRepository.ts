@@ -29,6 +29,14 @@ class IngredientRepository {
     return rows[0] as recipeType;
   }
 
+  async readByRecipe(id: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      "SELECT ingredient.id, ingredient.nom,ingredient.calories, ingredient.proteines, ingredient.glucides, ingredient.lipides, ingredient.sucre, ingredient.sel, ingredient.is_validated FROM recipe_ingredient JOIN ingredient ON recipe_ingredient.ingredient_id = ingredient.id WHERE recipe_ingredient.recipe_id=?",
+      [id],
+    );
+    return rows as recipeType[];
+  }
+
   async updateAdmin(ingredient: AdminUpdateIngredient) {
     const [result] = await databaseClient.query<Result>(
       "UPDATE ingredient SET nom = ?, calories = ?, is_validated = ? WHERE id = ?",

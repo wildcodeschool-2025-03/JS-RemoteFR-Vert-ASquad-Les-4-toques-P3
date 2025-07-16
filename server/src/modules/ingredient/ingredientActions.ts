@@ -26,6 +26,22 @@ const read: RequestHandler = async (req, res, next) => {
   }
 };
 
+const readIngredientsByRecipe: RequestHandler = async (req, res, next) => {
+  try {
+    const recipeId = Number(req.params.id);
+    const IngredientsByRecipe =
+      await IngredientRepository.readByRecipe(recipeId);
+
+    if (IngredientsByRecipe == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(IngredientsByRecipe);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 const editAdmin: RequestHandler = async (req, res, next) => {
   try {
     const updatedIngredientAdmin: AdminUpdateIngredient = {
@@ -61,4 +77,4 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, editAdmin, destroy };
+export default { browse, read, readIngredientsByRecipe, editAdmin, destroy };
