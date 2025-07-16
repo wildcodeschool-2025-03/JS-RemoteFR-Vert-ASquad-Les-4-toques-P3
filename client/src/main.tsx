@@ -10,8 +10,8 @@ import App from "./App";
 import Admin from "./pages/Admin";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/login/Login";
-import Recipedetail from "./pages/recipe_detail/Recipedetail";
 import Profil from "./pages/profil/Profil";
+import Recipedetail from "./pages/recipe_detail/Recipedetail";
 import Recipes from "./pages/recipes_list/recipes_list";
 import Register from "./pages/register/Register";
 
