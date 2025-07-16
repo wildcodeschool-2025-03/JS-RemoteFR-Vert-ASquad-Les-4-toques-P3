@@ -11,6 +11,7 @@ export type RecipesType = {
 };
 
 export type Account = {
+  id: number;
   firstname: string;
   lastname: string;
 };
