@@ -2,7 +2,10 @@ import type { FieldPacket, ResultSetHeader } from "mysql2";
 import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
-import type { AdminUpdateRecipe, NewRecipeType } from "../../lib/definitions";
+import type {
+  AdminUpdateRecipe,
+  ParsedNewRecipeType,
+} from "../../lib/definitions";
 
 type recipeType = {
   id: number;
@@ -22,12 +25,12 @@ class RecipeRepository {
    Create recipe and select category id from category table by comparing category.name with category value 
   */
 
-  async create(recipe: NewRecipeType, imagePath: string, userId: number) {
-    const { title, persons, difficulty, cost, category } = recipe;
+  async create(recipe: ParsedNewRecipeType, imagePath: string, userId: number) {
+    const { title, personsInt, difficulty, costInt, category } = recipe;
     const [result]: [ResultSetHeader, FieldPacket[]] =
       await databaseClient.query<Result>(
         "INSERT INTO recipe (name, cost, difficulty, nb_people, picture, user_id, category_id) VALUES (?, ?, ?, ?, ?, ?, (SELECT id FROM category WHERE name = ?))",
-        [title, cost, difficulty, persons, imagePath, userId, category],
+        [title, costInt, difficulty, personsInt, imagePath, userId, category],
       );
     return result.insertId;
   }

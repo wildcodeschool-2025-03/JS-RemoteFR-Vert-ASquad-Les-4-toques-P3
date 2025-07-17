@@ -169,8 +169,8 @@ export default function recipeCreation() {
                     message: "le champ doit contenir au minimum 2 caractères",
                   },
                   maxLength: {
-                    value: 20,
-                    message: "le champ doit contenir au maximum 45 caractères",
+                    value: 50,
+                    message: "le champ doit contenir au maximum 50 caractères",
                   },
                 })}
                 name="title"
@@ -203,7 +203,7 @@ export default function recipeCreation() {
                     type="checkbox"
                     id={`label-${l.id}`}
                     {...register("labels")}
-                    value={l.label}
+                    value={l.id}
                     className="checkbox-hidden"
                   />
                   <label className="selectLabel" htmlFor={`label-${l.id}`}>

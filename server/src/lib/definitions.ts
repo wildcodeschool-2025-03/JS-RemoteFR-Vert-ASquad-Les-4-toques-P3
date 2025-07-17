@@ -30,19 +30,19 @@ export type AdminUpdateIngredient = {
   is_validated: boolean;
 };
 
-export type NewRecipeType = {
+export type ParsedNewRecipeType = {
   title: string;
-  persons: number;
+  personsInt: number;
   category: string;
   difficulty: string;
-  cost: number;
-  labels: string[];
-  ingredients: {
+  costInt: number;
+  parsedLabels: string[];
+  parsedIngredients: {
     name: string;
     quantity: number;
     unit: string;
   }[];
-  steps: {
+  parsedSteps: {
     description: string;
   }[];
   image?: File;

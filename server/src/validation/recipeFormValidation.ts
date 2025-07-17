@@ -1,9 +1,9 @@
 import type { RequestHandler } from "express";
 import { type SafeParseReturnType, z } from "zod";
-import type { NewRecipeType } from "../lib/definitions";
+import type { ParsedNewRecipeType } from "../lib/definitions";
 
 const validateRecipe: RequestHandler = (req, res, next) => {
-  let {
+  const {
     title,
     persons,
     category,
@@ -14,50 +14,64 @@ const validateRecipe: RequestHandler = (req, res, next) => {
     steps,
   } = req.body;
 
+  const parsedLabels = JSON.parse(req.body.labels);
+  const parsedIngredients = JSON.parse(req.body.ingredients);
+  const parsedSteps = JSON.parse(req.body.steps);
+  let costInt = 0;
+  let personsInt = 0;
+
+  const parsedItems: ParsedNewRecipeType = {
+    title,
+    personsInt,
+    category,
+    difficulty,
+    costInt,
+    parsedLabels,
+    parsedIngredients,
+    parsedSteps,
+  };
+
   try {
-    cost = Number.parseInt(cost, 10);
-    persons = Number.parseInt(persons, 10);
+    costInt = Number.parseInt(cost, 10);
+    personsInt = Number.parseInt(persons, 10);
   } catch (error) {
     res.status(400).json({
       error: "Invalid number format for cost or persons",
     });
+    return;
   }
-
-  labels = JSON.parse(req.body.labels);
-  ingredients = JSON.parse(req.body.ingredients);
-  steps = JSON.parse(req.body.steps);
 
   const recipeSchema = z.object({
     title: z.string().min(2).max(45),
-    persons: z.number().int().positive(),
+    personsInt: z.number().int().positive(),
     category: z.string().min(2).max(45),
     difficulty: z.string().min(2).max(45),
-    cost: z.number().int().positive(),
-    labels: z.array(z.string()),
-    ingredients: z.array(
+    costInt: z.number().int().positive(),
+    parsedLabels: z.array(z.string()),
+    parsedIngredients: z.array(
       z.object({
         name: z.string().min(1).max(255),
         quantity: z.number().int().positive(),
         unit: z.string().min(1).max(10),
       }),
     ),
-    steps: z.array(
+    parsedSteps: z.array(
       z.object({
         description: z.string(),
       }),
     ),
   });
 
-  const validData: SafeParseReturnType<unknown, NewRecipeType> =
+  const validData: SafeParseReturnType<unknown, ParsedNewRecipeType> =
     recipeSchema.safeParse({
       title,
-      persons,
+      personsInt,
       category,
       difficulty,
-      cost,
-      labels,
-      ingredients,
-      steps,
+      costInt,
+      parsedLabels,
+      parsedIngredients,
+      parsedSteps,
     });
 
   if (!validData.success) {
@@ -69,10 +83,9 @@ const validateRecipe: RequestHandler = (req, res, next) => {
     }, {});
 
     res.status(400).json({ "Recipe validation errors:": errors });
-    console.log("erreur de validation:", errors);
     return;
   }
-
+  req.body = parsedItems;
   next();
 };
 

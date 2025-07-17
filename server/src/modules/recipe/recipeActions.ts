@@ -1,5 +1,8 @@
 import type { NextFunction, Request, RequestHandler, Response } from "express";
-import type { AdminUpdateRecipe, NewRecipeType } from "../../lib/definitions";
+import type {
+  AdminUpdateRecipe,
+  ParsedNewRecipeType,
+} from "../../lib/definitions";
 import { normalizeImagePath } from "../../validation/upload";
 import labelRepository from "../label/labelRepository";
 import RecipeRepository from "./recipeRepository";
@@ -73,10 +76,11 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
+/** Add a new recipe and dispatch requests to related models (labelRepository, ingredientRepository , stepRepository, categoryRepository) */
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const { labels, ingredients, steps, image, ...rest } =
-      req.body as NewRecipeType;
+    const { parsedLabels, parsedIngredients, parsedSteps, image, ...rest } =
+      req.body as ParsedNewRecipeType;
 
     const imagePath = normalizeImagePath(req.file?.path);
     const userId = req.auth?.id as number;
@@ -87,12 +91,12 @@ const add: RequestHandler = async (req, res, next) => {
     }
 
     const insertId: number = await RecipeRepository.create(
-      rest as NewRecipeType,
+      rest as ParsedNewRecipeType,
       imagePath,
       userId,
     );
 
-    const addLabel = await labelRepository.create(labels, insertId);
+    const addLabel = await labelRepository.create(parsedLabels, insertId);
 
     res.status(201).json({ recipeId: insertId, "Labels ids:": addLabel });
   } catch (err) {

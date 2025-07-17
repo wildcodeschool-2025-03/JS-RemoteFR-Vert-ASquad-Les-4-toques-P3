@@ -16,7 +16,7 @@ export default function ImgUpload({ onFilesChange }: ImgUploadProps) {
     if (files.name.length > maxLength) {
       return {
         code: "name-too-large",
-        message: `Le nom de l'image ne doit passe dépasser ${maxLength} caractères`,
+        message: `Le nom de l'image ne doit pas dépasser ${maxLength} caractères`,
       };
     }
     return null;
