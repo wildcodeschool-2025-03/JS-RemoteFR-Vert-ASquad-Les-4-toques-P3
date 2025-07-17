@@ -1,5 +1,10 @@
-import type { RequestHandler } from "express";
-import type { AdminUpdateRecipe } from "../../lib/definitions";
+import type { NextFunction, Request, RequestHandler, Response } from "express";
+import type {
+  AdminUpdateRecipe,
+  ParsedNewRecipeType,
+} from "../../lib/definitions";
+import { normalizeImagePath } from "../../validation/upload";
+import labelRepository from "../label/labelRepository";
 import RecipeRepository from "./recipeRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -72,9 +77,38 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
+/** Add a new recipe and dispatch requests to related models (labelRepository, ingredientRepository , stepRepository, categoryRepository) */
+const add: RequestHandler = async (req, res, next) => {
+  try {
+    const { parsedLabels, parsedIngredients, parsedSteps, image, ...rest } =
+      req.body as ParsedNewRecipeType;
+
+    const imagePath = normalizeImagePath(req.file?.path);
+    const userId = req.auth?.id as number;
+
+    if (!imagePath) {
+      res.status(400).json({ error: "Image file is required" });
+      return;
+    }
+
+    const insertId: number = await RecipeRepository.create(
+      rest as ParsedNewRecipeType,
+      imagePath,
+      userId,
+    );
+
+    const addLabel = await labelRepository.create(parsedLabels, insertId);
+
+    res.status(201).json({ recipeId: insertId, "Labels ids:": addLabel });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export default {
   browse,
   read,
   editAdmin,
+  add,
   destroy,
 };

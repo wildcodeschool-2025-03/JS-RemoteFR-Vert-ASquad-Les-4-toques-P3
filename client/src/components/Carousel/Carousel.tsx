@@ -74,6 +74,7 @@ export default function Carousel({
   search?: string | undefined;
 }) {
   const [recipes, setRecipes] = useState<RecipesType[]>([]);
+  const imgBaseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const getSeparator = (option: string) => {
@@ -92,7 +93,7 @@ export default function Carousel({
     getRecipes();
   }, [categoryId, last, search]);
 
-  const [displayedImgIndex, setdisplayedImgIndex] = useState<number>(1);
+  const [displayedImgIndex, setdisplayedImgIndex] = useState<number>(0);
   const slidesToShow = Math.max(1, Math.min(3, recipes.length));
   const showOneOrMany =
     recipes.length === 1 ? recipes.length > slidesToShow : true;
@@ -104,7 +105,7 @@ export default function Carousel({
     slidesToShow,
     slidesToScroll: 1,
     afterChange: (current: number) => {
-      const centeredIndex = current + Math.floor(slidesToShow / 2);
+      const centeredIndex = current;
       setdisplayedImgIndex(centeredIndex);
     },
     centerMode: true,
@@ -143,14 +144,14 @@ export default function Carousel({
           <section className="desktop_displayed_img_container">
             <img
               className="desktop_displayed_img"
-              src={recipes[CenteredImgIndex].picture}
+              src={`${imgBaseUrl}${recipes[CenteredImgIndex].picture}`}
               alt={recipes[CenteredImgIndex].name}
             />
 
             <article>
               <h3>{recipes[CenteredImgIndex].name}</h3>
               <span>Note: </span>
-              <span>Difficulté: </span>
+              <span>Difficulté: {recipes[CenteredImgIndex].difficulty} </span>
               <span>Temps de préparation: </span>
               <NavLink to={"/"}>
                 <motion.button
@@ -169,7 +170,7 @@ export default function Carousel({
           <Slider {...settings}>
             {recipes.map((r) => (
               <div key={r.id}>
-                <img src={r.picture} alt={r.name} />
+                <img src={`${imgBaseUrl}${r.picture}`} alt={r.name} />
               </div>
             ))}
           </Slider>

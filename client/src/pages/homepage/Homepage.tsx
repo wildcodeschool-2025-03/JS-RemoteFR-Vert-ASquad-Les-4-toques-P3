@@ -25,6 +25,7 @@ export default function Home() {
             <p>Inscris-toi</p>
           </div>
         )}
+
         <div className="step-item">
           <img src="/images/plus.svg" alt="logo plus" />
           <p>Ajoute ta recette</p>

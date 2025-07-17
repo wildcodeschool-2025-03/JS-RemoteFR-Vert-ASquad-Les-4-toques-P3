@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className={navbarChange}>
         <header className="navbar-section">
           <NavLink to="/">
-            <img src="images/logo.png" alt="logo Eating NamNam" />
+            <img src="/images/logo.png" alt="logo Eating NamNam" />
           </NavLink>
           <button type="button" className="menu" onClick={() => setOpen(!open)}>
             ☰
@@ -92,7 +92,7 @@ const Navbar = () => {
       <div className={navbarChange}>
         <header className="navbar-section">
           <NavLink to="/">
-            <img src="images/logo.png" alt="logo Eating NamNam" />
+            <img src="/images/logo.png" alt="logo Eating NamNam" />
           </NavLink>
           <button type="button" className="menu" onClick={() => setOpen(!open)}>
             ☰
@@ -110,6 +110,9 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink to="/profil">Mon profil</NavLink>
+              </li>
+              <li>
+                <NavLink to="/creation">Créer une recette</NavLink>
               </li>
               <li>A propos</li>
               <li>
@@ -154,6 +157,9 @@ const Navbar = () => {
                   Mon profil
                 </Link>
               )}
+              <Link className="link-desktop" to="/creation">
+                Créer une recette
+              </Link>
               <Link className="link-desktop" to="/">
                 A propos
               </Link>

@@ -29,3 +29,21 @@ export type AdminUpdateIngredient = {
   calories: number;
   is_validated: boolean;
 };
+
+export type ParsedNewRecipeType = {
+  title: string;
+  personsInt: number;
+  category: string;
+  difficulty: string;
+  costInt: number;
+  parsedLabels: string[];
+  parsedIngredients: {
+    name: string;
+    quantity: number;
+    unit: string;
+  }[];
+  parsedSteps: {
+    description: string;
+  }[];
+  image?: File;
+};

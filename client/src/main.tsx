@@ -11,6 +11,8 @@ import Admin from "./pages/Admin";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/login/Login";
 import Profil from "./pages/profil/Profil";
+import RecipeCreation from "./pages/recipeCreation/recipeCreation";
+import Recipedetail from "./pages/recipe_detail/Recipedetail";
 import Recipes from "./pages/recipes_list/recipes_list";
 import Register from "./pages/register/Register";
 
@@ -19,8 +21,6 @@ import Register from "./pages/register/Register";
 
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
-
-/* ************************************************************************* */
 
 // Create router configuration with routes
 // You can add more routes as you build out your app!
@@ -35,6 +35,8 @@ const router = createBrowserRouter([
       { path: "/connexion", element: <Login /> },
       { path: "/recettes", element: <Recipes /> },
       { path: "/profil", element: <Profil /> },
+      { path: "/recettes/:id", element: <Recipedetail /> },
+      { path: "/creation", element: <RecipeCreation /> },
     ], // Renders the App component for the home page
   },
   // Try adding a new route! For example, "/about" with an About component
