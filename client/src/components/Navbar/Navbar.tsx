@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className={navbarChange}>
         <header className="navbar-section">
           <NavLink to="/">
-            <img src="images/logo.png" alt="logo Eating NamNam" />
+            <img src="/images/logo.png" alt="logo Eating NamNam" />
           </NavLink>
           <button type="button" className="menu" onClick={() => setOpen(!open)}>
             ☰
@@ -29,7 +29,9 @@ const Navbar = () => {
               <li>
                 <NavLink to="/">Accueil</NavLink>
               </li>
-              <li>Les recettes</li>
+              <li>
+                <NavLink to="/recettes">Les recettes</NavLink>
+              </li>
               <li>A propos</li>
               <li>
                 <NavLink to="/connexion">Connexion</NavLink>
@@ -90,7 +92,7 @@ const Navbar = () => {
       <div className={navbarChange}>
         <header className="navbar-section">
           <NavLink to="/">
-            <img src="images/logo.png" alt="logo Eating NamNam" />
+            <img src="/images/logo.png" alt="logo Eating NamNam" />
           </NavLink>
           <button type="button" className="menu" onClick={() => setOpen(!open)}>
             ☰
@@ -103,7 +105,9 @@ const Navbar = () => {
               <li>
                 <NavLink to="/">Accueil</NavLink>
               </li>
-              <li>Les recettes</li>
+              <li>
+                <NavLink to="/recettes">Les recettes</NavLink>
+              </li>
               <li>
                 <NavLink to="/profil">Mon profil</NavLink>
               </li>
@@ -142,7 +146,7 @@ const Navbar = () => {
               <Link className="link-desktop" to="/">
                 Accueil
               </Link>
-              <Link className="link-desktop" to="/">
+              <Link className="link-desktop" to="/recettes">
                 Les recettes
               </Link>
               {isConnected && (

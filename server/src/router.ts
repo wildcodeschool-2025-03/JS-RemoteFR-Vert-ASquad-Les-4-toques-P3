@@ -31,6 +31,10 @@ import ingredientActions from "./modules/ingredient/ingredientActions";
 
 router.get("/api/ingredients", ingredientActions.browse);
 router.get("/api/ingredients/:id", ingredientActions.read);
+router.get(
+  "/api/recipes/:id/ingredients",
+  ingredientActions.readIngredientsByRecipe,
+);
 router.put("/api/admin/ingredients/:id", ingredientActions.editAdmin);
 router.delete("/api/ingredients/:id", ingredientActions.destroy);
 
@@ -74,6 +78,13 @@ router.post("/api/logout", cookieCheck, deleteCookie);
 import adminActions from "./modules/admin/adminActions";
 
 router.get("/api/admin", adminActions.browse);
+
+/* ************************************************************************* */
+
+// Define step-related routes
+import stepActions from "./modules/step/stepActions";
+
+router.get("/api/recipes/:id/steps", stepActions.readStepsByRecipe);
 
 /* ************************************************************************* */
 
