@@ -72,7 +72,6 @@ router.post("/api/logout", cookieCheck, deleteCookie);
 
 // Define admin-related routes
 import adminActions from "./modules/admin/adminActions";
-import stepActions from "./modules/step/stepActions";
 
 router.get("/api/admin", adminActions.browse);
 

@@ -32,7 +32,7 @@ const read: RequestHandler = async (req, res, next) => {
     if (recipe == null) {
       res.sendStatus(404);
     } else {
-      res.json([recipe]);
+      res.json(recipe);
     }
     next();
   } catch (err) {
