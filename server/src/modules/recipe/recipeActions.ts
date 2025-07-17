@@ -34,7 +34,6 @@ const read: RequestHandler = async (req, res, next) => {
     } else {
       res.json(recipe);
     }
-    next();
   } catch (err) {
     next(err);
   }
