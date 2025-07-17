@@ -89,7 +89,6 @@ export default function Carousel({
     };
     getRecipes();
   }, [categoryId, last]);
-  console.log(recipes);
 
   const filteredRecipes = recipes.filter((recipe) => {
     const searchLower = search ? search.toLowerCase() : "";

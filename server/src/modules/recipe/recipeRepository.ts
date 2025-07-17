@@ -32,14 +32,6 @@ class RecipeRepository {
     return rows as recipeType[];
   }
 
-  async readAllByIngredients(ing: string | []) {
-    const [rows] = await databaseClient.query<Rows>(
-      "SELECT recipe.id,recipe.name,recipe.picture,ingredient.nom FROM recipe JOIN recipe_ingredient ON recipe_id=recipe.id JOIN ingredient ON ingredient.id=ingredient_id WHERE ingredient.nom = ?",
-      [ing],
-    );
-    return rows as recipeType[];
-  }
-
   async readByRecentlyAdded(count: number) {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT id, name, cost, difficulty, nb_people, qte_ingredients, picture, additional_text FROM recipe ORDER BY id DESC LIMIT ?",

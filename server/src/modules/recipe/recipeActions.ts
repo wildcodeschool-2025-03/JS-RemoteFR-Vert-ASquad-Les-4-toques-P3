@@ -1,6 +1,5 @@
 import type { RequestHandler } from "express";
 import type { AdminUpdateRecipe } from "../../lib/definitions";
-import StepRepository from "../step/stepRepository";
 import RecipeRepository from "./recipeRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -29,12 +28,11 @@ const read: RequestHandler = async (req, res, next) => {
   try {
     const recipeId = Number(req.params.id);
     const recipe = await RecipeRepository.read(recipeId);
-    const stepsByRecipe = await StepRepository.readByRecipe(recipeId);
 
     if (recipe == null) {
       res.sendStatus(404);
     } else {
-      res.json([recipe, stepsByRecipe]);
+      res.json([recipe]);
     }
     next();
   } catch (err) {

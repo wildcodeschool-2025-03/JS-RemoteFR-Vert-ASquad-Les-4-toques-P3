@@ -20,11 +20,7 @@ router.post("/api/items", itemActions.add);
 import recipeActions from "./modules/recipe/recipeActions";
 
 router.get("/api/recipes", recipeActions.browse);
-router.get(
-  "/api/recipes/:id",
-  recipeActions.read,
-  stepActions.readStepsByRecipe,
-);
+router.get("/api/recipes/:id", recipeActions.read);
 router.put("/api/admin/recipes/:id", recipeActions.editAdmin);
 router.delete("/api/recipes/:id", recipeActions.destroy);
 
