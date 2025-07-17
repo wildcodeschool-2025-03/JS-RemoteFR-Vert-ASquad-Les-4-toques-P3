@@ -5,22 +5,12 @@ import type { ingredientType } from "../../lib/definition";
 const IngredientList = () => {
   const { id } = useParams();
   const [ingredients, setIngredients] = useState<ingredientType[]>([]);
-  const totalCalories = ingredients.reduce(
-    (accumulator, i) => accumulator + Number(i.calories || 0),
-    0,
-  );
-  const totalProteines = ingredients.reduce(
-    (accumulator, i) => accumulator + Number(i.proteines || 0),
-    0,
-  );
-  const totalGlucides = ingredients.reduce(
-    (accumulator, i) => accumulator + Number(i.glucides || 0),
-    0,
-  );
-  const totalLipides = ingredients.reduce(
-    (accumulator, i) => accumulator + Number(i.lipides || 0),
-    0,
-  );
+  const getTotalInfo = (key: string) => {
+    return ingredients.reduce(
+      (accumulator, i) => accumulator + Number(i[key] || 0),
+      0,
+    );
+  };
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${id}/ingredients`)
@@ -39,10 +29,10 @@ const IngredientList = () => {
 
       <h3>Valeurs nutritionnelles (pour 100g) : </h3>
       <ul>
-        <li>Calories (kcal): {totalCalories}</li>
-        <li>Protéines (g): {totalProteines.toFixed(1)}</li>
-        <li>Glucides (g): {totalGlucides.toFixed(1)}</li>
-        <li>Lipides (g): {totalLipides.toFixed(1)}</li>
+        <li>Calories (kcal): {getTotalInfo("calories")}</li>
+        <li>Protéines (g): {getTotalInfo("proteines").toFixed(1)}</li>
+        <li>Glucides (g): {getTotalInfo("glucides").toFixed(1)}</li>
+        <li>Lipides (g): {getTotalInfo("lipides").toFixed(1)}</li>
       </ul>
     </div>
   );

@@ -35,7 +35,7 @@ const readIngredientsByRecipe: RequestHandler = async (req, res, next) => {
     if (IngredientsByRecipe == null) {
       res.sendStatus(404);
     } else {
-      res.json(IngredientsByRecipe);
+      res.status(200).json(IngredientsByRecipe);
     }
   } catch (err) {
     next(err);

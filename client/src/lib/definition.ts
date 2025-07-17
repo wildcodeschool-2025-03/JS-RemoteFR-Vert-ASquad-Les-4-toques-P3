@@ -57,4 +57,5 @@ export type ingredientType = {
   sucre: string;
   sel: string;
   is_validated: boolean;
+  [key: string]: string | number | boolean;
 };

@@ -31,7 +31,7 @@ class IngredientRepository {
 
   async readByRecipe(id: number) {
     const [rows] = await databaseClient.query<Rows>(
-      "SELECT ingredient.id, ingredient.nom,ingredient.calories, ingredient.proteines, ingredient.glucides, ingredient.lipides, ingredient.sucre, ingredient.sel, ingredient.is_validated FROM recipe_ingredient JOIN ingredient ON recipe_ingredient.ingredient_id = ingredient.id WHERE recipe_ingredient.recipe_id=?",
+      "SELECT i.* FROM recipe_ingredient AS ri INNER JOIN ingredient AS i ON ri.ingredient_id = i.id WHERE ri.recipe_id=?",
       [id],
     );
     return rows as recipeType[];
