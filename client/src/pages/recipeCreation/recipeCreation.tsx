@@ -117,8 +117,7 @@ export default function recipeCreation() {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then((response) => {
-          console.log("Recipe created successfully:", response.data.insertId);
+        .then(() => {
           navigate("/");
         });
     } catch (err) {
