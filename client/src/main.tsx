@@ -11,8 +11,8 @@ import Admin from "./pages/Admin";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/login/Login";
 import Profil from "./pages/profil/Profil";
-import Recipedetail from "./pages/recipe_detail/Recipedetail";
 import RecipeCreation from "./pages/recipeCreation/recipeCreation";
+import Recipedetail from "./pages/recipe_detail/Recipedetail";
 import Recipes from "./pages/recipes_list/recipes_list";
 import Register from "./pages/register/Register";
 
