@@ -1,3 +1,4 @@
+import { parse } from "dotenv";
 import type { NextFunction, Request, RequestHandler, Response } from "express";
 import type {
   AdminUpdateRecipe,
@@ -5,6 +6,7 @@ import type {
 } from "../../lib/definitions";
 import { normalizeImagePath } from "../../validation/upload";
 import labelRepository from "../label/labelRepository";
+import stepRepository from "../step/stepRepository";
 import RecipeRepository from "./recipeRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -98,7 +100,13 @@ const add: RequestHandler = async (req, res, next) => {
 
     const addLabel = await labelRepository.create(parsedLabels, insertId);
 
-    res.status(201).json({ recipeId: insertId, "Labels ids:": addLabel });
+    const addSteps = await stepRepository.create(parsedSteps, insertId);
+
+    res.status(201).json({
+      recipeId: insertId,
+      "Labels ids:": addLabel,
+      "Steps:": addSteps,
+    });
   } catch (err) {
     next(err);
   }
