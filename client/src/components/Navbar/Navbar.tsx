@@ -111,6 +111,9 @@ const Navbar = () => {
               <li>
                 <NavLink to="/profil">Mon profil</NavLink>
               </li>
+              <li>
+                <NavLink to="/creation">Créer une recette</NavLink>
+              </li>
               <li>A propos</li>
               <li>
                 <button
@@ -154,6 +157,9 @@ const Navbar = () => {
                   Mon profil
                 </Link>
               )}
+              <Link className="link-desktop" to="/creation">
+                Créer une recette
+              </Link>
               <Link className="link-desktop" to="/">
                 A propos
               </Link>

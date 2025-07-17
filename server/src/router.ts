@@ -1,4 +1,3 @@
-import cookieParser from "cookie-parser";
 import express from "express";
 
 const router = express.Router();
@@ -18,11 +17,34 @@ router.post("/api/items", itemActions.add);
 
 // Define recipe-related routes
 import recipeActions from "./modules/recipe/recipeActions";
+import recipeFormValidation from "./validation/recipeFormValidation";
+
+import upload from "./validation/upload";
 
 router.get("/api/recipes", recipeActions.browse);
 router.get("/api/recipes/:id", recipeActions.read);
 router.put("/api/admin/recipes/:id", recipeActions.editAdmin);
 router.delete("/api/recipes/:id", recipeActions.destroy);
+router.post(
+  "/api/recipe",
+  verifyCookie,
+  upload.single("image"),
+  recipeFormValidation,
+  recipeActions.add,
+);
+
+/* ************************************************************************* */
+
+// Define label-related routes
+import labelActions from "./modules/label/labelActions";
+
+router.get("/api/label", labelActions.browse);
+/* ************************************************************************* */
+
+// Define label-related routes
+import categoryActions from "./modules/category/categoryActions";
+
+router.get("/api/category", categoryActions.browse);
 
 /* ************************************************************************* */
 
@@ -70,9 +92,8 @@ import { deleteCookie } from "./middlewares/cookieAuth/deleteCookie.middleware";
 /** cokie validation route */
 import { verifyCookie } from "./middlewares/cookieAuth/verifyCookie.middleware";
 
-const cookieCheck = cookieParser();
-router.get("/api/me", cookieCheck, verifyCookie);
-router.post("/api/logout", cookieCheck, deleteCookie);
+router.get("/api/me", verifyCookie);
+router.post("/api/logout", deleteCookie);
 
 // Define admin-related routes
 import adminActions from "./modules/admin/adminActions";

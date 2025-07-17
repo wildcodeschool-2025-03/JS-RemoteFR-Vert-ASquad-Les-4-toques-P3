@@ -6,14 +6,12 @@ CREATE TABLE category (
 
 CREATE TABLE recipe(
 id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-name VARCHAR(45),
+name VARCHAR(50) UNIQUE,
 cost INT UNSIGNED NOT NULL,
-difficulty INT UNSIGNED NOT NULL,
+difficulty VARCHAR(45) NOT NULL,
 nb_people INT UNSIGNED NOT NULL,
-qte_ingredients INT UNSIGNED NOT NULL,
 picture TEXT,
-additional_text VARCHAR(255),
-is_validated BOOLEAN NOT NULL,
+is_validated BOOLEAN DEFAULT false,
 category_id INT,
 FOREIGN KEY (category_id) REFERENCES category(id),
 user_id INT 
@@ -37,6 +35,8 @@ CREATE TABLE ingredient (
 CREATE TABLE recipe_ingredient (
   recipe_id INT,
   ingredient_id INT,
+  quantity INT UNSIGNED NOT NULL,
+  unit VARCHAR(10),
   PRIMARY KEY (recipe_id, ingredient_id),
   FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON DELETE CASCADE,
   FOREIGN KEY (ingredient_id) REFERENCES ingredient(id) ON DELETE NO ACTION
@@ -111,5 +111,6 @@ CREATE TABLE week_meal (
   FOREIGN KEY (recipe_id) REFERENCES recipe(id),
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
 
 
