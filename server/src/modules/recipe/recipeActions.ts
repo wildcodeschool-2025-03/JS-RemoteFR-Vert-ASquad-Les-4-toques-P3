@@ -7,6 +7,7 @@ const browse: RequestHandler = async (req, res, next) => {
     if (req.query.category) {
       const recipesByCategory = await RecipeRepository.readAllByCategory(
         +req.query.category,
+        req.query?.search as string,
       );
       res.status(200).json(recipesByCategory);
     }

@@ -76,30 +76,26 @@ export default function Carousel({
   const [recipes, setRecipes] = useState<RecipesType[]>([]);
 
   useEffect(() => {
+    const getSeparator = (option: string) => {
+      return option.includes("?") ? "&" : "?";
+    };
     const getRecipes = async () => {
-      const option = categoryId
-        ? `?category=${categoryId}`
-        : last
-          ? `?last=${last}`
-          : "";
+      let option = "";
+      if (categoryId) option += `?category=${categoryId}`;
+      if (search) option += `${getSeparator(option)}search=${search}`;
+      if (last) option += `${getSeparator(option)}last=${last}`;
       axios
         .get(`${import.meta.env.VITE_API_URL}/api/recipes${option}`)
         .then((response) => setRecipes(response.data))
         .catch((err) => console.error("Erreur :", err));
     };
     getRecipes();
-  }, [categoryId, last]);
-
-  const filteredRecipes = recipes.filter((recipe) => {
-    const searchLower = search ? search.toLowerCase() : "";
-    const matchName = recipe.name.toLowerCase().startsWith(searchLower);
-    return matchName;
-  });
+  }, [categoryId, last, search]);
 
   const [displayedImgIndex, setdisplayedImgIndex] = useState<number>(1);
-  const slidesToShow = Math.max(1, Math.min(3, filteredRecipes.length));
+  const slidesToShow = Math.max(1, Math.min(3, recipes.length));
   const showOneOrMany =
-    filteredRecipes.length === 1 ? filteredRecipes.length > slidesToShow : true;
+    recipes.length === 1 ? recipes.length > slidesToShow : true;
 
   const settings = {
     dots: true,
@@ -110,7 +106,6 @@ export default function Carousel({
     afterChange: (current: number) => {
       const centeredIndex = current + Math.floor(slidesToShow / 2);
       setdisplayedImgIndex(centeredIndex);
-      console.log(current);
     },
     centerMode: true,
     centerPadding: "10%",
@@ -138,11 +133,7 @@ export default function Carousel({
     displayedImgIndex < recipes.length ? displayedImgIndex : 0;
 
   if (recipes.length === 0) {
-    return <h1>Chargement</h1>;
-  }
-
-  if (filteredRecipes.length === 0) {
-    return <h1>Aucune recette trouvée</h1>;
+    return search ? <h1>Aucune recette trouvée</h1> : <h1>Chargement</h1>;
   }
 
   return (
@@ -176,7 +167,7 @@ export default function Carousel({
         )}
         <div className="slider-container">
           <Slider {...settings}>
-            {filteredRecipes.map((r) => (
+            {recipes.map((r) => (
               <div key={r.id}>
                 <img src={r.picture} alt={r.name} />
               </div>
