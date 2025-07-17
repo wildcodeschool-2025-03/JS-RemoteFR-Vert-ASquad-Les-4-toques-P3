@@ -1,117 +1,172 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import './ContactForm.css'; // Assurez-vous que ce fichier CSS est bien lié
+import { useNavigate } from "react-router";
+import "../contactForm/contactForm.css";
 
 type FormType = {
-    nom: string;
-    prenom: string;
+    firstname: string;
+    lastname: string;
     email: string;
     message: string;
 };
 
-export default function ContactForm() {
+const ContactForm: React.FC = () => {
+    const navigate = useNavigate();
+    const [status, setStatus] = useState<string>("");
+
     const {
         register,
         handleSubmit,
         formState: { errors },
-        reset,
-    } = useForm<FormType>();
+    } = useForm<FormType>({ mode: "onSubmit" });
 
-    const onSubmit = (data: FormType) => {
-        console.log("Données du formulaire soumises:", data); // Pour le débogage
-        alert("Formulaire soumis ! Merci de votre message.");
-        reset(); // Réinitialise le formulaire après soumission
+    const onSubmit = async (data: FormType) => {
+        setStatus("Envoi en cours...");
+
+        try {
+            const response = await fetch("http://localhost:3310/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                setStatus(
+                    "Votre message a bien été envoyé ! Nous revenons vers vous au plus vite.",
+                );
+                setTimeout(() => navigate("/"), 3500);
+            } else {
+                const result = await response.json();
+                setStatus(`Erreur : ${result?.error || "Erreur serveur"}`);
+            }
+        } catch (error) {
+            setStatus("Erreur serveur");
+        }
     };
 
     return (
-        <div className="contact-form-wrapper"> {/* Renommé le conteneur principal pour plus d'unicité */}
-            <h2 className="contact-form-title">Formulaire de contact</h2> {/* Titre du formulaire */}
-            <form onSubmit={handleSubmit(onSubmit)} className="contact-main-form" noValidate> {/* Formulaire principal */}
-                <div className="form-fields-group"> {/* Groupe des champs, correspond à input-group1 */}
-                    <label htmlFor="nom" className="form-label">Nom</label>
+        <div className="contact-form-wrapper">
+            <h2 className="contact-form-title">Formulaire de contact</h2>
+            <form
+                className="contact-main-form"
+                onSubmit={handleSubmit(onSubmit)}
+                noValidate
+            >
+                <div className="form-fields-group">
+                    <label htmlFor="firstname" className="form-label">
+                        Prénom
+                    </label>
                     <input
-                        id="nom"
-                        className="form-input form-input-nom" // Plus spécifique pour le style
-                        placeholder="Entrez votre nom"
-                        {...register("nom", {
-                            required: "Le nom est obligatoire",
-                            minLength: {
-                                value: 2,
-                                message: "Le nom doit contenir au moins 2 caractères",
-                            },
-                            maxLength: {
-                                value: 45,
-                                message: "Le nom doit contenir au maximum 45 caractères",
-                            },
-                        })}
-                    />
-                    {errors.nom && <p className="form-error-message">{errors.nom.message}</p>}
-
-                    <label htmlFor="prenom" className="form-label">Prénom</label>
-                    <input
-                        id="prenom"
-                        className="form-input form-input-prenom" // Plus spécifique
+                        id="firstname"
                         placeholder="Entrez votre prénom"
-                        {...register("prenom", {
-                            required: "Le prénom est obligatoire",
+                        className="form-input"
+                        {...register("firstname", {
+                            required: "merci de completer ce champ",
                             minLength: {
                                 value: 2,
-                                message: "Le prénom doit contenir au moins 2 caractères",
+                                message: "le champ doit contenir au minimum 2 caractères",
                             },
                             maxLength: {
                                 value: 45,
-                                message: "Le prénom doit contenir au maximum 45 caractères",
+                                message: "le champ doit contenir au maximum 45 caractères",
                             },
                         })}
                     />
-                    {errors.prenom && <p className="form-error-message">{errors.prenom.message}</p>}
+                    {errors.firstname && (
+                        <p className="contact-error-msg">{errors.firstname.message}</p>
+                    )}
+                </div>
 
-                    <label htmlFor="email" className="form-label">Email</label>
-                    <div className="form-email-input-container"> {/* Conteneur pour l'icône email */}
+                <div className="form-fields-group">
+                    <label htmlFor="lastname" className="form-label">
+                        Nom
+                    </label>
+                    <input
+                        id="lastname"
+                        placeholder="Entrez votre nom"
+                        className="form-input"
+                        {...register("lastname", {
+                            required: "merci de completer ce champ",
+                            minLength: {
+                                value: 2,
+                                message: "le champ doit contenir au minimum 2 caractères",
+                            },
+                            maxLength: {
+                                value: 45,
+                                message: "le champ doit contenir au maximum 45 caractères",
+                            },
+                        })}
+                    />
+                    {errors.lastname && (
+                        <p className="contact-error-msg">{errors.lastname.message}</p>
+                    )}
+                </div>
+
+                <div className="form-fields-group">
+                    <label htmlFor="email" className="form-label">
+                        Email
+                    </label>
+                    <div className="form-input-email-container">
+                        <img
+                            src="/images/mail.svg"
+                            alt="email icon"
+                            className="form-input-email-icon"
+                        />
                         <input
                             id="email"
                             type="email"
-                            className="form-input form-input-email" // Plus spécifique
                             placeholder="Entrez votre email"
+                            className="form-input form-input-email"
                             {...register("email", {
-                                required: "L'email est obligatoire",
+                                required: "merci de completer ce champ",
                                 pattern: {
                                     value:
                                         /^(?!\.)(?!.*\.\.)([a-z0-9_'+\-\.]*)[a-z0-9_+-]@([a-z0-9][a-z0-9\-]*\.)+[a-z]{2,}$/i,
-                                    message: "Le format d'email est incorrect",
+                                    message: "le format d'email est incorrect",
                                 },
                             })}
                         />
-                        {/* L'icône sera gérée par background-image en CSS pour l'input */}
                     </div>
-                    {errors.email && <p className="form-error-message">{errors.email.message}</p>}
+                    {errors.email && (
+                        <p className="contact-error-msg">{errors.email.message}</p>
+                    )}
+                </div>
 
-                    <label htmlFor="message" className="form-label">Message</label>
+                <div className="form-fields-group">
+                    <label htmlFor="message" className="form-label">
+                        Message
+                    </label>
                     <textarea
                         id="message"
-                        className="form-textarea-message" // Classe unique pour le textarea
                         placeholder="Entrez votre message"
-                        rows={5}
+                        className="form-textarea-message"
                         {...register("message", {
-                            required: "Le message est obligatoire",
+                            required: "merci de completer ce champ",
                             minLength: {
                                 value: 10,
-                                message: "Le message doit contenir au moins 10 caractères",
+                                message: "le message doit contenir au minimum 10 caractères",
                             },
                             maxLength: {
-                                value: 500,
-                                message: "Le message ne peut pas dépasser 500 caractères",
+                                value: 1000,
+                                message: "le message doit contenir au maximum 1000 caractères",
                             },
                         })}
                     />
-                    {errors.message && <p className="form-error-message">{errors.message.message}</p>}
-
-                    <div className="form-button-container"> {/* Conteneur pour le bouton */}
-                        <button type="submit" className="form-submit-button"> {/* Bouton de soumission */}
-                            Soumettre
-                        </button>
-                    </div>
+                    {errors.message && (
+                        <p className="contact-error-msg">{errors.message.message}</p>
+                    )}
                 </div>
+
+                <div className="form-button-container">
+                    <button type="submit" className="form-submit-button">
+                        Envoyer
+                    </button>
+                </div>
+
+                {status && <p className="form-status-message">{status}</p>}
             </form>
         </div>
     );
-}
+};
+
+export default ContactForm;

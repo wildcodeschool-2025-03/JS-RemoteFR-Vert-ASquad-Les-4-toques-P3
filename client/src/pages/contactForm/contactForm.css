@@ -1,192 +1,183 @@
 .contact-form-wrapper {
-    width: 100%;
-    padding: 2rem 0.5rem;
-    margin: 2rem auto;
-    font-family: "Arial", sans-serif;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto 2rem auto;
+  padding: 1rem 0.5rem 2rem 0.5rem;
+  background: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .contact-form-title {
-    color: var(--secondary);
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 1em 0 1.5em 0;
-    text-align: center;
-    font-family: "Now", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 1em 0;
+  padding: 0 1rem;
+  text-align: center;
 }
 
 .contact-main-form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-    align-items: center;
-    width: 100%;
-    max-width: 320px;
-}
-
-.form-label {
-    margin-bottom: 0.4rem;
-    margin-top: 1rem;
-    font-weight: 500;
-    color: #333;
+  padding: 0 1rem;
+  gap: 0.5rem;
+  max-width: 320px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-fields-group {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+  position: relative;
+  min-height: 60px;
+  margin-bottom: 1rem;
 }
 
-.form-input {
-    border: 1px solid var(--primary);
-    border-radius: 25px;
-    width: 100%;
-    height: 2.2rem;
-    padding: 0 0.8rem;
-    font-size: 0.95rem;
-    font-family: inherit;
-    outline: none;
-    box-sizing: border-box;
-    color: #333;
-    background-color: #fff;
-    transition: border-color 0.3s ease;
+.form-label {
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
 }
 
-.form-input-nom,
-.form-input-prenom {
-    padding-left: 0.8rem;
+.form-input-email-container {
+  position: relative;
+  width: 100%;
 }
 
-.form-email-input-container {
-    width: 100%;
+.form-input-email-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.form-input,
+.form-textarea-message {
+  width: 100%;
+  height: 2.2rem;
+  padding: 0 10px;
+  border: 1px solid var(--primary);
+  border-radius: 25px;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  outline: none;
 }
 
 .form-input-email {
-    background-image: url("/images/mail.svg");
-    background-repeat: no-repeat;
-    background-position: 0.5rem center;
-    background-size: 18px;
-    padding-left: 2.2rem;
-    border-radius: 25px;
-}
-
-.form-textarea-message {
-    border: 1px solid var(--primary);
-    border-radius: 25px;
-    width: 100%;
-    min-height: 80px;
-    padding: 0.6rem 0.8rem;
-    font-size: 0.95rem;
-    font-family: inherit;
-    outline: none;
-    resize: vertical;
-    box-sizing: border-box;
-    color: #333;
-    background-color: #fff;
-    transition: border-color 0.3s ease;
-}
-
-.form-input:focus,
-.form-textarea-message:focus {
-    border-color: #f7a43f;
+  padding-left: 30px;
+  position: relative;
+  z-index: 1;
 }
 
 .form-input::placeholder,
 .form-textarea-message::placeholder {
-    color: #999;
-    opacity: 1;
+  font-family: "aleo", sans-serif;
+  font-size: 0.8rem;
+  color: #999;
+  opacity: 1;
 }
 
-.form-error-message {
-    color: red;
-    font-size: 0.8rem;
-    margin-top: 0.2rem;
-    margin-bottom: 0;
-    font-weight: normal;
+.form-textarea-message {
+  height: 70px;
+  resize: vertical;
+  padding: 8px 10px;
+  border-radius: 15px;
 }
 
 .form-button-container {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    max-width: 320px;
-    margin-top: 1.5rem;
-    margin-left: auto;
-    margin-right: auto;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .form-submit-button {
-    background-color: var(--secondary);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 0.6rem 1.8rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: var(--secondary);
+  color: white;
+  border: none;
+  border-radius: 20px;
 }
 
-.form-submit-button:hover {
-    background-color: #72a33f;
+.contact-error-msg {
+  color: #dc3545;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  line-height: 1.2;
+  height: 18px;
+}
+
+.form-fields-group:has(.form-textarea-message) {
+  min-height: 100px;
 }
 
 @media (min-width: 768px) {
-    .contact-form-wrapper {
-        max-width: 600px;
-        /* padding: 3rem 1.5rem;
-        margin: 3rem auto; */
-    }
+  .contact-form-wrapper {
+    max-width: 500px;
+    padding: 2rem;
+    margin: 1rem auto 3rem auto;
+  }
 
-    .contact-form-title {
-        font-size: 2.2rem;
-        margin: 1.5em 0 3em 0;
-    }
+  .contact-form-title {
+    font-size: 2rem;
+  }
 
-    .contact-main-form {
-        max-width: 450px;
-        padding: 0;
-    }
+  .contact-main-form {
+    padding: 0 2rem;
+    gap: 1rem;
+  }
 
-    .form-label {
-        margin-top: 1.5rem;
-        font-size: 1.05rem;
-    }
+  .form-label {
+    font-size: 0.9rem;
+  }
 
-    .form-input {
-        height: 2.8rem;
-        padding: 0 1.2rem;
-        font-size: 1.1rem;
-    }
+  .form-input {
+    height: 2.4rem;
+    font-size: 0.85rem;
+    padding: 0 14px;
+  }
 
-    .form-input-nom,
-    .form-input-prenom {
-        padding-left: 1.2rem;
-    }
+  .form-input-email {
+    padding-left: 37px;
+  }
 
-    .form-input-email {
-        background-position: 1rem center;
-        background-size: 22px;
-        padding-left: 3rem;
-    }
+  .form-textarea-message {
+    height: 80px;
+    font-size: 0.85rem;
+    padding: 10px 14px;
+  }
 
-    .form-textarea-message {
-        min-height: 120px;
-        padding: 0.8rem 1.2rem;
-        font-size: 1.1rem;
-    }
+  .form-input-email-icon {
+    width: 18px;
+    height: 18px;
+    left: 14px;
+  }
 
-    .form-error-message {
-        font-size: 0.9rem;
-    }
+  .form-submit-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+  }
 
-    .form-button-container {
-        max-width: 450px;
-        margin-top: 2.5rem;
-    }
-
-    .form-submit-button {
-        padding: 0.8rem 2.5rem;
-        font-size: 1.1rem;
-    }
+  .form-button-container {
+    margin-top: 1.5rem;
+  }
 }

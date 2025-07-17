@@ -76,4 +76,9 @@ router.get("/api/admin", adminActions.browse);
 
 /* ************************************************************************* */
 
+import { sendContactEmails } from "./modules/mail/mailController";
+
+// Define contact-related routes
+router.post("/api/contact", sendContactEmails);
+
 export default router;
