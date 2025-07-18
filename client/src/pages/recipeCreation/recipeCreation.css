@@ -122,10 +122,12 @@ input::-webkit-inner-spin-button {
   flex-direction: column;
   justify-content: center;
   font-weight: bold;
+
   gap: 1em;
 }
 .recipe-nameAndPersons input {
   font-size: 0.6em;
+  font-size: 1em;
   text-align: center;
 }
 
@@ -171,28 +173,33 @@ input::-webkit-inner-spin-button {
 
 .ingredients {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   margin-top: .5em;
-  width: 70vw;
   gap: 1em;
+  width: 70vw;
+  @media screen and (min-width: 1200px) {
+    gap: 3em;
+  }
 }
 
 .ing-name input {
   text-align: center;
-  font-size: 0.6em;
+  font-size: .6em;
   height: 2.6em;
   width: 8em;
   @media screen and (min-width: 1200px) {
+    font-size: .8em;
     width: 15em;
     height: 3em;
   }
 }
 .ing-quantity input {
   text-align: center;
-  font-size: 0.6em;
+  font-size: .6em;
   height: 2.6em;
   width: 5em;
   @media screen and (min-width: 1200px) {
+    font-size: .8em;
     width: 10em;
     height: 3em;
   }
@@ -201,9 +208,10 @@ input::-webkit-inner-spin-button {
   padding: 0.5em 1em;
   border: 1px solid var(--primary);
   border-radius: 0.5rem;
-  font-size: 0.6em;
+  font-size: .6em;
   width: 7em;
   @media screen and (min-width: 1200px) {
+    font-size: .8em;
     width: 10em;
     height: 3em;
   }
@@ -225,6 +233,7 @@ input::-webkit-inner-spin-button {
   padding: .2em;
   width: 50vw;
   height: 5em;
+  font-size: .8em;
 }
 
 .adding-btn {
