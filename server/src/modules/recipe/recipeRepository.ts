@@ -11,11 +11,9 @@ type recipeType = {
   id: number;
   name: string;
   cost: number;
-  difficulty: number;
+  difficulty: string;
   nb_people: number;
-  qte_ingredients: number;
   picture: string;
-  additional_text: string;
   is_validated: boolean;
   user_id: number;
 };

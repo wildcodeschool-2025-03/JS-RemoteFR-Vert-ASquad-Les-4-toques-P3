@@ -30,9 +30,6 @@ const IngredientList = () => {
       <h3>Valeurs nutritionnelles (pour 100g) : </h3>
       <ul>
         <li>Calories (kcal): {getTotalInfo("calories")}</li>
-        <li>Protéines (g): {getTotalInfo("proteines").toFixed(1)}</li>
-        <li>Glucides (g): {getTotalInfo("glucides").toFixed(1)}</li>
-        <li>Lipides (g): {getTotalInfo("lipides").toFixed(1)}</li>
       </ul>
     </div>
   );

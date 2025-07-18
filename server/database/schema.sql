@@ -23,11 +23,6 @@ CREATE TABLE ingredient (
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     nom VARCHAR(50),
     calories VARCHAR(10),
-    proteines VARCHAR(10),
-    glucides VARCHAR(10),
-    lipides VARCHAR(10),
-    sucre VARCHAR(10),
-    sel VARCHAR(10),
     is_validated BOOLEAN DEFAULT false
 );
 
@@ -45,10 +40,7 @@ CREATE TABLE recipe_ingredient (
 
 CREATE TABLE step (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  step_number INT UNSIGNED NOT NULL,
-  title VARCHAR(255),
   description TEXT,
-  image VARCHAR(255),
   recipe_id INT,
   FOREIGN KEY (recipe_id) REFERENCES recipe(id) ON DELETE CASCADE
 );
@@ -111,6 +103,9 @@ CREATE TABLE week_meal (
   FOREIGN KEY (recipe_id) REFERENCES recipe(id),
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+
+
 
 
 
