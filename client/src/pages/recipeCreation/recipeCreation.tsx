@@ -3,7 +3,12 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import {
+  Bounce,
+  ToastContainer,
+  type ToastOptions,
+  toast,
+} from "react-toastify";
 
 import ImgUpload from "../../components/ImgUpload/ImgUpload";
 
@@ -65,6 +70,18 @@ const UNITOPTIONS = [
   { id: 12, unit: "boîte" },
 ];
 
+const TOASTOPTIONS: ToastOptions<unknown> = {
+  position: "top-right",
+  autoClose: 3400,
+  hideProgressBar: false,
+  closeOnClick: false,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+  transition: Bounce,
+};
+
 export default function recipeCreation() {
   const [label, setLabel] = useState<Labeltype[]>([]);
   const [category, setCategory] = useState<Categorytype[]>([]);
@@ -123,29 +140,11 @@ export default function recipeCreation() {
         },
       });
       setTimeout(() => navigate("/"), 3500);
-      toast.success("Recette créée avec succès!", {
-        position: "top-right",
-        autoClose: 3400,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+      toast.success("Recette créée avec succès!", { ...TOASTOPTIONS });
     } catch (err) {
       console.error(err);
       toast.error("Erreur lors de la création de la recette", {
-        position: "top-right",
-        autoClose: 3400,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+        ...TOASTOPTIONS,
       });
     }
   };
