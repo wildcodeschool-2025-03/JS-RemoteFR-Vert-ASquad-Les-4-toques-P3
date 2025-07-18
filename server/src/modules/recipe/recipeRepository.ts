@@ -42,11 +42,16 @@ class RecipeRepository {
     return rows as recipeType[];
   }
 
-  async readAllByCategory(id: number) {
-    const [rows] = await databaseClient.query<Rows>(
-      "SELECT id, name, cost, difficulty, nb_people, picture, is_validated, user_id FROM recipe WHERE category_id=?",
-      [id],
-    );
+  async readAllByCategory(id: number, search: string | undefined) {
+    let request =
+      "SELECT id, name, cost, difficulty, nb_people, picture, is_validated, user_id FROM recipe WHERE category_id=?";
+    const args = [];
+
+    if (search) {
+      request += " AND name LIKE ?";
+      args.push(`${search}%`);
+    }
+    const [rows] = await databaseClient.query<Rows>(request, [id, args]);
     return rows as recipeType[];
   }
 

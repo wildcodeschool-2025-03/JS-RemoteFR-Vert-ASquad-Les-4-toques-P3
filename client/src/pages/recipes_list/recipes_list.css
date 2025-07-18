@@ -9,6 +9,7 @@
 .search_input {
   border: none;
   margin-left: 1rem;
+  background-color: transparent;
 }
 .search_btn {
   border: none;
@@ -52,8 +53,4 @@
   @media (max-width: 1200px) {
     margin: 2rem 0 2rem 5%;
   }
-}
-
-.desktop_displayed_img_container {
-  display: none;
 }

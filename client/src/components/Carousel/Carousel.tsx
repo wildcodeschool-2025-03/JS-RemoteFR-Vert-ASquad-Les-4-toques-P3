@@ -63,40 +63,50 @@ function PrevArrow({ onClick }: ArrowProps) {
 }
 
 export default function Carousel({
+  search,
   categoryId,
   showMainImage = true,
   last,
-}: { categoryId?: number; showMainImage?: boolean; last?: number }) {
+}: {
+  categoryId?: number;
+  showMainImage?: boolean;
+  last?: number;
+  search?: string | undefined;
+}) {
   const [recipes, setRecipes] = useState<RecipesType[]>([]);
   const imgBaseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
+    const getSeparator = (option: string) => {
+      return option.includes("?") ? "&" : "?";
+    };
     const getRecipes = async () => {
-      const option = categoryId
-        ? `?category=${categoryId}`
-        : last
-          ? `?last=${last}`
-          : "";
+      let option = "";
+      if (categoryId) option += `?category=${categoryId}`;
+      if (search) option += `${getSeparator(option)}search=${search}`;
+      if (last) option += `${getSeparator(option)}last=${last}`;
       axios
         .get(`${import.meta.env.VITE_API_URL}/api/recipes${option}`)
         .then((response) => setRecipes(response.data))
         .catch((err) => console.error("Erreur :", err));
     };
     getRecipes();
-  }, [categoryId, last]);
+  }, [categoryId, last, search]);
 
   const [displayedImgIndex, setdisplayedImgIndex] = useState<number>(0);
+  const slidesToShow = Math.max(1, Math.min(3, recipes.length));
+  const showOneOrMany =
+    recipes.length === 1 ? recipes.length > slidesToShow : true;
 
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: showOneOrMany,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow,
     slidesToScroll: 1,
     afterChange: (current: number) => {
       const centeredIndex = current;
       setdisplayedImgIndex(centeredIndex);
-      console.log(current);
     },
     centerMode: true,
     centerPadding: "10%",
@@ -124,7 +134,7 @@ export default function Carousel({
     displayedImgIndex < recipes.length ? displayedImgIndex : 0;
 
   if (recipes.length === 0) {
-    return <h1>Chargement</h1>;
+    return search ? <h1>Aucune recette trouvée</h1> : <h1>Chargement</h1>;
   }
 
   return (
