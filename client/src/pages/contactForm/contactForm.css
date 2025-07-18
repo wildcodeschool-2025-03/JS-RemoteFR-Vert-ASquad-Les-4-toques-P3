@@ -132,7 +132,7 @@
   min-height: 100px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .contact-form-wrapper {
     max-width: 400px;
     padding: 2rem;
