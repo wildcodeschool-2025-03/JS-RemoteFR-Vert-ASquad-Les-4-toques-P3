@@ -17,17 +17,17 @@ export const sendContactEmails: RequestHandler = async (req, res) => {
     const emailData = {
       sender: {
         name: "Les 4 Toques",
-        email: process.env.ADMIN_EMAIL || "namnameating@gmail.com"
+        email: process.env.ADMIN_EMAIL || "namnameating@gmail.com",
       },
       to: [
         {
           email: process.env.ADMIN_EMAIL || "namnameating@gmail.com",
-          name: "Administrateur Les 4 Toques"
-        }
+          name: "Administrateur Les 4 Toques",
+        },
       ],
       replyTo: {
         email: email,
-        name: `${firstname} ${lastname}`
+        name: `${firstname} ${lastname}`,
       },
       subject: `Nouveau message via le formulaire de contact - ${firstname} ${lastname}`,
       htmlContent: `
@@ -45,7 +45,7 @@ export const sendContactEmails: RequestHandler = async (req, res) => {
 
             <div style="background-color: #ffffff; padding: 20px; border-left: 4px solid #2980b9; border-radius: 4px;">
               <p style="margin-bottom: 10px;"><strong>Message :</strong></p>
-              <p style="white-space: pre-line;">${message.replace(/\n/g, '<br>')}</p>
+              <p style="white-space: pre-line;">${message.replace(/\n/g, "<br>")}</p>
             </div>
 
             <p style="margin-top: 30px;">Veuillez répondre directement à cette adresse si vous souhaitez prendre contact avec le client.</p>
@@ -53,17 +53,16 @@ export const sendContactEmails: RequestHandler = async (req, res) => {
             <p style="color: #888; font-size: 0.9em; margin-top: 40px;">— Notification automatique générée par le site "Eating Nam Nam"</p>
           </body>
         </html>
-      `
+      `,
     };
 
-
-    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
+    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'api-key': process.env.BREVO_API_KEY || ''
+        "Content-Type": "application/json",
+        "api-key": process.env.BREVO_API_KEY || "",
       },
-      body: JSON.stringify(emailData)
+      body: JSON.stringify(emailData),
     });
 
     if (!response.ok) {
@@ -72,9 +71,9 @@ export const sendContactEmails: RequestHandler = async (req, res) => {
     }
 
     res.status(200).json({
-      message: "Votre message a bien été envoyé ! Nous vous recontacterons bientôt.",
+      message:
+        "Votre message a bien été envoyé ! Nous vous recontacterons bientôt.",
     });
-
   } catch (error) {
     res.status(500).json({
       error: "Erreur lors de l'envoi. Veuillez réessayer.",

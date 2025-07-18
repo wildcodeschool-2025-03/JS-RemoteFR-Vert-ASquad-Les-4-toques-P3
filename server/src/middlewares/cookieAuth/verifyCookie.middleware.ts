@@ -18,9 +18,8 @@ export const verifyCookie: RequestHandler = async (req, res, next) => {
     ) as JwtPayload;
 
     res.json(req.auth);
-
-    next();
   } catch (err) {
     res.status(401).json({ message: err });
   }
+  next();
 };

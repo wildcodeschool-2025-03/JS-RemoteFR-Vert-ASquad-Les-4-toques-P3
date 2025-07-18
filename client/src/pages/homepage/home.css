@@ -1,6 +1,6 @@
 h1 {
   font-size: 1rem;
-  color: #97bf0d;
+  color: var(--secondary);
   margin: 2em 0 1em 0;
   font-weight: 600;
   padding-left: 1rem;
@@ -8,11 +8,20 @@ h1 {
 }
 
 h2 {
-  color: #97bf0d;
+  color: var(--secondary);
   font-size: 1rem;
   font-weight: 600;
   margin: 4em 0 1em 0;
   padding: 0 1rem;
+  text-align: center;
+  font-family: "Now", sans-serif;
+}
+
+.h2Home {
+  color: var(--secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1rem 1rem 2rem 1rem;
   text-align: center;
   font-family: "Now", sans-serif;
 }
@@ -31,14 +40,15 @@ h2 {
   align-items: center;
   text-align: center;
   justify-content: center;
+  max-width: 50%;
 }
 
 .step-item img {
   width: 10vw;
   max-width: 50px;
   min-width: 40px;
-  height: auto;
   margin-bottom: 0.5em;
+  height: auto;
   display: block;
 }
 
@@ -55,6 +65,11 @@ h2 {
     font-family: "Now", sans-serif;
     font-size: 1.4rem;
     padding: 2rem;
+  }
+  .h2Home {
+    font-size: 1.4rem;
+    padding: 2rem 0 0 0;
+    margin: 0;
   }
 
   .steps {

@@ -11,17 +11,17 @@ import Admin from "./pages/Admin";
 import ContactForm from "./pages/contactForm/ContactForm";
 import Homepage from "./pages/homepage/Homepage";
 import Login from "./pages/login/Login";
+import Profil from "./pages/profil/Profil";
+import RecipeCreation from "./pages/recipeCreation/recipeCreation";
+import Recipedetail from "./pages/recipe_detail/Recipedetail";
 import Recipes from "./pages/recipes_list/recipes_list";
 import Register from "./pages/register/Register";
-import UserHomepage from "./pages/userHomepage/userHomepage";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
 
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
-
-/* ************************************************************************* */
 
 // Create router configuration with routes
 // You can add more routes as you build out your app!
@@ -31,11 +31,13 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Homepage /> },
-      { path: "/user", element: <UserHomepage /> },
       { path: "/inscription", element: <Register /> },
       { path: "/admin", element: <Admin /> },
       { path: "/connexion", element: <Login /> },
       { path: "/recettes", element: <Recipes /> },
+      { path: "/profil", element: <Profil /> },
+      { path: "/recettes/:id", element: <Recipedetail /> },
+      { path: "/creation", element: <RecipeCreation /> },
       { path: "/contact", element: <ContactForm /> },
     ], // Renders the App component for the home page
   },
