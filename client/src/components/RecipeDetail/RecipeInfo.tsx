@@ -18,6 +18,7 @@ const cost: transitionType = {
 const RecipeInfo = () => {
   const { id } = useParams();
   const [recette, setRecette] = useState<recipeType | null>(null);
+  const imgBaseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`)
@@ -32,7 +33,11 @@ const RecipeInfo = () => {
   return (
     <section className="recipe-info">
       <h1>{recette.name}</h1>
-      <img className="img-recipe" src={recette.picture} alt={recette.name} />
+      <img
+        className="img-recipe"
+        src={`${imgBaseUrl}${recette.picture}`}
+        alt={recette.name}
+      />
       <p>Nombre de personnes : {recette.nb_people}</p>
       <p>Difficulté : {recette.difficulty}</p>
       <p>Budget : {cost[recette.cost]}</p>
