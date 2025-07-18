@@ -102,7 +102,6 @@ router.get("/api/admin", adminActions.browse);
 
 /* ************************************************************************* */
 
-
 // Define step-related routes
 import stepActions from "./modules/step/stepActions";
 
