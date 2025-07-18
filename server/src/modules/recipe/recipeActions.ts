@@ -104,8 +104,8 @@ const add: RequestHandler = async (req, res, next) => {
 
     res.status(201).json({
       recipeId: insertId,
-      "Labels ids:": addLabel,
-      "Steps:": addSteps,
+      labelsIds: addLabel,
+      stepsIds: addSteps,
     });
   } catch (err) {
     next(err);
