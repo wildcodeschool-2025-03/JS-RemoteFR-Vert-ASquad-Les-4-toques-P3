@@ -23,7 +23,6 @@ const RecipeInfo = () => {
     fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Recette reçue :", data); // 👈 ici
         setRecette(data);
       });
   }, [id]);
