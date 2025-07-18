@@ -56,7 +56,7 @@ export const sendContactEmails: RequestHandler = async (req, res) => {
       `,
     };
 
-    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+    const response = await fetch(`${process.env.BREVO_URL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

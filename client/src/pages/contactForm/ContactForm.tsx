@@ -13,6 +13,7 @@ type FormType = {
 const ContactForm: React.FC = () => {
   const navigate = useNavigate();
   const [status, setStatus] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const {
     register,
@@ -21,14 +22,18 @@ const ContactForm: React.FC = () => {
   } = useForm<FormType>({ mode: "onSubmit" });
 
   const onSubmit = async (data: FormType) => {
+    setIsSubmitting(true);
     setStatus("Envoi en cours...");
 
     try {
-      const response = await fetch("http://localhost:3310/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/contact`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        },
+      );
 
       if (response.ok) {
         setStatus(
@@ -38,9 +43,11 @@ const ContactForm: React.FC = () => {
       } else {
         const result = await response.json();
         setStatus(`Erreur : ${result?.error || "Erreur serveur"}`);
+        setIsSubmitting(false);
       }
     } catch (error) {
       setStatus("Erreur serveur");
+      setIsSubmitting(false);
     }
   };
 
@@ -158,8 +165,12 @@ const ContactForm: React.FC = () => {
         </div>
 
         <div className="form-button-container">
-          <button type="submit" className="form-submit-button">
-            Envoyer
+          <button
+            type="submit"
+            className="form-submit-button"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Envoi en cours..." : "Envoyer"}
           </button>
         </div>
 
