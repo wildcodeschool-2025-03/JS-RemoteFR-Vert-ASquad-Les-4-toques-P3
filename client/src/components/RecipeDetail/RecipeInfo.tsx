@@ -9,12 +9,6 @@ type transitionType = {
   3: string;
 };
 
-const difficulty: transitionType = {
-  1: "Débutant",
-  2: "Intermédiaire",
-  3: "Chef",
-};
-
 const cost: transitionType = {
   1: "€",
   2: "€€",
@@ -24,21 +18,28 @@ const cost: transitionType = {
 const RecipeInfo = () => {
   const { id } = useParams();
   const [recette, setRecette] = useState<recipeType | null>(null);
+  const imgBaseUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`)
       .then((res) => res.json())
-      .then((data) => setRecette(data));
+      .then((data) => {
+        setRecette(data);
+      });
   }, [id]);
 
-  if (!recette) return <p>Chargement de la recette...</p>;
+  if (!recette) return <p>Aucune recette...</p>;
 
   return (
     <section className="recipe-info">
       <h1>{recette.name}</h1>
-      <img className="img-recipe" src={recette.picture} alt={recette.name} />
+      <img
+        className="img-recipe"
+        src={`${imgBaseUrl}${recette.picture}`}
+        alt={recette.name}
+      />
       <p>Nombre de personnes : {recette.nb_people}</p>
-      <p>Difficulté : {difficulty[recette.difficulty]}</p>
+      <p>Difficulté : {recette.difficulty}</p>
       <p>Budget : {cost[recette.cost]}</p>
     </section>
   );

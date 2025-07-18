@@ -7,11 +7,6 @@ type recipeType = {
   id: number;
   nom: string;
   calories: string;
-  proteines: string;
-  glucides: string;
-  lipides: string;
-  sucre: string;
-  sel: string;
   is_validated: boolean;
 };
 
