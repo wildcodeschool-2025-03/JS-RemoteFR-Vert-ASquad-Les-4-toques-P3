@@ -1,0 +1,189 @@
+.contact-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.contact-form-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+  text-align: center;
+  color: var(--secondary);
+}
+
+.contact-main-form {
+  padding: 0;
+  gap: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-fields-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+  position: relative;
+  min-height: 60px;
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.form-input-email-container {
+  position: relative;
+  width: 100%;
+}
+
+.form-input-email-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.form-input,
+.form-textarea-message {
+  width: 100%;
+  height: 2.2rem;
+  padding: 0 10px;
+  border: 1px solid var(--primary);
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-family: "aleo", sans-serif;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.form-input-email {
+  padding-left: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.form-input::placeholder,
+.form-textarea-message::placeholder {
+  font-family: "aleo", sans-serif;
+  font-size: 0.85rem;
+  color: #999;
+  opacity: 1;
+}
+
+.form-textarea-message {
+  height: 70px;
+  resize: vertical;
+  padding: 8px 10px;
+  border-radius: 15px;
+  font-family: "aleo", sans-serif;
+}
+
+.form-button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.form-submit-button {
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: var(--secondary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+}
+
+.contact-error-msg {
+  color: #dc3545;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  line-height: 1.2;
+  height: 18px;
+}
+
+.form-fields-group:has(.form-textarea-message) {
+  min-height: 100px;
+}
+
+@media (min-width: 1200px) {
+  .contact-form-wrapper {
+    max-width: 400px;
+    padding: 2rem;
+    margin: 2rem auto;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-form-title {
+    font-size: 1.9rem;
+    color: var(--secondary);
+  }
+
+  .contact-main-form {
+    padding: 0;
+    gap: 1.2rem;
+  }
+
+  .form-label {
+    font-size: 0.9rem;
+  }
+
+  .form-input {
+    height: 2.4rem;
+    font-size: 0.9rem;
+    padding: 0 14px;
+    font-family: "aleo", sans-serif;
+  }
+
+  .form-input-email {
+    padding-left: 37px;
+  }
+
+  .form-textarea-message {
+    height: 80px;
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    font-family: "aleo", sans-serif;
+  }
+
+  .form-input-email-icon {
+    width: 18px;
+    height: 18px;
+    left: 14px;
+  }
+
+  .form-submit-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .form-button-container {
+    margin-top: 1.5rem;
+  }
+}
