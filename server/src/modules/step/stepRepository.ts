@@ -11,6 +11,16 @@ type stepType = {
 };
 
 class StepRepository {
+  /** 
+   Create step and select recipe id from recipe table by comparing recipe.id with recipe_id value 
+  */
+  async create(steps: { description: string }[], recipeId: number) {
+    return await databaseClient.query(
+      "INSERT INTO step (description, recipe_id) VALUES ?",
+      [steps.map((step) => [step.description, recipeId])],
+    );
+  }
+
   async readAll() {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT id, step_number, title, description, image FROM step",

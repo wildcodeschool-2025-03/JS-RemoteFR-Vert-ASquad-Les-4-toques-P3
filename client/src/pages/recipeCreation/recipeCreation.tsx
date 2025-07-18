@@ -19,7 +19,7 @@ type RecipeForm = {
   cost: string;
   ingredients: {
     name: string;
-    quantity: number;
+    quantity: number | null;
     unit: string;
   }[];
   steps: {
@@ -57,6 +57,11 @@ const UNITOPTIONS = [
   { id: 5, unit: "ml" },
   { id: 6, unit: "cl" },
   { id: 7, unit: "l" },
+  { id: 8, unit: "cuil. à soupe" },
+  { id: 9, unit: "cuil à café" },
+  { id: 10, unit: "sachet" },
+  { id: 11, unit: "pincée" },
+  { id: 12, unit: "boîte" },
 ];
 
 export default function recipeCreation() {
@@ -366,7 +371,7 @@ export default function recipeCreation() {
             className="adding-btn"
             type="button"
             onClick={() =>
-              appendIngredient({ name: "", quantity: 0, unit: "" })
+              appendIngredient({ name: "", quantity: null, unit: "unité" })
             }
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
