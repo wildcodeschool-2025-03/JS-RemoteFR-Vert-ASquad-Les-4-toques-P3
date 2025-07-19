@@ -18,6 +18,7 @@ router.post("/api/items", itemActions.add);
 // Define recipe-related routes
 import recipeActions from "./modules/recipe/recipeActions";
 import recipeFormValidation from "./validation/recipeFormValidation";
+import { validateCookie } from "./validation/validateCookie";
 
 import upload from "./validation/upload";
 
@@ -27,7 +28,7 @@ router.put("/api/admin/recipes/:id", recipeActions.editAdmin);
 router.delete("/api/recipes/:id", recipeActions.destroy);
 router.post(
   "/api/recipe",
-  verifyCookie,
+  validateCookie,
   upload.single("image"),
   recipeFormValidation,
   recipeActions.add,
