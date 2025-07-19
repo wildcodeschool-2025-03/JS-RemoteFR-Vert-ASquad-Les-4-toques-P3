@@ -140,12 +140,10 @@ export default function recipeCreation() {
         },
       });
       setTimeout(() => navigate("/"), 3500);
-      toast.success("Recette créée avec succès!", { ...TOASTOPTIONS });
+      toast.success("Recette créée avec succès!", TOASTOPTIONS);
     } catch (err) {
       console.error(err);
-      toast.error("Erreur lors de la création de la recette", {
-        ...TOASTOPTIONS,
-      });
+      toast.error("Erreur lors de la création de la recette", TOASTOPTIONS);
     }
   };
 
