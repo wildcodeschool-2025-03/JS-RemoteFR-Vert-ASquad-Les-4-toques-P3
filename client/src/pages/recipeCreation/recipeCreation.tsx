@@ -3,6 +3,12 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
+import {
+  Bounce,
+  ToastContainer,
+  type ToastOptions,
+  toast,
+} from "react-toastify";
 
 import ImgUpload from "../../components/ImgUpload/ImgUpload";
 
@@ -64,6 +70,18 @@ const UNITOPTIONS = [
   { id: 12, unit: "boîte" },
 ];
 
+const TOASTOPTIONS: ToastOptions<unknown> = {
+  position: "top-right",
+  autoClose: 3400,
+  hideProgressBar: false,
+  closeOnClick: false,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+  transition: Bounce,
+};
+
 export default function recipeCreation() {
   const [label, setLabel] = useState<Labeltype[]>([]);
   const [category, setCategory] = useState<Categorytype[]>([]);
@@ -102,7 +120,7 @@ export default function recipeCreation() {
     }
   };
 
-  const onSubmit: SubmitHandler<RecipeForm> = (data) => {
+  const onSubmit: SubmitHandler<RecipeForm> = async (data) => {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("persons", data.persons);
@@ -115,18 +133,17 @@ export default function recipeCreation() {
     formData.append("image", data.image[0]);
 
     try {
-      axios
-        .post(`${import.meta.env.VITE_API_URL}/api/recipe`, formData, {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then(() => {
-          navigate("/");
-        });
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/recipe`, formData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setTimeout(() => navigate("/"), 3500);
+      toast.success("Recette créée avec succès!", TOASTOPTIONS);
     } catch (err) {
       console.error(err);
+      toast.error("Erreur lors de la création de la recette", TOASTOPTIONS);
     }
   };
 
@@ -428,6 +445,7 @@ export default function recipeCreation() {
           >
             Envoyer
           </motion.button>
+          <ToastContainer />
         </div>
       </form>
     </>
