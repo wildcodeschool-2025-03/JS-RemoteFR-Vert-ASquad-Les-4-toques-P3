@@ -140,6 +140,18 @@ export default function Carousel({
   return (
     <>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <div className="slider-container">
+          <Slider {...settings}>
+            {recipes.map((r) => (
+              <div key={r.id}>
+                <NavLink to={`/recettes/${r.id}`}>
+                  <img src={`${imgBaseUrl}${r.picture}`} alt={r.name} />
+                </NavLink>
+                <p className="slider_picture_name">{r.name}</p>
+              </div>
+            ))}
+          </Slider>
+        </div>
         {showMainImage && (
           <section className="desktop_displayed_img_container">
             <img
@@ -150,10 +162,9 @@ export default function Carousel({
 
             <article>
               <h3>{recipes[CenteredImgIndex].name}</h3>
-              <span>Note: </span>
-              <span>Difficulté: {recipes[CenteredImgIndex].difficulty} </span>
-              <span>Temps de préparation: </span>
-              <NavLink to={"/"}>
+              <span>Note : </span>
+              <span>Difficulté : {recipes[CenteredImgIndex].difficulty} </span>
+              <NavLink to={`/recettes/${recipes[CenteredImgIndex].id}`}>
                 <motion.button
                   type="button"
                   className="sign-btn"
@@ -166,15 +177,6 @@ export default function Carousel({
             </article>
           </section>
         )}
-        <div className="slider-container">
-          <Slider {...settings}>
-            {recipes.map((r) => (
-              <div key={r.id}>
-                <img src={`${imgBaseUrl}${r.picture}`} alt={r.name} />
-              </div>
-            ))}
-          </Slider>
-        </div>
       </motion.div>
     </>
   );

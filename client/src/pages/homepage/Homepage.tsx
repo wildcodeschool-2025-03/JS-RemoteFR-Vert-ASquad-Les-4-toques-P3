@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <h2 className="h2Home">Les recettes fraîchement ajoutées</h2>
-      <div className="carousel">
+      <div className="home_carousel">
         <Carousel last={5} />
       </div>
       <h2>Crée ta recette en 3 étapes</h2>

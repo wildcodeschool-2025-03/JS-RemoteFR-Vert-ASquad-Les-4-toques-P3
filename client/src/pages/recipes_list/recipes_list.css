@@ -29,19 +29,6 @@
   display: flex;
 }
 
-.vegan,
-.gluten_free,
-.vegetarian {
-  border: none;
-  background-color: rgba(255, 255, 255, 0);
-  height: 2rem;
-  width: 2rem;
-  margin-left: .8rem;
-}
-.label_icon {
-  height: 2rem;
-}
-
 .category {
   color: #97bf0d;
   font-size: 1rem;
@@ -53,4 +40,8 @@
   @media (max-width: 1200px) {
     margin: 2rem 0 2rem 5%;
   }
+}
+
+div .carousel {
+  height: 24rem;
 }
