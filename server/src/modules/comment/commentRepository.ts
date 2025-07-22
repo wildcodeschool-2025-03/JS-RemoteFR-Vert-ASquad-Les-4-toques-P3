@@ -1,7 +1,7 @@
+import type { FieldPacket, ResultSetHeader } from "mysql2";
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 import type { CommentType } from "../../lib/definitions";
-import type { FieldPacket, ResultSetHeader } from "mysql2";
 
 class commentRepository {
   async readByRecipe(recipeId: number) {
