@@ -5,6 +5,7 @@ import type {
   ParsedNewRecipeType,
 } from "../../lib/definitions";
 import { normalizeImagePath } from "../../validation/upload";
+import ingredientRepository from "../ingredient/ingredientRepository";
 import labelRepository from "../label/labelRepository";
 import stepRepository from "../step/stepRepository";
 import RecipeRepository from "./recipeRepository";
@@ -103,10 +104,16 @@ const add: RequestHandler = async (req, res, next) => {
 
     const addSteps = await stepRepository.create(parsedSteps, insertId);
 
+    const addIngredients = await ingredientRepository.create(
+      parsedIngredients,
+      insertId,
+    );
+
     res.status(201).json({
       recipeId: insertId,
       labelsIds: addLabel,
       stepsIds: addSteps,
+      ingredients: addIngredients,
     });
   } catch (err) {
     next(err);
