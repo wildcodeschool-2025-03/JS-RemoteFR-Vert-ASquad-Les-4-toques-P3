@@ -47,3 +47,11 @@ export type ParsedNewRecipeType = {
   }[];
   image?: File;
 };
+
+export type CommentType = {
+  id: number;
+  rating: number;
+  text: string;
+  recipe_id: number;
+  user_id: number;
+};
