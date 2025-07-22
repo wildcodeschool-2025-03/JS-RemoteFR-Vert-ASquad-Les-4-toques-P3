@@ -46,3 +46,10 @@ export type ingredientType = {
   is_validated: boolean;
   [key: string]: string | number | boolean;
 };
+
+export type CommentType = {
+  id: number;
+  text: string;
+  rating: number;
+  pseudo: string;
+};

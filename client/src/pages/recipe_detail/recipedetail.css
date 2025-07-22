@@ -14,7 +14,8 @@
 }
 
 .step-list h3,
-.ingredient-list h3 {
+.ingredient-list h3,
+.comment-list h3 {
   color: var(--secondary);
   font-weight: normal;
   font-size: 1.1rem;
@@ -22,11 +23,59 @@
   margin-bottom: 1.5rem;
 }
 
+.comment-list ul {
+  list-style: none;
+}
+
+.comment-list li {
+  border-bottom: 1px solid #dddddd;
+  padding: 1rem 0;
+}
+
+.comment-list .stars {
+  color: #ffc800;
+  font-size: 1.2rem;
+}
+
+.comment-form {
+  gap: 1rem;
+  margin: 2rem auto;
+}
+
+.comment-form textarea,
+.comment-form select {
+  padding: 0.6rem;
+  font-size: 1rem;
+}
+
+.comment-form textarea::placeholder {
+  font-family: Aleo, sans-serif;
+  font-size: 0.85rem;
+  color: #999;
+  opacity: 1;
+}
+
+.comment-form button {
+  padding: 0.6rem;
+  font-size: 1rem;
+  background-color: var(--secondary);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.message-to-connect {
+  color: var(--primary);
+  font-weight: bold;
+  margin-top: 1em;
+}
+
 @media screen and (min-width: 1200px) {
   .recipe-ing {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: auto auto auto;
     grid-column-gap: 5rem;
     grid-row-gap: 2rem;
   }
@@ -36,7 +85,8 @@
   }
 
   .ingredient-list h3,
-  .step-list h3 {
+  .step-list h3,
+  .comment-list h3 {
     color: var(--primary);
   }
 
@@ -55,5 +105,10 @@
 
   .step-list ol {
     list-style-position: inside;
+  }
+
+  .comment-place {
+    grid-column: 1;
+    grid-row: 3;
   }
 }

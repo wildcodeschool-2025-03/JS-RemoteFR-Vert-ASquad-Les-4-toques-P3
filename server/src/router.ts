@@ -114,4 +114,12 @@ import { sendContactEmails } from "./modules/mail/mailController";
 // Define contact-related routes
 router.post("/api/contact", sendContactEmails);
 
+// Define comment-related routes
+import commentActions from "./modules/comment/commentActions";
+
+router.get("/api/comment/:recipeId", commentActions.browseByRecipe);
+router.post("/api/comment", verifyCookie, commentActions.add);
+
+/* ************************************************************************* */
+
 export default router;
