@@ -11,6 +11,41 @@ type recipeType = {
 };
 
 class IngredientRepository {
+  /** Insert ingredients after recipe creation */
+  async create(
+    ingredients: { name: string; quantity: number; unit: string }[],
+    recipeId: number,
+  ) {
+    /** ingredients are stored in an array from the front end.
+     * we need to loop, in order to check if the ingredient already exists
+     */
+    for (const ingredient of ingredients) {
+      const [result] = await databaseClient.query<Rows>(
+        "SELECT id FROM ingredient WHERE nom = ?",
+        [ingredient.name],
+      );
+
+      /**
+       * If the ingredient does not exist, it is inserted into the ingredient table
+       */
+      if ((result as []).length === 0) {
+        await databaseClient.query<Result>(
+          "INSERT INTO ingredient (nom) VALUES (?)",
+          [ingredient.name],
+        );
+      }
+
+      /**
+       *  Then, once we are ensured to have an id for each ingredient, we can feed the recipe_ingredient table
+       */
+      await databaseClient.query<Result>(
+        "INSERT INTO recipe_ingredient (recipe_id, ingredient_id, quantity, unit) VALUES (?, (SELECT id FROM ingredient WHERE nom = ?), ?, ?)",
+        [recipeId, ingredient.name, ingredient.quantity, ingredient.unit],
+      );
+    }
+    return ingredients as [];
+  }
+
   async readAll() {
     const [rows] = await databaseClient.query<Rows>("SELECT * FROM ingredient");
     return rows as recipeType[];

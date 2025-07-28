@@ -21,8 +21,8 @@ user_id INT
 
 CREATE TABLE ingredient (
     id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    nom VARCHAR(50),
-    calories VARCHAR(10),
+    nom VARCHAR(50) UNIQUE,
+    calories VARCHAR(10) DEFAULT null, 
     is_validated BOOLEAN DEFAULT false
 );
 
