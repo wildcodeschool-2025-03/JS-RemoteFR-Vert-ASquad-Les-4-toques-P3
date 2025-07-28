@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
+import { ToastContainer } from "react-toastify";
 import { useAuth } from "../../Auth/authContext";
+import { showToast } from "../../components/Toast/Toast";
 
 type FormType = {
   email: string;
@@ -33,11 +35,14 @@ export default function Login() {
           withCredentials: true,
         })
         .then(() => {
+          showToast("Connexion réussie !", { type: "success" });
           authenticate();
-          navigate("/");
+          setTimeout(() => navigate("/"), 2000);
         });
     } catch (err) {
-      setErrorMsg("Erreur de la connexion. Veuillez réessayer.");
+      showToast("Erreur de la connexion. Veuillez réessayer.", {
+        type: "error",
+      });
       setLoading(false);
     }
   };
@@ -117,6 +122,7 @@ export default function Login() {
             {loading ? "Connexion en cours..." : "Se connecter"}
           </motion.button>
         </div>
+        <ToastContainer />
       </form>
 
       {errorMsg && <p className="login-error-msg">{errorMsg}</p>}

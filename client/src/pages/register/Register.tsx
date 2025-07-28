@@ -3,6 +3,8 @@ import axios from "axios";
 import { motion } from "motion/react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
+import { ToastContainer } from "react-toastify";
+import { showToast } from "../../components/Toast/Toast";
 
 type FormType = {
   firstname: string;
@@ -29,10 +31,13 @@ export default function Register() {
       await axios
         .post(`${import.meta.env.VITE_API_URL}/api/register`, data)
         .then(() => {
-          navigate("/connexion");
+          showToast("Inscription réussie !", { type: "success" });
+          setTimeout(() => navigate("/"), 2000);
         });
     } catch (err) {
-      err;
+      showToast("Erreur lors de l'inscription. Veuillez réessayer.", {
+        type: "error",
+      });
     }
   };
 
@@ -225,6 +230,7 @@ export default function Register() {
       <p className="para">
         Déjà un compte?
         <Link to="/connexion">Se connecter</Link>
+        <ToastContainer />
       </p>
     </div>
   );
