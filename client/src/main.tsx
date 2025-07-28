@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 
 // Import the main app component
 import App from "./App";
+import AboutPage from "./pages/AboutPage/AboutPage";
 import Admin from "./pages/Admin";
 import ContactForm from "./pages/contactForm/ContactForm";
 import ErrorPage from "./pages/errorpage/Errorpage";
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: "/recettes/:id", element: <Recipedetail /> },
       { path: "/creation", element: <RecipeCreation /> },
       { path: "/contact", element: <ContactForm /> },
+      { path: "/about", element: <AboutPage /> },
       { path: "*", element: <ErrorPage /> },
     ], // Renders the App component for the home page
   },
