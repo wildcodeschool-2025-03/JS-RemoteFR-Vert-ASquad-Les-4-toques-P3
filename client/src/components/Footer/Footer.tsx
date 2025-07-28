@@ -9,7 +9,9 @@ const Footer = () => {
           <Link to="/contact" className="contact-link">
             <p>Contact</p>
           </Link>
-          <p>A propos du site</p>
+          <Link to="/about" className="contact-link">
+            <p>A propos du site</p>
+          </Link>
         </div>
         <div className="logos">
           <img src="/images/instagram.svg" alt="logo instagram" />

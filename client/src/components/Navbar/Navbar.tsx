@@ -32,7 +32,9 @@ const Navbar = () => {
               <li>
                 <NavLink to="/recettes">Les recettes</NavLink>
               </li>
-              <li>A propos</li>
+              <li>
+                <NavLink to="/about">A propos</NavLink>
+              </li>
               <li>
                 <NavLink to="/connexion">Connexion</NavLink>
               </li>
@@ -74,7 +76,7 @@ const Navbar = () => {
               <Link className="link-desktop" to="/recettes">
                 Les recettes
               </Link>
-              <Link className="link-desktop" to="/">
+              <Link className="link-desktop" to="/about">
                 A propos
               </Link>
               <Link className="link-desktop" to="/connexion">
@@ -114,7 +116,9 @@ const Navbar = () => {
               <li>
                 <NavLink to="/creation">Créer une recette</NavLink>
               </li>
-              <li>A propos</li>
+              <li>
+                <NavLink to="/about">A propos</NavLink>
+              </li>
               <li>
                 <button
                   className="burger-logout"
@@ -160,7 +164,7 @@ const Navbar = () => {
               <Link className="link-desktop" to="/creation">
                 Créer une recette
               </Link>
-              <Link className="link-desktop" to="/">
+              <Link className="link-desktop" to="/about">
                 A propos
               </Link>
               <Link className="link-desktop" to="/" onClick={logout}>
