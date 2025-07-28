@@ -75,7 +75,7 @@ export default function ProfilUpdate() {
   return (
     <div className="formulaire_container">
       <h2 className="titre">Mon profil</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="profil_form" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="firstname">Prénom</label>
           <input

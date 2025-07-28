@@ -32,9 +32,9 @@
 }
 
 .navbar-text h1 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 30px;
+  font-size: 1.4rem;
+  font-weight: bolder;
+  margin-bottom: 50px;
   margin-top: -50px;
 }
 
@@ -153,11 +153,17 @@
   }
 
   .navbar-text h1 {
-    font-size: 2em;
+    font-size: 3em;
   }
 
   .navbar-text p {
     font-size: 1em;
+    padding: .5rem;
+    background: rgba(213, 109, 6, 0.147);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.5px);
+    -webkit-backdrop-filter: blur(10.5px);
   }
 
   .desktop-menu {

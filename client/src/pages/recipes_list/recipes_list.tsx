@@ -14,7 +14,7 @@ export default function Recipes() {
           <input
             className="search_input"
             type="text"
-            placeholder="Rechercher une recette, un ingrédient ou label"
+            placeholder="Rechercher une recette"
             value={search}
             onChange={handleSearch}
           />
