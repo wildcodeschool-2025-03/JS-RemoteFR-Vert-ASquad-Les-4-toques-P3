@@ -1,0 +1,23 @@
+.errorpage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.error-image {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../public/images/erreur-404-mobil.png");
+  background-size: cover;
+  background-position: center;
+  border-top: 4px solid #e0e0e0;
+  margin-top: 2rem;
+}
+
+@media (min-width: 1200px) {
+  .error-image {
+    background-image: url("/images/erreur-404-desktop.png");
+    margin-top: 2rem;
+  }
+}
