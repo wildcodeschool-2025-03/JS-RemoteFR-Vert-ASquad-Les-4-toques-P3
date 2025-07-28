@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { Navigate } from "react-router";
+import { ToastContainer } from "react-toastify";
 import { useAuth } from "../../Auth/authContext";
+import { showToast } from "../../components/Toast/Toast";
 import "../profil/profil.css";
 
 type FormType = {
@@ -38,7 +40,7 @@ export default function ProfilUpdate() {
         reset(res.data);
       } catch (error) {
         console.error("Erreur lors du chargement du profil :", error);
-        alert("Erreur lors du chargement du profil.");
+        showToast("Erreur lors du chargement du profil.", { type: "error" });
       }
     };
 
@@ -47,7 +49,7 @@ export default function ProfilUpdate() {
 
   const onSubmit = async (data: FormType) => {
     if (!account?.id) {
-      alert("Utilisateur non identifié.");
+      showToast("Utilisateur non identifié.", { type: "error" });
       return;
     }
 
@@ -58,17 +60,18 @@ export default function ProfilUpdate() {
         data,
         { withCredentials: true },
       );
-      alert("Profil mis à jour avec succès !");
-      navigate("/profil");
+      showToast("Profil mis à jour avec succès !", { type: "success" });
+      setTimeout(() => navigate("/"), 2000);
     } catch (err) {
-      console.error("Erreur lors de la mise à jour :", err);
-      alert("Erreur lors de la mise à jour. Veuillez réessayer.");
+      showToast("Erreur lors de la mise à jour. Veuillez réessayer.", {
+        type: "error",
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
   if (!account?.id) {
-    alert("Utilisateur non identifié.");
+    showToast("Utilisateur non identifié.", { type: "error" });
     return <Navigate to="/" replace />;
   }
 
@@ -158,6 +161,7 @@ export default function ProfilUpdate() {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }

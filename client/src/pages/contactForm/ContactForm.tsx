@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { ToastContainer } from "react-toastify";
+import { showToast } from "../../components/Toast/Toast";
 import "../contactForm/contactForm.css";
 
 type FormType = {
@@ -23,7 +25,6 @@ const ContactForm: React.FC = () => {
 
   const onSubmit = async (data: FormType) => {
     setIsSubmitting(true);
-    setStatus("Envoi en cours...");
 
     try {
       const response = await fetch(
@@ -36,8 +37,9 @@ const ContactForm: React.FC = () => {
       );
 
       if (response.ok) {
-        setStatus(
+        showToast(
           "Votre message a bien été envoyé ! Nous revenons vers vous au plus vite.",
+          { type: "success" },
         );
         setTimeout(() => navigate("/"), 3500);
       } else {
@@ -175,6 +177,7 @@ const ContactForm: React.FC = () => {
         </div>
 
         {status && <p className="form-status-message">{status}</p>}
+        <ToastContainer />
       </form>
     </div>
   );
