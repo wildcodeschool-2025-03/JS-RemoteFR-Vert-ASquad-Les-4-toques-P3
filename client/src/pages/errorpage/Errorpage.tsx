@@ -2,10 +2,10 @@ import "./errorpage.css";
 
 function ErrorPage() {
   return (
-    <div className="errorpage">
+    <main className="errorpage">
       <div className="error-image" />
       <div className="error-content" />
-    </div>
+    </main>
   );
 }
 
