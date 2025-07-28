@@ -37,8 +37,8 @@ export default function Register() {
   };
 
   return (
-    <>
-      <h2 className="titre">Création de compte</h2>
+    <div className="register_container">
+      <h2 className="login-title">Création de compte</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="formulaire">
         <div className="input-group">
           <label htmlFor="firstname">Prénom</label>
@@ -226,6 +226,6 @@ export default function Register() {
         Déjà un compte?
         <Link to="/connexion">Se connecter</Link>
       </p>
-    </>
+    </div>
   );
 }

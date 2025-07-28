@@ -7,11 +7,20 @@ export default function Home() {
   const { isConnected } = useAuth();
   return (
     <>
-      <h2 className="h2Home">Les recettes fraîchement ajoutées</h2>
+      <p className="home_text">
+        Eating Nam Nam est un site où chacun peut partager ses recettes et
+        explorer celles de la communauté.
+        <br />
+        <strong>
+          Simple, pratique et gourmand Eating Nam Nam, la cuisine partagée à
+          portée de clic !
+        </strong>
+      </p>
+      <h2 className="h2Home1">Les recettes fraîchement ajoutées</h2>
       <div className="home_carousel">
         <Carousel last={5} />
       </div>
-      <h2>Crée ta recette en 3 étapes</h2>
+      <h2 className="h2Home2">Crée ta recette en 3 étapes</h2>
       <div className="steps">
         {isConnected && (
           <div className="step-item">

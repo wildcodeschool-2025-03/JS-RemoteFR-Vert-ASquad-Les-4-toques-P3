@@ -43,17 +43,6 @@ const Navbar = () => {
         )}
         <div className="navbar-text">
           <h1> Eating NAM NAM</h1>
-          <p>
-            Eating Nam Nam est un site où chacun peut partager ses recettes et
-            explorer celles de la communauté.Tu peux aussi créer ton planning de
-            la semaine et générer ta liste de courses.
-          </p>
-          <p>
-            <strong>
-              Simple, pratique et gourmand Eating Nam Nam, la cuisine partagée à
-              portée de clic !
-            </strong>
-          </p>
           <div className="sign-banniere">
             <NavLink to={"/inscription"}>
               <motion.button

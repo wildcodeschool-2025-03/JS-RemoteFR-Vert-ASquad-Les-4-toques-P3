@@ -1,3 +1,15 @@
+.home_text {
+  color: var(--primary);
+  width: 80%;
+  margin: 1rem auto 0 auto;
+  text-align: center;
+  font-size: .7rem;
+}
+
+.home_text strong {
+  font-size: .8rem;
+}
+
 h1 {
   font-size: 1rem;
   color: var(--secondary);
@@ -7,21 +19,20 @@ h1 {
   font-family: "Now", sans-serif;
 }
 
-h2 {
+.h2Home1 {
   color: var(--secondary);
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin: 4em 0 1em 0;
-  padding: 0 1rem;
+  margin: 1rem 1rem 0 1rem;
   text-align: center;
   font-family: "Now", sans-serif;
 }
 
-.h2Home {
+.h2Home2 {
   color: var(--secondary);
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin: 1rem 1rem 2rem 1rem;
+  margin: 3rem 1rem 0 1rem;
   text-align: center;
   font-family: "Now", sans-serif;
 }
@@ -40,7 +51,7 @@ h2 {
   align-items: center;
   text-align: center;
   justify-content: center;
-  max-width: 50%;
+  width: 15rem;
 }
 
 .step-item img {
@@ -61,20 +72,24 @@ h2 {
 }
 
 @media (min-width: 1200px) {
-  h2 {
-    font-family: "Now", sans-serif;
-    font-size: 1.4rem;
-    padding: 2rem;
+  .home_text {
+    color: var(--primary);
+    width: 90%;
+    margin: 2rem auto;
+    font-size: 1.1rem;
+  }
+
+  .home_text strong {
+    font-size: 1.5rem;
   }
   .h2Home {
     font-size: 1.4rem;
     padding: 2rem 0 0 0;
-    margin: 0;
   }
 
   .steps {
     gap: 3em;
-    padding: 0 2rem;
+    padding: 2rem 2rem;
   }
 
   .step-item img {
