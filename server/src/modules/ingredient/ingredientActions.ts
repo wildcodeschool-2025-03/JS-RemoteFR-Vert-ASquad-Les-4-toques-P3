@@ -4,8 +4,13 @@ import IngredientRepository from "./ingredientRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
   try {
-    const ingredients = await IngredientRepository.readAll();
-    res.json(ingredients);
+    if (req.query.search === "recipe") {
+      const ingredientsByRecipe = await IngredientRepository.readAllSorted();
+      res.json(ingredientsByRecipe);
+    } else {
+      const ingredients = await IngredientRepository.readAll();
+      res.json(ingredients);
+    }
   } catch (err) {
     next(err);
   }
@@ -77,4 +82,10 @@ const destroy: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, readIngredientsByRecipe, editAdmin, destroy };
+export default {
+  browse,
+  read,
+  readIngredientsByRecipe,
+  editAdmin,
+  destroy,
+};
