@@ -14,11 +14,13 @@ export type Account = {
   id: number;
   firstname: string;
   lastname: string;
+  role_id: number;
 };
 
 export type ContextType = {
   account: Account | null;
   isConnected: boolean;
+  isLoading: boolean;
   authenticate: () => void;
   logout: () => void;
 };
