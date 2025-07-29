@@ -42,9 +42,9 @@ const RecipeInfo = () => {
       <p>Nombre de personnes : {recette.nb_people}</p>
       <p>Difficulté : {recette.difficulty}</p>
       <p>Budget : {cost[recette.cost]}</p>
-      <p>
+      <div>
         Favori : <Favorite />
-      </p>
+      </div>
     </section>
   );
 };
