@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import type { recipeType } from "../../lib/definition";
 import Favorite from "../../components/RecipeDetail/Favorite";
+import type { recipeType } from "../../lib/definition";
 
 type transitionType = {
   [key: number]: string;
