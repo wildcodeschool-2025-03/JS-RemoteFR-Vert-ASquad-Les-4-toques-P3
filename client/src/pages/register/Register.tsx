@@ -1,6 +1,7 @@
 import "../register/register.css";
 import axios from "axios";
 import { motion } from "motion/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { ToastContainer } from "react-toastify";
@@ -18,6 +19,7 @@ type FormType = {
 
 export default function Register() {
   const navigate = useNavigate();
+  const [emailError, setEmailError] = useState<string | null>(null);
 
   const {
     register,
@@ -38,6 +40,9 @@ export default function Register() {
       showToast("Erreur lors de l'inscription. Veuillez réessayer.", {
         type: "error",
       });
+      if (axios.isAxiosError(err) && err.response?.status === 403) {
+        setEmailError(err.response.data.message);
+      }
     }
   };
 
@@ -168,6 +173,7 @@ export default function Register() {
             placeholder="Entrez votre email"
           />
           {errors?.email && <p className="error-msg">{errors.email.message}</p>}
+          {emailError && <p className="error-msg">{emailError}</p>}
         </div>
         <div className="input-group1">
           <label htmlFor="password">Mot de passe</label>
