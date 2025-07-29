@@ -123,4 +123,12 @@ router.post("/api/comment", verifyCookie, commentActions.add);
 
 /* ************************************************************************* */
 
+// Define comment-related routes
+import favoriActions from "./modules/favori/favoriActions";
+
+router.post("/api/favorite", verifyCookie, favoriActions.add);
+router.delete("/api/favorite/:recipeId", userActions.destroy);
+
+/* ************************************************************************* */
+
 export default router;
