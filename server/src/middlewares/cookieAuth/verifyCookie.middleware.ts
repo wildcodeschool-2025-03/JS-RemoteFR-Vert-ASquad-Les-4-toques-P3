@@ -22,6 +22,7 @@ export const verifyCookie: RequestHandler = async (req, res) => {
       res.status(401).json({ message: "Utilisateur non trouvé" });
       return;
     }
+
     const { password, ...userWithoutPassword } = user;
     res.json(userWithoutPassword);
   } catch (err) {

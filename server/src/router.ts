@@ -119,15 +119,15 @@ router.post("/api/contact", sendContactEmails);
 import commentActions from "./modules/comment/commentActions";
 
 router.get("/api/comment/:recipeId", commentActions.browseByRecipe);
-router.post("/api/comment", verifyCookie, commentActions.add);
+router.post("/api/comment", commentActions.add);
 
 /* ************************************************************************* */
 
 // Define comment-related routes
 import favoriActions from "./modules/favori/favoriActions";
 
-router.post("/api/favorite", verifyCookie, favoriActions.add);
-router.delete("/api/favorite/:recipeId", userActions.destroy);
+router.post("/api/favorite", favoriActions.add);
+router.delete("/api/favorite/:userId/:recipeId", favoriActions.destroy);
 
 /* ************************************************************************* */
 
