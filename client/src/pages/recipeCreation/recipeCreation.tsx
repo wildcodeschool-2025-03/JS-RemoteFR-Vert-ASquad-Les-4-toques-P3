@@ -1,11 +1,12 @@
 import axios from "axios";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 import { ToastContainer } from "react-toastify";
 import { showToast } from "../../components/Toast/Toast";
 
+import AutocompleteField from "../../components/AutoComplete/autocompleteField";
 import ImgUpload from "../../components/ImgUpload/ImgUpload";
 
 import "./recipeCreation.css";
@@ -23,6 +24,7 @@ type RecipeForm = {
     name: string;
     quantity: number | null;
     unit: string;
+    id?: number;
   }[];
   steps: {
     description: string;
@@ -69,6 +71,7 @@ const UNITOPTIONS = [
 export default function recipeCreation() {
   const [label, setLabel] = useState<Labeltype[]>([]);
   const [category, setCategory] = useState<Categorytype[]>([]);
+  const [ingredients, setIngredients] = useState([]);
   const navigate = useNavigate();
 
   const {
@@ -103,6 +106,33 @@ export default function recipeCreation() {
       console.error(err);
     }
   };
+
+  const fetchIngredients = useCallback(async () => {
+    const option = "?search=recipe";
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/ingredients${option}`,
+        {
+          withCredentials: true,
+        },
+      );
+
+      const searchedIngredients = response.data.map(
+        (ing: { id: number; nom: string; name: string }) => ({
+          id: ing.id,
+          name: ing.nom || ing.name,
+        }),
+      );
+
+      setIngredients(searchedIngredients);
+    } catch (error) {
+      console.error("Erreur lors du chargement des ingrédients:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchIngredients();
+  }, [fetchIngredients]);
 
   const onSubmit: SubmitHandler<RecipeForm> = async (data) => {
     const formData = new FormData();
@@ -151,6 +181,12 @@ export default function recipeCreation() {
 
   useEffect(() => {
     register("image", { required: "Veuillez ajouter une image" });
+  }, [register]);
+
+  useEffect(() => {
+    register("ingredients.0.name", {
+      required: "Merci de sélectionner un ingrédient",
+    });
   }, [register]);
 
   return (
@@ -300,72 +336,81 @@ export default function recipeCreation() {
         <section className="third-block">
           <article>
             <h4>Ingrédients</h4>
-            {ingredientsFields.map((field, index) => {
-              return (
-                <div key={field.id}>
-                  <div className={"ingredients"} key={field.id}>
-                    <div className="ing-name">
-                      <input
-                        placeholder="nom"
-                        {...register(`ingredients.${index}.name` as const, {
-                          required: {
-                            value: true,
-                            message: "merci de completer ce champ",
-                          },
-                        })}
-                        className={
-                          errors?.ingredients?.[index]?.name ? "error" : ""
+            {ingredientsFields.map((field, index) => (
+              <div key={field.id}>
+                <div className={"ingredients"}>
+                  <div className="ing-name">
+                    <AutocompleteField
+                      options={ingredients}
+                      label="Ingrédient"
+                      placeholder="Nom de l'ingrédient"
+                      onChange={(value) => {
+                        if (typeof value !== "string" && value != null) {
+                          const ingredientName = value.name || value.nom || "";
+                          setValue(`ingredients.${index}.name`, ingredientName);
+                          if (value.id) {
+                            setValue(`ingredients.${index}.id`, +value.id);
+                          }
                         }
-                      />
-                    </div>
-                    <div className="ing-quantity">
-                      <input
-                        placeholder="quantité"
-                        type="number"
-                        {...register(`ingredients.${index}.quantity` as const, {
-                          valueAsNumber: true,
-                          required: {
-                            value: true,
-                            message: "merci de completer ce champ",
-                          },
-                        })}
-                        className={
-                          errors?.ingredients?.[index]?.quantity ? "error" : ""
-                        }
-                      />
-                    </div>
-                    <div className="ing-unit">
-                      <select
-                        {...register(`ingredients.${index}.unit` as const, {
-                          required: {
-                            value: true,
-                            message: "merci de completer ce champ",
-                          },
-                        })}
-                        className={
-                          errors?.ingredients?.[index]?.unit ? "error" : ""
-                        }
-                      >
-                        {UNITOPTIONS.map((u) => (
-                          <option key={u.id}>{u.unit}</option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <motion.button
-                      className="remove-btn"
-                      type="button"
-                      onClick={() => removeIngredient(index)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      -
-                    </motion.button>
+                      }}
+                      freeSolo={true}
+                    />
+                    {errors?.ingredients?.[index]?.name && (
+                      <span>{errors.ingredients[index].name.message}</span>
+                    )}
                   </div>
+                  <div className="ing-quantity">
+                    <input
+                      placeholder="quantité"
+                      type="number"
+                      {...register(`ingredients.${index}.quantity` as const, {
+                        valueAsNumber: true,
+                        required: {
+                          value: true,
+                          message: "merci de completer ce champ",
+                        },
+                      })}
+                      className={
+                        errors?.ingredients?.[index]?.quantity ? "error" : ""
+                      }
+                    />
+                    {errors?.ingredients?.[index]?.quantity && (
+                      <span>{errors.ingredients[index].quantity?.message}</span>
+                    )}
+                  </div>
+                  <div className="ing-unit">
+                    <select
+                      {...register(`ingredients.${index}.unit` as const, {
+                        required: {
+                          value: true,
+                          message: "merci de completer ce champ",
+                        },
+                      })}
+                      className={
+                        errors?.ingredients?.[index]?.unit ? "error" : ""
+                      }
+                    >
+                      {UNITOPTIONS.map((u) => (
+                        <option key={u.id}>{u.unit}</option>
+                      ))}
+                    </select>
+                    {errors?.ingredients?.[index]?.unit && (
+                      <span>{errors.ingredients[index].unit?.message}</span>
+                    )}
+                  </div>
+
+                  <motion.button
+                    className="remove-btn"
+                    type="button"
+                    onClick={() => removeIngredient(index)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    -
+                  </motion.button>
                 </div>
-              );
-            })}
-            {errors?.title && <span>{errors.title.message}</span>}
+              </div>
+            ))}
           </article>
 
           <motion.button
@@ -379,6 +424,7 @@ export default function recipeCreation() {
           >
             +
           </motion.button>
+
           <article className="steps-article">
             <h4>Etapes</h4>
             {stepsFields.map((field, index) => {

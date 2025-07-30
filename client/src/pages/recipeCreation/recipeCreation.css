@@ -186,7 +186,7 @@ input::-webkit-inner-spin-button {
   text-align: center;
   font-size: .6em;
   height: 2.6em;
-  width: 8em;
+  width: 6em;
   @media screen and (min-width: 1200px) {
     font-size: .8em;
     width: 15em;
