@@ -49,7 +49,7 @@
 }
 
 .autocomplete-field .MuiInputBase-root input {
-  padding: 0.5em 1em !important;
+  padding: 0em !important;
 }
 
 .autocomplete-field .MuiInputBase-root {
