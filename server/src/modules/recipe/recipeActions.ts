@@ -18,8 +18,7 @@ const browse: RequestHandler = async (req, res, next) => {
         req.query?.search as string,
       );
       res.status(200).json(recipesByCategory);
-    }
-    if (req.query.last) {
+    } else if (req.query.last) {
       const latestRecipes = await RecipeRepository.readByRecentlyAdded(
         +req.query.last,
       );
