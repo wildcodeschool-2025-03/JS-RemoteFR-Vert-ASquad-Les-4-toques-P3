@@ -1,3 +1,4 @@
+/* NAVBAR MOBILE */
 .navbar-all {
   background-image: url("/images/new-mobile.png");
   background-size: cover;
@@ -38,12 +39,8 @@
   margin-top: -50px;
 }
 
-.navbar-text p {
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.sign-btn {
+.sign-btn,
+.search-btn {
   background-color: var(--secondary);
   color: white;
   font-size: 0.8rem;
@@ -58,15 +55,6 @@
 
 .search-btn {
   background-color: hsla(30, 95%, 43%, 0.815);
-  color: white;
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 10px 40px;
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  margin-top: 20px;
-  box-shadow: 3px 3px 5px rgb(0, 0, 0, 0.4);
 }
 
 .sign-banniere {
@@ -84,13 +72,16 @@
   background: white;
   border-radius: 20px;
   padding: 5px;
+  z-index: 100;
 }
+
 .burger-logout {
   background: none;
   border: none;
   color: var(--secondary);
   font-size: 1rem;
   font-family: Aleo, sans-serif;
+  cursor: pointer;
 }
 
 .burger-menu a {
@@ -100,6 +91,8 @@
 
 .burger-menu ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .burger-menu li {
@@ -107,29 +100,9 @@
   text-align: center;
 }
 
+/* NAVBAR DESKTOP */
 .desktop-menu {
   display: none;
-}
-
-.navbar-all-compact {
-  background-image: url("/images/new-mobile.png");
-  background-size: center;
-  min-height: 110px;
-  width: 100%;
-  position: relative;
-  z-index: 5;
-}
-.navbar-all-compact .navbar-text {
-  display: none;
-}
-
-.navbar-all-compact .menu {
-  background-color: white;
-  border: 2px solid var(--secondary);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
 }
 
 @media screen and (min-width: 1200px) {
@@ -156,28 +129,42 @@
     font-size: 3em;
   }
 
-  .navbar-text p {
-    font-size: 1em;
-    padding: .5rem;
-    background: rgba(213, 109, 6, 0.147);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10.5px);
-    -webkit-backdrop-filter: blur(10.5px);
-  }
-
   .desktop-menu {
     display: flex;
     flex-direction: row;
     justify-content: center;
     background-color: #efece0;
+    width: 100%;
+  }
+
+  .desktop-menu ul {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+
+  .desktop-menu li {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
   }
 
   .link-desktop {
     text-decoration: none;
     color: var(--primary);
     font-weight: bold;
-    margin: 0 4em;
+    margin: 0 2em;
+    font-size: 1rem;
+    transition: color 0.2s;
+  }
+
+  .link-desktop:hover {
+    color: var(--secondary);
   }
 
   .navbar-all-compact {
