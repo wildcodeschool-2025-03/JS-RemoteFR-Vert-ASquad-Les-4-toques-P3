@@ -41,6 +41,7 @@ export const login: RequestHandler = async (req, res, next) => {
         .status(200)
         .json({
           message: "Bienvenue sur le site !",
+          user: userWithoutHashedPassword,
         });
     } else {
       res.sendStatus(422);
@@ -93,7 +94,6 @@ export const verifyToken: RequestHandler = async (req, res, next) => {
 
     next();
   } catch (err) {
-    console.error("JWT verification error:", err);
     res.sendStatus(401);
   }
 };

@@ -2,6 +2,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
+import ProtectedRoute from "./components/PotectedRoute/ProtectedRoute";
 
 /* ************************************************************************* */
 
@@ -34,7 +35,6 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Homepage /> },
       { path: "/inscription", element: <Register /> },
-      { path: "/admin", element: <Admin /> },
       { path: "/connexion", element: <Login /> },
       { path: "/recettes", element: <Recipes /> },
       { path: "/profil", element: <Profil /> },
@@ -43,6 +43,14 @@ const router = createBrowserRouter([
       { path: "/contact", element: <ContactForm /> },
       { path: "/about", element: <AboutPage /> },
       { path: "*", element: <ErrorPage /> },
+      {
+        path: "/admin",
+        element: (
+          <ProtectedRoute requiredRole={1}>
+            <Admin />
+          </ProtectedRoute>
+        ),
+      },
     ], // Renders the App component for the home page
   },
   // Try adding a new route! For example, "/about" with an About component
