@@ -15,7 +15,9 @@ const IngredientList = () => {
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${id}/ingredients`)
       .then((res) => res.json())
-      .then((data) => setIngredients(data));
+      .then((data) => {
+        setIngredients(data);
+      });
   }, [id]);
 
   return (
@@ -23,7 +25,9 @@ const IngredientList = () => {
       <h3>Ingrédients : </h3>
       <ul className="ingredient-item">
         {ingredients.map((i) => (
-          <li key={i.id}>{i.nom}</li>
+          <li key={i.id}>
+            {i.quantity} {i.unit} {i.nom}
+          </li>
         ))}
       </ul>
 

@@ -119,7 +119,7 @@ router.post("/api/contact", sendContactEmails);
 import commentActions from "./modules/comment/commentActions";
 
 router.get("/api/comment/:recipeId", commentActions.browseByRecipe);
-router.post("/api/comment", verifyCookie, commentActions.add);
+router.post("/api/comment", validateCookie, commentActions.add);
 
 /* ************************************************************************* */
 

@@ -32,20 +32,30 @@ const RecipeInfo = () => {
   if (!recette) return <p>Aucune recette...</p>;
 
   return (
-    <section className="recipe-info">
-      <h1>{recette.name}</h1>
-      <img
-        className="img-recipe"
-        src={`${imgBaseUrl}${recette.picture}`}
-        alt={recette.name}
-      />
-      <p>Nombre de personnes : {recette.nb_people}</p>
-      <p>Difficulté : {recette.difficulty}</p>
-      <p>Budget : {cost[recette.cost]}</p>
-      <div>
-        Favori : <Favorite />
-      </div>
-    </section>
+    <>
+      <h1 className="recipe-title">{recette.name}</h1>
+      <section className="recipe-info">
+        <img
+          className="img-recipe"
+          src={`${imgBaseUrl}${recette.picture}`}
+          alt={recette.name}
+        />
+        <div className="recipe-info-details">
+          <p>
+            Nombre de personnes : <span>{recette.nb_people}</span>
+          </p>
+          <p>
+            Difficulté : <span>{recette.difficulty}</span>
+          </p>
+          <p>
+            Budget : <span>{cost[recette.cost]}</span>
+          </p>
+          <div>
+            <Favorite />
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 

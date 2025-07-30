@@ -13,13 +13,12 @@ const browseByRecipe: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const user_id = req.auth.id;
     const newComment = {
       id: req.body.id,
       text: req.body.text,
       rating: req.body.rating,
       recipe_id: req.body.recipe_id,
-      user_id,
+      user_id: req.body.user_id,
     };
 
     const insertId: number = await commentRepository.create(newComment);

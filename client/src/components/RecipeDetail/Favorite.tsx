@@ -56,6 +56,7 @@ const Favorite = () => {
 
   return (
     <div className="favorite-actions">
+      <p>Favori : </p>
       {!isFavorite ? (
         <button type="button" onClick={addFavorite} disabled={isNotFavorite}>
           {isNotFavorite ? "" : "🤍"}

@@ -18,6 +18,11 @@
   font-family: "Now";
   src: url(/Typo/Now/Now-Regular.otf);
 }
+@font-face {
+  font-family: "Aleo Bold";
+  src: url(/Typo/Aleo/Aleo-Bold.ttf);
+}
+
 body {
   font-family: "Aleo", sans-serif;
   font-size: 16px;
