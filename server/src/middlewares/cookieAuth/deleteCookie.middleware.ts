@@ -13,7 +13,6 @@ export const deleteCookie: RequestHandler = async (req, res, next) => {
       .clearCookie("auth_token", {
         secure: false,
         httpOnly: true,
-        maxAge: 3600000,
       })
       .json({ message: "cookie deleted" });
 

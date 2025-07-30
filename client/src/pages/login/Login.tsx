@@ -34,10 +34,15 @@ export default function Login() {
         .post(`${import.meta.env.VITE_API_URL}/api/login`, data, {
           withCredentials: true,
         })
-        .then(() => {
+        .then((res) => {
           showToast("Connexion réussie !", { type: "success" });
           authenticate();
-          setTimeout(() => navigate("/"), 2000);
+          const user = res.data.user;
+          if (user && user.role_id === 1) {
+            setTimeout(() => navigate("/admin"), 2000);
+          } else {
+            setTimeout(() => navigate("/"), 2000);
+          }
         });
     } catch (err) {
       showToast("Erreur de la connexion. Veuillez réessayer.", {

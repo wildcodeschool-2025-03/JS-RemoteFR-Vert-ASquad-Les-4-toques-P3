@@ -16,14 +16,17 @@ const AuthContext = createContext<ContextType | null>(null);
 
 export function AuthProvider({ children }: ChildrenType) {
   const [account, setAccount] = useState<Account | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const isConnected = account != null;
 
   const authenticate = useCallback(() => {
+    setIsLoading(true);
     axios
       .get(`${import.meta.env.VITE_API_URL}/api/me`, { withCredentials: true })
       .then((response) => setAccount(response.data))
-      .catch(() => setAccount(null));
+      .catch(() => setAccount(null))
+      .finally(() => setIsLoading(false));
   }, []);
 
   useEffect(() => {
@@ -44,7 +47,7 @@ export function AuthProvider({ children }: ChildrenType) {
 
   return (
     <AuthContext.Provider
-      value={{ account, isConnected, authenticate, logout }}
+      value={{ account, isConnected, isLoading, authenticate, logout }}
     >
       {children}
     </AuthContext.Provider>
