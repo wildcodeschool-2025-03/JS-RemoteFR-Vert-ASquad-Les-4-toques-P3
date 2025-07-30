@@ -18,7 +18,7 @@ const Favorite = () => {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({
-          user_id: account.id, // 🆕 Ajout du user_id
+          user_id: account.id,
           recipe_id: Number(id),
         }),
       });
