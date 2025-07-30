@@ -9,7 +9,7 @@ export default function Admin() {
 
   return (
     <div>
-      <h1>Interface Administrateur</h1>
+      <h1 className="admin-title">Interface Administrateur</h1>
 
       <div className="admin-tabs">
         <button type="button" onClick={() => setSection("recettes")}>

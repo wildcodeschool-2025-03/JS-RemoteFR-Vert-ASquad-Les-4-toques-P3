@@ -87,7 +87,7 @@ export default function IngredientAdmin() {
           <li>
             <button
               type="button"
-              className="button-admin"
+              className="button-admin button-validate"
               onClick={() => {
                 fetch(
                   `${import.meta.env.VITE_API_URL}/api/admin/ingredients/${ing.id}`,
@@ -105,12 +105,23 @@ export default function IngredientAdmin() {
                 });
               }}
             >
-              Valider
+              <span className="button-label-desktop">Valider</span>
+              <span className="button-label-mobile" aria-label="Valider">
+                <img
+                  src="/images/encoche.png"
+                  alt="Valider"
+                  style={{
+                    width: "3em",
+                    height: "3em",
+                    verticalAlign: "middle",
+                  }}
+                />
+              </span>
             </button>
 
             <button
               type="button"
-              className="button-admin"
+              className="button-admin button-delete"
               onClick={() => {
                 fetch(
                   `${import.meta.env.VITE_API_URL}/api/ingredients/${ing.id}`,
@@ -124,7 +135,10 @@ export default function IngredientAdmin() {
                 });
               }}
             >
-              Supprimer
+              <span className="button-label-desktop">Supprimer</span>
+              <span className="button-label-mobile" aria-label="Supprimer">
+                ❌
+              </span>
             </button>
           </li>
         </ul>
