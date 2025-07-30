@@ -22,7 +22,7 @@ import { validateCookie } from "./validation/validateCookie";
 
 import upload from "./validation/upload";
 
-router.get("/api/recipes", recipeActions.browse);
+router.get("/api/recipes", decodeCookie, recipeActions.browse);
 router.get("/api/recipes/:id", recipeActions.read);
 router.put("/api/admin/recipes/:id", recipeActions.editAdmin);
 router.delete("/api/recipes/:id", recipeActions.destroy);
@@ -119,12 +119,13 @@ router.post("/api/contact", sendContactEmails);
 import commentActions from "./modules/comment/commentActions";
 
 router.get("/api/comment/:recipeId", commentActions.browseByRecipe);
-router.post("/api/comment", verifyCookie, commentActions.add);
+router.post("/api/comment", validateCookie, commentActions.add);
 
 /* ************************************************************************* */
 
 // Define comment-related routes
 import favoriActions from "./modules/favori/favoriActions";
+import { decodeCookie } from "./validation/decodeCookie";
 
 router.post("/api/favorite", verifyCookie, favoriActions.add);
 router.delete("/api/favorite/:recipeId", userActions.destroy);
