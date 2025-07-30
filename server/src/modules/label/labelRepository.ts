@@ -28,6 +28,9 @@ class LabelRepository {
    Insert in recipe_label table new recipe labels ids and recipe id to attach labels to recipe
    */
   async create(labels: string[], recipeId: number) {
+    if (!labels || labels.length === 0) {
+      return [];
+    }
     return await databaseClient.query<Result>(
       "INSERT INTO recipe_label (label_id, recipe_id) VALUES ?",
       [labels.map((label) => [label, recipeId])],

@@ -36,7 +36,7 @@ export type ParsedNewRecipeType = {
   category: string;
   difficulty: string;
   costInt: number;
-  parsedLabels: string[];
+  parsedLabels: string[] | [];
   parsedIngredients: {
     name: string;
     quantity: number;
