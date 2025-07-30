@@ -55,3 +55,8 @@ export type CommentType = {
   recipe_id: number;
   user_id: number;
 };
+
+export type FavoriType = {
+  user_id: number;
+  recipe_id: number;
+};
