@@ -76,6 +76,12 @@
   outline: none;
 }
 
+.form-input:focus,
+.form-textarea-message:focus {
+  border-color: var(--secondary);
+  outline: none;
+}
+
 .form-input-email {
   padding-left: 30px;
   position: relative;
