@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import "./navbar.css";
 import { motion } from "motion/react";
 import { useState } from "react";
@@ -16,6 +16,7 @@ const getLinks = (
   logout: () => void,
 ): LinkType[] => {
   if (!isConnected) {
+    // Links for non-authenticated users
     return [
       { to: "/", label: "Accueil" },
       { to: "/recettes", label: "Les recettes" },
@@ -24,6 +25,7 @@ const getLinks = (
     ];
   }
   if (isAdmin) {
+    // Links for authenticated users who are admins
     return [
       { to: "/", label: "Accueil" },
       { to: "/recettes", label: "Les recettes" },
@@ -35,6 +37,7 @@ const getLinks = (
     ];
   }
   return [
+    // Links for authenticated users who are not admins
     { to: "/", label: "Accueil" },
     { to: "/recettes", label: "Les recettes" },
     { to: "/profil", label: "Mon profil" },
@@ -122,22 +125,19 @@ const Navbar = () => {
             {links.map((link) =>
               link.onClick ? (
                 <li key={link.label}>
-                  <a
+                  <button
                     className="link-desktop"
-                    href={link.to}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      link.onClick?.();
-                    }}
+                    type="button"
+                    onClick={link.onClick}
                   >
                     {link.label}
-                  </a>
+                  </button>
                 </li>
               ) : (
                 <li key={link.label}>
-                  <Link className="link-desktop" to={link.to}>
+                  <NavLink className="link-desktop" to={link.to}>
                     {link.label}
-                  </Link>
+                  </NavLink>
                 </li>
               ),
             )}
