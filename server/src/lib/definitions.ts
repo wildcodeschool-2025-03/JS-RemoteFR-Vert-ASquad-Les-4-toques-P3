@@ -60,3 +60,8 @@ export type FavoriType = {
   user_id: number;
   recipe_id: number;
 };
+
+export type UserRoleType = {
+  id: number;
+  role_id: number;
+};

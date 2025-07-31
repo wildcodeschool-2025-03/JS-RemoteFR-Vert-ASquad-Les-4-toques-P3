@@ -33,6 +33,13 @@ class RecipeRepository {
     return result.insertId;
   }
 
+  async readAllValidated() {
+    const [rows] = await databaseClient.query<Rows>(
+      "SELECT id, name, cost, difficulty, nb_people, picture FROM recipe WHERE is_validated = 1",
+    );
+    return rows as recipeType[];
+  }
+
   async readAll() {
     const [rows] = await databaseClient.query<Rows>(
       "SELECT id, name, cost, difficulty, nb_people, picture, is_validated, user_id FROM recipe",
@@ -42,7 +49,7 @@ class RecipeRepository {
 
   async readAllByCategory(id: number, search: string | undefined) {
     let request =
-      "SELECT id, name, cost, difficulty, nb_people, picture, is_validated, user_id FROM recipe WHERE category_id=?";
+      "SELECT id, name, cost, difficulty, nb_people, picture, is_validated, user_id FROM recipe WHERE category_id=? AND is_validated = 1";
     const args = [];
 
     if (search) {
@@ -55,7 +62,7 @@ class RecipeRepository {
 
   async readByRecentlyAdded(count: number) {
     const [rows] = await databaseClient.query<Rows>(
-      "SELECT id, name, cost, difficulty, nb_people, picture FROM recipe ORDER BY id DESC LIMIT ?",
+      "SELECT id, name, cost, difficulty, nb_people, picture FROM recipe WHERE is_validated = 1 ORDER BY id DESC LIMIT ?",
       [count],
     );
     return rows as recipeType[];
