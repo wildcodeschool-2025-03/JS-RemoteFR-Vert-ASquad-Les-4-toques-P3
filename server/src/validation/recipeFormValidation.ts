@@ -20,6 +20,15 @@ const validateRecipe: RequestHandler = (req, res, next) => {
   let costInt = 0;
   let personsInt = 0;
 
+  try {
+    costInt = Number.parseInt(cost, 10);
+    personsInt = Number.parseInt(persons, 10);
+  } catch (error) {
+    res.status(400).json({
+      error: "Invalid number format for cost or persons",
+    });
+    return;
+  }
   const parsedItems: ParsedNewRecipeType = {
     title,
     personsInt,
@@ -30,16 +39,6 @@ const validateRecipe: RequestHandler = (req, res, next) => {
     parsedIngredients,
     parsedSteps,
   };
-
-  try {
-    costInt = Number.parseInt(cost, 10);
-    personsInt = Number.parseInt(persons, 10);
-  } catch (error) {
-    res.status(400).json({
-      error: "Invalid number format for cost or persons",
-    });
-    return;
-  }
 
   const recipeSchema = z.object({
     title: z.string().min(2).max(45),
