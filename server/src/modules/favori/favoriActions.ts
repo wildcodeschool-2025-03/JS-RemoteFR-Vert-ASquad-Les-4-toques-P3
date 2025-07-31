@@ -3,10 +3,9 @@ import favoriRepository from "./favoriRepository";
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const user_id = req.auth.id;
     const newFavorite = {
       recipe_id: req.body.recipe_id,
-      user_id,
+      user_id: req.body.user_id,
     };
 
     const insertId: number = await favoriRepository.create(newFavorite);
@@ -18,8 +17,8 @@ const add: RequestHandler = async (req, res, next) => {
 };
 const destroy: RequestHandler = async (req, res, next) => {
   try {
-    const user_id = req.auth.id;
-    const recipe_id = Number(req.params.id);
+    const user_id = Number(req.params.userId);
+    const recipe_id = Number(req.params.recipeId);
 
     await favoriRepository.delete({ user_id, recipe_id });
 

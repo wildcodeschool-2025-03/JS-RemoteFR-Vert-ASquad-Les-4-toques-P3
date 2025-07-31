@@ -32,7 +32,8 @@
   padding: 1rem 0;
 }
 
-.comment-list .stars {
+.comment-list .stars,
+.rating-list .stars {
   color: #ffc800;
   font-size: 1.2rem;
 }
@@ -80,6 +81,13 @@
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--secondary);
+  outline: none;
 }
 
 @media screen and (min-width: 1200px) {
