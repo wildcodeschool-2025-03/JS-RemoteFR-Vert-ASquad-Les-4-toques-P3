@@ -162,7 +162,6 @@ export default function Carousel({
 
             <article>
               <h3>{recipes[CenteredImgIndex].name}</h3>
-              <span>Note : </span>
               <span>Difficulté : {recipes[CenteredImgIndex].difficulty} </span>
               <NavLink to={`/recettes/${recipes[CenteredImgIndex].id}`}>
                 <motion.button

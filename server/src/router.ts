@@ -127,9 +127,7 @@ router.post("/api/comment", validateCookie, commentActions.add);
 import favoriActions from "./modules/favori/favoriActions";
 import { decodeCookie } from "./validation/decodeCookie";
 
-router.post("/api/favorite", verifyCookie, favoriActions.add);
-router.delete("/api/favorite/:recipeId", userActions.destroy);
-
-/* ************************************************************************* */
+router.post("/api/favorite", favoriActions.add);
+router.delete("/api/favorite/:userId/:recipeId", favoriActions.destroy);
 
 export default router;

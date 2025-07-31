@@ -32,7 +32,8 @@
   padding: 1rem 0;
 }
 
-.comment-list .stars {
+.comment-list .stars,
+.rating-list .stars {
   color: #ffc800;
   font-size: 1.2rem;
 }
