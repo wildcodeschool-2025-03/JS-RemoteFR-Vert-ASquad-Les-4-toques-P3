@@ -121,7 +121,6 @@ import commentActions from "./modules/comment/commentActions";
 router.get("/api/comment/:recipeId", commentActions.browseByRecipe);
 router.post("/api/comment", validateCookie, commentActions.add);
 
-
 /* ************************************************************************* */
 
 // Define comment-related routes
