@@ -26,6 +26,8 @@ const validateUserUpdate: RequestHandler = (req, res, next) => {
     age: z.number().int().min(0).optional(),
   });
 
+  const parsedAge = age !== undefined ? Number(age) : undefined;
+
   const validData: SafeParseReturnType<
     unknown,
     Partial<UserType>
@@ -34,7 +36,7 @@ const validateUserUpdate: RequestHandler = (req, res, next) => {
     lastname,
     pseudo,
     email,
-    age,
+    age: parsedAge,
   });
 
   if (!validData.success) {
