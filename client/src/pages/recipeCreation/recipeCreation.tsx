@@ -85,6 +85,7 @@ export default function recipeCreation() {
       ingredients: [{ name: "", unit: "unité" }],
       steps: [{ description: "" }],
       image: [],
+      labels: [],
     },
   });
 
@@ -191,8 +192,8 @@ export default function recipeCreation() {
 
   return (
     <>
-      <h1>Créez votre recette</h1>
       <form className="recipe-form" onSubmit={handleSubmit(onSubmit)}>
+        <h1 className="login-title">Créez votre recette</h1>
         <section className="first-block">
           <div className="drop-zone">
             <ImgUpload onFilesChange={(files) => setValue("image", files)} />
@@ -248,7 +249,20 @@ export default function recipeCreation() {
                     value={l.id}
                     className="checkbox-hidden"
                   />
-                  <label className="selectLabel" htmlFor={`label-${l.id}`}>
+                  <label
+                    className="selectLabel"
+                    htmlFor={`label-${l.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById(`label-${l.id}`)?.click();
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        document.getElementById(`label-${l.id}`)?.click();
+                      }
+                    }}
+                  >
                     {l.label}
                   </label>
                 </div>
@@ -273,7 +287,20 @@ export default function recipeCreation() {
                     value={c.name}
                     className="radio-hidden"
                   />
-                  <label className="selectLabel" htmlFor={`cat-${c.id}`}>
+                  <label
+                    className="selectLabel"
+                    htmlFor={`cat-${c.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById(`cat-${c.id}`)?.click();
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        document.getElementById(`cat-${c.id}`)?.click();
+                      }
+                    }}
+                  >
                     {c.name}
                   </label>
                 </div>
@@ -299,7 +326,20 @@ export default function recipeCreation() {
                     value={d.dif}
                     className="radio-hidden"
                   />
-                  <label className="selectLabel" htmlFor={`dif-${d.id}`}>
+                  <label
+                    className="selectLabel"
+                    htmlFor={`dif-${d.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById(`dif-${d.id}`)?.click();
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        document.getElementById(`dif-${d.id}`)?.click();
+                      }
+                    }}
+                  >
                     {d.dif}
                   </label>
                 </div>
@@ -324,7 +364,20 @@ export default function recipeCreation() {
                     value={p.cost}
                     className="radio-hidden"
                   />
-                  <label className="selectLabel" htmlFor={`cost-${p.id}`}>
+                  <label
+                    className="selectLabel"
+                    htmlFor={`cost-${p.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById(`cost-${p.id}`)?.click();
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        document.getElementById(`cost-${p.id}`)?.click();
+                      }
+                    }}
+                  >
                     {p.value}
                   </label>
                 </div>

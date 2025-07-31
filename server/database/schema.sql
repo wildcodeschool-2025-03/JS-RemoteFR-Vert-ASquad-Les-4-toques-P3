@@ -91,6 +91,7 @@ CREATE TABLE recipe_label(
 CREATE TABLE favori (
   recipe_id INT,
   user_id INT,
+  PRIMARY KEY (recipe_id, user_id),
   FOREIGN KEY (recipe_id) REFERENCES recipe(id),
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
@@ -103,5 +104,7 @@ CREATE TABLE week_meal (
   FOREIGN KEY (recipe_id) REFERENCES recipe(id),
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+
 
 

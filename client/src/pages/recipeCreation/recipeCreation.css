@@ -131,13 +131,18 @@ input::-webkit-inner-spin-button {
   flex-direction: column;
   justify-content: center;
   font-weight: bold;
-
   gap: 1em;
 }
+
 .recipe-nameAndPersons input {
   font-size: 0.6em;
   font-size: 1em;
   text-align: center;
+}
+
+.recipe-nameAndPersons input:focus {
+  outline: none;
+  border-color: var(--secondary);
 }
 
 .persons-nbr input {
@@ -202,6 +207,11 @@ input::-webkit-inner-spin-button {
     height: 3em;
   }
 }
+.ing-name input:focus {
+  outline: none;
+  border-color: var(--secondary);
+}
+
 .ing-quantity input {
   text-align: center;
   font-size: .6em;
@@ -212,6 +222,11 @@ input::-webkit-inner-spin-button {
     width: 10em;
     height: 3em;
   }
+}
+
+.ing-quantity input:focus {
+  outline: none;
+  border-color: var(--secondary);
 }
 .ing-unit select {
   padding: 0.5em 1em;
@@ -225,9 +240,14 @@ input::-webkit-inner-spin-button {
     height: 3em;
   }
 }
+
+.ing-unit select:focus {
+  outline: none;
+  border-color: var(--secondary);
+}
+
 .steps-area {
   margin-top: 1em;
-
   display: flex;
   align-items: center;
   gap: 1em;
@@ -243,6 +263,12 @@ input::-webkit-inner-spin-button {
   width: 50vw;
   height: 5em;
   font-size: .8em;
+  font-family: "Aleo", sans-serif;
+}
+
+.steps-area textarea:focus {
+  outline: none;
+  border-color: var(--secondary);
 }
 
 .adding-btn {

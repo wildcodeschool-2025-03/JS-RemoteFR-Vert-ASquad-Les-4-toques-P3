@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Favorite from "../../components/RecipeDetail/Favorite";
 import type { recipeType } from "../../lib/definition";
+import Rating from "./Rating";
 
 type transitionType = {
   [key: number]: string;
@@ -50,6 +51,9 @@ const RecipeInfo = () => {
           <p>
             Budget : <span>{cost[recette.cost]}</span>
           </p>
+          <div>
+            Note : <Rating />
+          </div>
           <div>
             <Favorite />
           </div>

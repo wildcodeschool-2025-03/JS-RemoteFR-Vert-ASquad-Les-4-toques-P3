@@ -6,6 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useNavigate } from "react-router";
 import type { Account, ContextType } from "../types/definitions";
 
 type ChildrenType = {
@@ -17,6 +18,7 @@ const AuthContext = createContext<ContextType | null>(null);
 export function AuthProvider({ children }: ChildrenType) {
   const [account, setAccount] = useState<Account | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const isConnected = account != null;
 
@@ -42,8 +44,9 @@ export function AuthProvider({ children }: ChildrenType) {
       )
       .then(() => {
         setAccount(null);
+        navigate("/");
       });
-  }, []);
+  }, [navigate]);
 
   return (
     <AuthContext.Provider

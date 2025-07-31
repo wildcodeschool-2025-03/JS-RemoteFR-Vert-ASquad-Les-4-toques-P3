@@ -36,7 +36,7 @@ export type ParsedNewRecipeType = {
   category: string;
   difficulty: string;
   costInt: number;
-  parsedLabels: string[];
+  parsedLabels: string[] | [];
   parsedIngredients: {
     name: string;
     quantity: number;
@@ -59,4 +59,9 @@ export type CommentType = {
 export type FavoriType = {
   user_id: number;
   recipe_id: number;
+};
+
+export type UserRoleType = {
+  id: number;
+  role_id: number;
 };

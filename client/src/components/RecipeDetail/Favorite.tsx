@@ -17,7 +17,10 @@ const Favorite = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ recipe_id: Number(id) }),
+        body: JSON.stringify({
+          user_id: account.id,
+          recipe_id: Number(id),
+        }),
       });
 
       setIsFavorite(true);
@@ -33,10 +36,13 @@ const Favorite = () => {
     setIsNotFavorite(true);
 
     try {
-      await fetch(`${import.meta.env.VITE_API_URL}/api/favorite/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+      await fetch(
+        `${import.meta.env.VITE_API_URL}/api/favorite/${account.id}/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        },
+      );
 
       setIsFavorite(false);
     } catch (err) {

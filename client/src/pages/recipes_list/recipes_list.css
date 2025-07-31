@@ -11,7 +11,14 @@
   margin-left: 1rem;
   background-color: transparent;
   padding: 0;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
+
+.search_input:focus {
+  outline: none;
+}
+
 .search_btn {
   border: none;
   background-color: rgba(255, 255, 255, 0);
@@ -29,6 +36,11 @@
   height: 2rem;
   display: flex;
   align-items: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search_bar:focus-within {
+  border-color: var(--secondary);
 }
 
 .category {

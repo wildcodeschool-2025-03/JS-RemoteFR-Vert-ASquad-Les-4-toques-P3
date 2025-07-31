@@ -47,7 +47,7 @@ const validateRecipe: RequestHandler = (req, res, next) => {
     category: z.string().min(2).max(45),
     difficulty: z.string().min(2).max(45),
     costInt: z.number().int().positive(),
-    parsedLabels: z.array(z.string()),
+    parsedLabels: z.array(z.string()).default([]),
     parsedIngredients: z.array(
       z.object({
         name: z.string().min(1).max(255),

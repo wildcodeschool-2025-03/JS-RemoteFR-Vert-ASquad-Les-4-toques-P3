@@ -21,7 +21,6 @@ export default function UserAdmin() {
         <li>Id</li>
         <li>Pseudo</li>
         <li>Role</li>
-        <li>Statut</li>
         <li>Actions</li>
       </ul>
       {utilisateurs.map((user) => (
@@ -29,37 +28,12 @@ export default function UserAdmin() {
           <li>{user.id}</li>
           <li>{user.pseudo}</li>
           <li>{user.role_id === 1 ? "Administrateur" : "Utilisateur"}</li>
-          <li>{user.is_validated ? "Validé" : "En attente"}</li>
           <li>
             <button
               type="button"
-              className="button-admin"
-              onClick={() => {
-                fetch(
-                  `${import.meta.env.VITE_API_URL}/api/admin/users/${user.id}`,
-                  {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                      pseudo: user.pseudo,
-                      role_id: user.role_id,
-                      is_validated: true,
-                    }),
-                  },
-                ).then(() => {
-                  fetchUsers();
-                });
-              }}
-            >
-              Valider
-            </button>
-
-            <button
-              type="button"
-              className="button-admin"
+              className="button-admin button-validate"
               onClick={() => {
                 const newRole = user.role_id === 1 ? 3 : 1;
-
                 fetch(
                   `${import.meta.env.VITE_API_URL}/api/admin/users/${user.id}`,
                   {
@@ -76,12 +50,23 @@ export default function UserAdmin() {
                 });
               }}
             >
-              Changer rôle
+              <span className="button-label-desktop">Changer rôle</span>
+              <span className="button-label-mobile" aria-label="Changer rôle">
+                <img
+                  src="/images/encoche.png"
+                  alt="Changer rôle"
+                  style={{
+                    width: "3em",
+                    height: "  3em",
+                    verticalAlign: "middle",
+                  }}
+                />
+              </span>
             </button>
 
             <button
               type="button"
-              className="button-admin"
+              className="button-admin button-delete"
               onClick={() => {
                 fetch(`${import.meta.env.VITE_API_URL}/api/users/${user.id}`, {
                   method: "DELETE",
@@ -92,7 +77,10 @@ export default function UserAdmin() {
                 });
               }}
             >
-              Supprimer
+              <span className="button-label-desktop">Supprimer</span>
+              <span className="button-label-mobile" aria-label="Supprimer">
+                ❌
+              </span>
             </button>
           </li>
         </ul>

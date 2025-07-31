@@ -3,7 +3,9 @@ import type { NextFunction, Request, RequestHandler, Response } from "express";
 import type {
   AdminUpdateRecipe,
   ParsedNewRecipeType,
+  UserRoleType,
 } from "../../lib/definitions";
+
 import { normalizeImagePath } from "../../validation/upload";
 import ingredientRepository from "../ingredient/ingredientRepository";
 import labelRepository from "../label/labelRepository";
@@ -12,21 +14,33 @@ import RecipeRepository from "./recipeRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
   try {
+    const userRoleId = req.user?.role_id;
+
+    if (userRoleId === 1) {
+      const recipes = await RecipeRepository.readAll();
+      res.status(200).json(recipes);
+      return;
+    }
+
     if (req.query.category) {
       const recipesByCategory = await RecipeRepository.readAllByCategory(
         +req.query.category,
         req.query?.search as string,
       );
       res.status(200).json(recipesByCategory);
-    } else if (req.query.last) {
+      return;
+    }
+
+    if (req.query.last) {
       const latestRecipes = await RecipeRepository.readByRecentlyAdded(
         +req.query.last,
       );
       res.status(200).json(latestRecipes);
-    } else {
-      const recipes = await RecipeRepository.readAll();
-      res.json(recipes);
+      return;
     }
+
+    const ValidatedRecipes = await RecipeRepository.readAllValidated();
+    res.status(200).json(ValidatedRecipes);
   } catch (err) {
     next(err);
   }
