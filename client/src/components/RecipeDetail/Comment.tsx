@@ -5,6 +5,7 @@ import type { CommentType } from "../../lib/definition";
 const Comment = () => {
   const { id } = useParams();
   const [comments, setComments] = useState<CommentType[]>([]);
+
   const stars = (rating: number): string => {
     return "★".repeat(rating) + "☆".repeat(5 - rating);
   };
@@ -18,6 +19,9 @@ const Comment = () => {
   return (
     <section className="comment-list">
       <h3>Commentaires : </h3>
+      {comments.length === 0 ? (
+        <p>Aucun commentaire pour cette recette.</p>
+      ) : null}
       <ul>
         {comments.map((comment) => (
           <li key={comment.id}>

@@ -17,9 +17,7 @@ const StepList = () => {
       <h3>Étapes : </h3>
       <ol>
         {steps.map((step) => (
-          <li key={step.id}>
-            <p>{step.description}</p>
-          </li>
+          <li key={step.id}>{step.description}</li>
         ))}
       </ol>
     </section>

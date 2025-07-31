@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { useAuth } from "../../Auth/authContext";
 
-const CommentForm = () => {
+const CommentForm = ({ onCommentAdded }: { onCommentAdded?: () => void }) => {
   const { id } = useParams();
   const { account } = useAuth();
   const [text, setText] = useState("");
@@ -29,6 +29,7 @@ const CommentForm = () => {
 
       setText("");
       setRating(5);
+      if (onCommentAdded) onCommentAdded();
     } catch (err) {
       console.error(err);
     }
@@ -46,8 +47,8 @@ const CommentForm = () => {
 
   return (
     <form className="comment-form" onSubmit={handleSubmit}>
-      <label htmlFor="comment">Commentaire:</label>
       <textarea
+        className="form-textarea-message"
         id="comment"
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -56,21 +57,22 @@ const CommentForm = () => {
       />
 
       <label htmlFor="rating">Note:</label>
-      <select
-        id="rating"
-        value={rating}
-        onChange={(e) => setRating(Number(e.target.value))}
-      >
-        {notes.map((note) => (
-          <option key={note} value={note}>
-            {note} ⭐
-          </option>
-        ))}
-      </select>
-
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Envoi..." : "Envoyer"}
-      </button>
+      <div className="rating-select">
+        <select
+          id="rating"
+          value={rating}
+          onChange={(e) => setRating(Number(e.target.value))}
+        >
+          {notes.map((note) => (
+            <option key={note} value={note}>
+              {note} ⭐
+            </option>
+          ))}
+        </select>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Envoi..." : "Envoyer"}
+        </button>
+      </div>
     </form>
   );
 };
