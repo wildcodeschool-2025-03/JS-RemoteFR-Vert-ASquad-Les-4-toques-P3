@@ -158,6 +158,7 @@
   font-weight: bold;
   font-size: 1rem;
   text-decoration: none;
+
   font-family: "aleo", sans-serif;
 }
 
@@ -217,6 +218,7 @@
     margin: 0 2em;
     font-size: 1rem;
     transition: color 0.2s;
+    cursor: pointer;
   }
 
   .navbar-all-compact {
