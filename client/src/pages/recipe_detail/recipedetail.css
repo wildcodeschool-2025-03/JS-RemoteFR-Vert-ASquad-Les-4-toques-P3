@@ -82,6 +82,13 @@
   cursor: pointer;
 }
 
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--secondary);
+  outline: none;
+}
+
 @media screen and (min-width: 1200px) {
   .recipe-ing {
     display: grid;
