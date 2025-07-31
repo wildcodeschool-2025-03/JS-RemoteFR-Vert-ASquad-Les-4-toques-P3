@@ -131,6 +131,4 @@ import { decodeCookie } from "./validation/decodeCookie";
 router.post("/api/favorite", favoriActions.add);
 router.delete("/api/favorite/:userId/:recipeId", favoriActions.destroy);
 
-/* ************************************************************************* */
-
 export default router;
