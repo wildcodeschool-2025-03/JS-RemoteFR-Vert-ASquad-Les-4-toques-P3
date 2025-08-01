@@ -1,0 +1,72 @@
+.autocomplete-field {
+  width: 5em !important;
+}
+
+.autocomplete-field .MuiInputBase-root {
+  width: 100%;
+  height: 2.6em !important;
+  font-size: .6em;
+}
+
+.autocomplete-field .MuiOutlinedInput-root {
+  border-radius: 25px !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.autocomplete-field .MuiOutlinedInput-notchedOutline {
+  border: none !important;
+}
+
+.MuiAutocomplete-popper {
+  width: 8em !important;
+}
+
+.autocomplete-field input {
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+@media screen and (min-width: 1200px) {
+  .autocomplete-field {
+    width: 15em !important;
+  }
+
+  .autocomplete-field .MuiInputBase-root {
+    font-size: .8em;
+    height: 3em !important;
+  }
+
+  .MuiAutocomplete-popper {
+    width: 15em !important;
+  }
+}
+
+.css-1tlcqt-MuiAutocomplete-root .MuiOutlinedInput-root {
+  padding: 0 !important;
+}
+
+.autocomplete-field .MuiInputBase-root input {
+  padding: 0em !important;
+}
+
+.autocomplete-field .MuiInputBase-root {
+  display: flex;
+  align-items: center;
+}
+
+.autocomplete-field .MuiInputBase-root input::placeholder {
+  text-align: center;
+  opacity: 1;
+}
+
+.autocomplete-field .MuiAutocomplete-endAdornment {
+  position: absolute;
+  right: 5px;
+}
+
+.autocomplete-field .MuiInputBase-input {
+  padding-right: 26px !important;
+}

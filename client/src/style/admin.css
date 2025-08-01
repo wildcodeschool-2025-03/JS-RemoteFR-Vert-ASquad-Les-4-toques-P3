@@ -1,0 +1,215 @@
+.admin-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  font-family: "Now", sans-serif;
+}
+
+.admin-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
+}
+
+.admin-tabs button {
+  padding: 0.5rem 1rem;
+  border: none;
+  margin: 0.25rem;
+  cursor: pointer;
+  background: none;
+  color: #97bf0d;
+}
+
+.admin-table {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 10px;
+  overflow-x: unset;
+}
+
+.admin-table ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  border-bottom: 1px solid #1b1919;
+  padding: 0.1rem 0.05rem;
+  background: #fff;
+  gap: 0;
+}
+
+.admin-table li {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  font-size: 0.62em;
+  text-align: left;
+  padding: 0.05em 0.1em;
+  word-break: break-word;
+  border-bottom: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-table li:nth-child(1),
+.admin-table li:nth-child(2),
+.admin-table li:nth-child(3),
+.admin-table li:last-child {
+  min-width: unset;
+  max-width: unset;
+  margin-right: 0;
+  text-align: left;
+}
+
+.admin-table li:nth-child(1) {
+  flex: 0 0 2em;
+  max-width: 2.5em;
+  min-width: 1.5em;
+  text-align: center;
+  margin-right: 0.2em;
+}
+
+.button-admin {
+  background-color: #d56c06;
+  color: white;
+  padding: 0.3rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 0.5em;
+  font-size: 0.62em;
+  white-space: nowrap;
+  min-width: 32px;
+  padding: 0.05em 0.1em;
+}
+
+.button-admin:last-child {
+  margin-right: 0;
+}
+
+.button-label-mobile {
+  display: inline;
+  font-size: 1em;
+  vertical-align: middle;
+}
+.button-label-desktop {
+  display: none;
+}
+
+.button-validate {
+  color: #2ecc40;
+  background: none;
+  border-radius: 50%;
+  border: none;
+  width: 2em;
+  height: 2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.3em;
+}
+.button-delete {
+  color: #e74c3c;
+  background: none;
+  border-radius: 50%;
+  border: none;
+  width: 2em;
+  height: 2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0;
+}
+.button-admin,
+.button-validate,
+.button-delete {
+  margin-right: 0;
+}
+
+.calories-placeholder {
+  display: flex;
+  height: 1.5em;
+  justify-content: center;
+  gap: 1em;
+}
+
+.calories-input {
+  width: 7em;
+  height: 1.5em;
+  padding: 0.2rem;
+  text-align: center;
+  border-radius: 50px;
+}
+
+@media screen and (min-width: 1200px) {
+  .admin-title {
+    font-size: 2.2rem;
+  }
+  .admin-table {
+    margin: 0 10px;
+  }
+  .admin-table ul {
+    gap: 0;
+  }
+
+  .admin-table li {
+    flex: 1 1 0;
+    font-size: 1em;
+    min-width: 0;
+    max-width: none;
+    padding: 0;
+    border-bottom: none;
+    white-space: nowrap;
+    text-align: left;
+  }
+
+  .admin-table li:nth-child(1),
+  .admin-table li:nth-child(2),
+  .admin-table li:nth-child(3),
+  .admin-table li:last-child {
+    min-width: unset;
+    max-width: unset;
+    margin-right: 0;
+    text-align: left;
+  }
+  .admin-table li:last-child {
+    min-width: 4em;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+    display: flex;
+    gap: 0.05em;
+    align-items: center;
+    justify-content: center;
+  }
+  .button-admin {
+    background-color: #d56c06;
+    color: white;
+    padding: 0.3rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 0.5em;
+    font-size: 1em;
+    white-space: nowrap;
+    min-width: 95px;
+  }
+  .button-admin:last-child {
+    margin-right: 0;
+  }
+  .button-label-mobile {
+    display: none;
+  }
+  .button-label-desktop {
+    display: inline;
+  }
+  .admin-table li:nth-child(1) {
+    flex: 0 0 3em;
+    max-width: 3.5em;
+    min-width: 2em;
+    text-align: center;
+    margin-right: 0.5em;
+  }
+}

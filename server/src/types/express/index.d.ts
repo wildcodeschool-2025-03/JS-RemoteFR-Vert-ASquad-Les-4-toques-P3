@@ -1,5 +1,5 @@
 // to make the file a module and avoid the TypeScript error
-export type {};
+export type { auth };
 
 declare global {
   namespace Express {
@@ -9,6 +9,11 @@ declare global {
       //
       // user?: { ... }
       /* ************************************************************************* */
+      user?: {
+        id: number;
+        role_id: number;
+      };
+      auth?: JwtPayload;
     }
   }
 }

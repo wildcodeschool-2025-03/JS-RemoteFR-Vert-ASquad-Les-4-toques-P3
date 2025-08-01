@@ -1,0 +1,33 @@
+footer {
+  background-color: var(--tertiary);
+  padding: 20px;
+  margin-top: 30px;
+  margin-top: 50vh;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  font-size: 1em;
+}
+
+.footer-section {
+  text-align: end;
+}
+.contact-link {
+  text-decoration: none;
+  color: black;
+}
+
+.logos {
+  display: none;
+}
+
+@media screen and (min-width: 1200px) {
+  .logos {
+    display: flex;
+    gap: 1rem;
+    padding-left: 5rem;
+  }
+}

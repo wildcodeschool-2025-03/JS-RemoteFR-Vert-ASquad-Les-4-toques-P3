@@ -1,0 +1,160 @@
+.recipe-title {
+  color: var(--secondary);
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  font-family: "Now", sans-serif;
+  margin: 2rem 0 1rem 0;
+}
+
+.recette-detail {
+  text-align: justify;
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+.img-recipe {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+}
+
+.ingredient-list ul {
+  list-style: none;
+}
+
+.step-list h3,
+.ingredient-list h3,
+.comment-list h3 {
+  color: var(--secondary);
+  font-weight: normal;
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  margin-bottom: .5rem;
+}
+
+.step-list ol {
+  list-style-position: inside;
+}
+
+.step-list li {
+  margin-bottom: 1rem;
+}
+
+.recipe-info p span {
+  font-family: "Aleo Bold", sans-serif;
+}
+
+.comment-list ul {
+  list-style: none;
+}
+
+.comment-list li {
+  border-bottom: 1px solid #dddddd;
+  padding: 1rem 0;
+}
+
+.comment-list .stars,
+.rating-list .stars {
+  color: #ffc800;
+  font-size: 1.2rem;
+}
+
+.comment-form {
+  gap: 1rem;
+  margin: 2rem auto;
+}
+
+.comment-form textarea,
+.comment-form select {
+  padding: 0.6rem;
+  font-size: 1rem;
+}
+
+.comment-form textarea::placeholder {
+  font-family: Aleo, sans-serif;
+  font-size: 0.85rem;
+  color: #999;
+  opacity: 1;
+}
+
+.comment-form button {
+  background-color: var(--secondary);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.message-to-connect {
+  color: var(--primary);
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+.favorite-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .5rem;
+}
+
+.favorite-actions button {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding-bottom: .3rem;
+}
+
+#rating {
+  border-color: var(--primary);
+  border-radius: 5px;
+}
+
+.rating-select {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--secondary);
+  outline: none;
+}
+
+@media screen and (min-width: 1200px) {
+  .recipe-title {
+    font-size: 2.2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .recipe-ing {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .recipe-info {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-end;
+  }
+
+  .img-recipe {
+    max-width: 800px;
+    max-height: 500px;
+    object-fit: cover;
+  }
+
+  .comment-place {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}

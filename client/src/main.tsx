@@ -2,11 +2,23 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
+import ProtectedRoute from "./components/PotectedRoute/ProtectedRoute";
 
 /* ************************************************************************* */
 
 // Import the main app component
 import App from "./App";
+import AboutPage from "./pages/AboutPage/AboutPage";
+import Admin from "./pages/Admin";
+import ContactForm from "./pages/contactForm/ContactForm";
+import ErrorPage from "./pages/errorpage/Errorpage";
+import Homepage from "./pages/homepage/Homepage";
+import Login from "./pages/login/Login";
+import Profil from "./pages/profil/Profil";
+import RecipeCreation from "./pages/recipeCreation/recipeCreation";
+import Recipedetail from "./pages/recipe_detail/Recipedetail";
+import Recipes from "./pages/recipes_list/recipes_list";
+import Register from "./pages/register/Register";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -14,14 +26,32 @@ import App from "./App";
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
 
-/* ************************************************************************* */
-
 // Create router configuration with routes
 // You can add more routes as you build out your app!
 const router = createBrowserRouter([
   {
     path: "/", // The root path
-    element: <App />, // Renders the App component for the home page
+    element: <App />,
+    children: [
+      { path: "/", element: <Homepage /> },
+      { path: "/inscription", element: <Register /> },
+      { path: "/connexion", element: <Login /> },
+      { path: "/recettes", element: <Recipes /> },
+      { path: "/profil", element: <Profil /> },
+      { path: "/recettes/:id", element: <Recipedetail /> },
+      { path: "/creation", element: <RecipeCreation /> },
+      { path: "/contact", element: <ContactForm /> },
+      { path: "/about", element: <AboutPage /> },
+      { path: "*", element: <ErrorPage /> },
+      {
+        path: "/admin",
+        element: (
+          <ProtectedRoute requiredRole={1}>
+            <Admin />
+          </ProtectedRoute>
+        ),
+      },
+    ], // Renders the App component for the home page
   },
   // Try adding a new route! For example, "/about" with an About component
 ]);

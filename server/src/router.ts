@@ -15,4 +15,119 @@ router.post("/api/items", itemActions.add);
 
 /* ************************************************************************* */
 
+// Define recipe-related routes
+import recipeActions from "./modules/recipe/recipeActions";
+import recipeFormValidation from "./validation/recipeFormValidation";
+import { validateCookie } from "./validation/validateCookie";
+
+import upload from "./validation/upload";
+
+router.get("/api/recipes", decodeCookie, recipeActions.browse);
+router.get("/api/recipes/:id", recipeActions.read);
+router.put("/api/admin/recipes/:id", recipeActions.editAdmin);
+router.delete("/api/recipes/:id", recipeActions.destroy);
+router.post(
+  "/api/recipe",
+  validateCookie,
+  upload.single("image"),
+  recipeFormValidation,
+  recipeActions.add,
+);
+
+/* ************************************************************************* */
+
+// Define label-related routes
+import labelActions from "./modules/label/labelActions";
+
+router.get("/api/label", labelActions.browse);
+/* ************************************************************************* */
+
+// Define label-related routes
+import categoryActions from "./modules/category/categoryActions";
+
+router.get("/api/category", categoryActions.browse);
+
+/* ************************************************************************* */
+
+// Define ingredient-related routes
+import ingredientActions from "./modules/ingredient/ingredientActions";
+
+router.get("/api/ingredients", ingredientActions.browse);
+router.get("/api/ingredients/:id", ingredientActions.read);
+router.get(
+  "/api/recipes/:id/ingredients",
+  ingredientActions.readIngredientsByRecipe,
+);
+router.put("/api/admin/ingredients/:id", ingredientActions.editAdmin);
+router.delete("/api/ingredients/:id", ingredientActions.destroy);
+
+/* ************************************************************************* */
+
+import { hashPassword, login } from "./middlewares/argon.middleware";
+import {
+  checkEmail,
+  checkEmailAndStoreUserData,
+} from "./middlewares/checkEmail.middleware";
+import userActions from "./modules/user/userActions";
+import validateUser from "./validation/userValidation";
+import validateUserUpdate from "./validation/userValidationUser";
+
+router.post("/api/login", checkEmailAndStoreUserData, login);
+
+router.post(
+  "/api/register",
+  validateUser,
+  checkEmail,
+  hashPassword,
+  userActions.add,
+);
+router.get("/api/users", userActions.browse);
+router.get("/api/users/:id", userActions.read);
+router.put("/api/users/:id", validateUserUpdate, userActions.edit);
+router.put("/api/admin/users/:id", userActions.editAdmin);
+router.delete("/api/users/:id", userActions.destroy);
+
+/* ************************************************************************* */
+
+import { deleteCookie } from "./middlewares/cookieAuth/deleteCookie.middleware";
+/** cokie validation route */
+import { verifyCookie } from "./middlewares/cookieAuth/verifyCookie.middleware";
+
+router.get("/api/me", verifyCookie);
+router.post("/api/logout", deleteCookie);
+
+// Define admin-related routes
+import adminActions from "./modules/admin/adminActions";
+
+router.get("/api/admin", adminActions.browse);
+
+/* ************************************************************************* */
+
+// Define step-related routes
+import stepActions from "./modules/step/stepActions";
+
+router.get("/api/recipes/:id/steps", stepActions.readStepsByRecipe);
+
+/* ************************************************************************* */
+
+import { sendContactEmails } from "./modules/mail/mailController";
+
+// Define contact-related routes
+router.post("/api/contact", sendContactEmails);
+
+// Define comment-related routes
+import commentActions from "./modules/comment/commentActions";
+
+router.get("/api/comment/:recipeId", commentActions.browseByRecipe);
+router.post("/api/comment", validateCookie, commentActions.add);
+
+/* ************************************************************************* */
+
+// Define comment-related routes
+import favoriActions from "./modules/favori/favoriActions";
+import { decodeCookie } from "./validation/decodeCookie";
+
+router.post("/api/favorite", favoriActions.add);
+router.delete("/api/favorite/:userId/:recipeId", favoriActions.destroy);
+
 export default router;

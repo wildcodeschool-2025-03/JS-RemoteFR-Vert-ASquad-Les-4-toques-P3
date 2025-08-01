@@ -1,0 +1,233 @@
+.navbar-all {
+  background-image: url("/images/new-mobile.png");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+.navbar-all .menu {
+  background-color: white;
+  border: 2px solid var(--secondary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+}
+
+.navbar-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.navbar-section img {
+  width: 10vh;
+}
+
+.menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2em;
+  color: #b3261e;
+}
+
+.navbar-text {
+  font-size: 1rem;
+  color: var(--primary);
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.navbar-text h1 {
+  font-size: 1.4rem;
+  font-weight: bolder;
+  margin-bottom: 50px;
+  margin-top: -50px;
+}
+
+.sign-btn,
+.search-btn {
+  background-color: var(--secondary);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 3px 3px 5px rgb(0, 0, 0, 0.4);
+}
+
+.search-btn {
+  background-color: hsla(30, 95%, 43%, 0.815);
+}
+
+.sign-banniere {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-all-compact {
+  background-image: url("/images/new-mobile.png");
+  background-size: center;
+  min-height: 110px;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+.navbar-all-compact .navbar-text {
+  display: none;
+}
+
+.navbar-all-compact .menu {
+  background-color: white;
+  border: 2px solid var(--secondary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+}
+
+.burger-menu {
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  background: white;
+  border-radius: 10px;
+  padding: 28px 40px;
+  z-index: 100;
+  box-shadow: 0 12px 36px 0 rgba(31, 38, 135, 0.22), 0 2px 8px 0
+    rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  animation: burgerFadeIn 0.35s;
+  min-width: 230px;
+  transition: box-shadow 0.2s, background 0.2s, border 0.2s;
+  outline-offset: 4px;
+}
+
+@keyframes burgerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.burger-logout {
+  background: none;
+  border: none;
+  color: var(--secondary);
+  font-size: 1rem;
+  font-family: Aleo, sans-serif;
+  cursor: pointer;
+}
+
+.burger-menu a {
+  text-decoration: none;
+  color: var(--secondary);
+}
+
+.burger-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.burger-menu li {
+  padding: 10px;
+  text-align: center;
+}
+
+.desktop-menu {
+  display: none;
+}
+
+.link-desktop {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 2em;
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+
+  font-family: "aleo", sans-serif;
+}
+
+@media screen and (min-width: 1200px) {
+  .navbar-all {
+    background-image: url("/images/accueil_desktop.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .navbar-text {
+    color: #efece0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+    text-align: center;
+    margin: auto;
+  }
+
+  .navbar-text h1 {
+    font-size: 3em;
+  }
+
+  .desktop-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #efece0;
+    width: 100%;
+  }
+
+  .desktop-menu ul {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+
+  .desktop-menu li {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .link-desktop {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: bold;
+    margin: 0 2em;
+    font-size: 1rem;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .navbar-all-compact {
+    background-image: url("/images/accueil_desktop.jpg");
+    background-size: cover;
+    background-position-y: 10rem;
+    width: 100%;
+  }
+  .navbar-all-compact .navbar-text {
+    display: none;
+  }
+}
